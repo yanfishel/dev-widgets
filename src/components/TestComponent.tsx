@@ -1,9 +1,7 @@
 import React from 'react';
 
-type Props = {
 
-};
-const TestComponent = (props: Props) => {
+const TestComponent = () => {
   return (
     <div>
       <h2>Hello from React!</h2>

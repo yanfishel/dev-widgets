@@ -17,9 +17,9 @@ export const mainConfig: Configuration = {
   plugins,
   resolve: {
     alias: {
-      '@assets': path.resolve(__dirname, 'src/assets/'),
-      '@components': path.resolve(__dirname, 'src/components/'),
-      '@utils': path.resolve(__dirname, 'src/utils/')
+      '@': path.resolve(__dirname, 'src'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@controllers': path.resolve(__dirname, 'src/controllers'),
     },
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
   },
