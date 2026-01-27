@@ -12,11 +12,12 @@ export const rules: Required<ModuleOptions>['rules'] = [
     test: /[/\\]node_modules[/\\].+\.(m?js|node)$/,
     parser: { amd: false },
     use: {
-      loader: '@vercel/webpack-asset-relocator-loader',
+      loader: '@marshallofsound/webpack-asset-relocator-loader',
       options: {
         outputAssetBase: 'native_modules',
-      },
-    },
+        emitDirnameAll: false
+      }
+    }
   },
   {
     test: /\.tsx?$/,
@@ -24,8 +25,8 @@ export const rules: Required<ModuleOptions>['rules'] = [
     use: {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true,
-      },
-    },
-  },
-];
+        transpileOnly: true
+      }
+    }
+  }
+]

@@ -1,0 +1,45 @@
+import {app, BrowserWindow } from 'electron';
+
+import '@ipc/handlers'
+import winController from "@controllers/window";
+import appSettings from "@controllers/settings";
+
+
+
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
+
+app.whenReady().then(() => {
+
+  winController.createMain()
+
+  app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (BrowserWindow.getAllWindows().length === 0) {
+      winController.createMain()
+    }
+  });
+
+
+
+  const settings = appSettings.settings
+
+  // Set the application to automatically start at login
+  app.setLoginItemSettings({
+    openAtLogin: settings.openAtLogin, // Open the app at login
+  })
+
+});
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});

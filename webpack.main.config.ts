@@ -1,26 +1,24 @@
 import type { Configuration } from 'webpack';
-import path from "node:path";
 
 import { rules } from './webpack.rules';
 import { plugins } from './webpack.plugins';
+import { alias } from './webpack.alias';
+
 
 export const mainConfig: Configuration = {
   /**
    * This is the main entry point for your application, it's the first file
    * that runs in the main process.
    */
-  entry: './src/index.ts',
+  entry: './src/main.ts',
+  name: 'main_window',
   // Put your normal webpack config below here
   module: {
-    rules,
+    rules
   },
   plugins,
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@components': path.resolve(__dirname, 'src/components'),
-      '@controllers': path.resolve(__dirname, 'src/controllers'),
-    },
+    alias,
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
-  },
-};
+  }
+}

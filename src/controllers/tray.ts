@@ -1,10 +1,10 @@
 import { app, Menu, nativeImage, screen, Tray } from 'electron'
 import is from 'electron-is'
 
-import {config} from "../config";
-import {APP_WIDTH} from "../constants";
-import appSettings from "./settings";
+import {config} from "@/config";
+import {APP_WIDTH} from "@/constants";
 
+import appSettings from "@controllers/settings";
 import winController from "@controllers/window";
 
 
@@ -49,7 +49,7 @@ class TrayController {
   get menu() {
     // Create a context menu for the tray
     const contextMenu = Menu.buildFromTemplate([
-      { type: 'header', label: config.applicationName },
+      { type: 'header', label: config.applicationName, click: () => winController.createMain() },
       { type: 'separator' },
       { label: 'Options', submenu: [
           { label: 'Open at Login', type:'checkbox', checked: this.openAtLogin,  click: (menuItem) => {

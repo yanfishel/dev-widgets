@@ -3,20 +3,21 @@ import { register } from 'electron-localshortcut';
 import is from 'electron-is'
 import path from "node:path";
 
-import {config} from "../config";
-import {APP_WIDTH} from "../constants";
-import {IpcChannels} from "../ipc/channels";
-import appSettings from "./settings";
+import { config } from "@/config";
+import { APP_WIDTH } from "@/constants";
+import { IpcChannels } from "@ipc/channels";
+
+import appSettings from "@controllers/settings";
 
 import trayController from "@controllers/tray";
 
-//import serverController from "./server";
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 declare const ABOUT_WINDOW_WEBPACK_ENTRY: string;
 declare const ABOUT_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
+
 
 class WinController {
   static instance: WinController | null = null
@@ -54,7 +55,7 @@ class WinController {
       webPreferences: {
         contextIsolation: true,
         nodeIntegration: true,
-        preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY, // Path to preload script
+        preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY
       },
       transparent: true,
       autoHideMenuBar: true, // Hide the menu bar
@@ -71,10 +72,6 @@ class WinController {
       icon: config.iconPath, // Set the icon for the app
     })
 
-    this.#mainWindow
-      .on('closed', () => this.onMainWinowClosed())
-      .on('moved', () => this.onMainWinowMoved())
-
     this.#mainWindow.setSkipTaskbar(true)
 
     // Hide the traffic light buttons (minimize, maximize, close)
@@ -85,9 +82,9 @@ class WinController {
     // Load the main window content
     if (MAIN_WINDOW_WEBPACK_ENTRY) {
       console.log(MAIN_WINDOW_WEBPACK_ENTRY);
-      this.#mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY)
+      this.#mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).catch(err => console.log(err))
     } else {
-      this.#mainWindow.loadFile(path.join(__dirname, `../renderer/main_window/index.html`))
+      this.#mainWindow.loadFile(path.join(__dirname, `../renderer/main_window/index.html`)).catch(err => console.log(err))
     }
 
     this.#mainWindow.webContents.on('did-finish-load', () => {
@@ -98,12 +95,15 @@ class WinController {
       )
     })
 
+
+    this.#mainWindow
+      .on('closed', () => this.onMainWinowClosed())
+      .on('moved', () => this.onMainWinowMoved())
+
     // Reasign DevTools for debugging
     this.reasignDevTools()
 
     trayController.init()
-
-    //serverController.startServer()
 
   }
 

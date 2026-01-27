@@ -16,6 +16,9 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@controllers/*": ["src/controllers/*"],
+      "@ipc/*": ["src/ipc/*"],
+      "@services/*": ["src/services/*"],
+      "@views/*": ["src/views/*"]
     },
     "jsx": "react-jsx"
   },
