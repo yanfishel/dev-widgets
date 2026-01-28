@@ -131,6 +131,9 @@ body {
   #weather-widget { order: 2; }
 }
 
+dialog {
+  color: var(--text-primary);
+}
 
 .content-container-wrapper {
   width: 100%;

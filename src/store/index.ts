@@ -36,29 +36,43 @@ export const useStore = createWithEqualityFn<T_Store>()(
     },
 
     toggleLockPosition: (locked: boolean) => {
+      const { settings, storeSettings } = get()
       set({
         settings: {
-          ...get().settings,
+          ...settings,
           locked
         }
       })
-      get().storeSettings()
+      storeSettings()
     },
 
     setWidgetsSize: (size) => {
+      const { settings, storeSettings } = get()
       document.documentElement.classList.remove("widgets-size-small", "widgets-size-medium", "widgets-size-large")
       document.documentElement.classList.add(`widgets-size-${size}`)
       set({
         settings: {
-          ...get().settings,
+          ...settings,
           size
         }
       })
-      get().storeSettings()
+      storeSettings()
+    },
+
+    setSettingsValue: (key, value) => {
+      const { settings, storeSettings } = get()
+      set({
+        settings: {
+          ...settings,
+          [key]: value
+        }
+      })
+      storeSettings()
     },
 
     storeSettings: () => {
-      const settingsString = JSON.stringify( get().settings )
+      const { settings } = get()
+      const settingsString = JSON.stringify( settings )
       setStorageItem(STORAGE_KEYS.WIDGETS_SETTINGS, settingsString)
     },
 

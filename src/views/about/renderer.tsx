@@ -5,7 +5,7 @@ import About from "@components/about";
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const root = createRoot(document.getElementById("root") as HTMLElement);
+  const root = createRoot(document.getElementById("root"));
   root.render(<About />);
 
 })

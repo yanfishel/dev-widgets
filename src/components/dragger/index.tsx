@@ -7,7 +7,7 @@ import {DragIcon} from "@/assets";
 import './style.css'
 
 
-export const Dragger = () => {
+const Dragger = () => {
 
   const [show, setShow] = useState<boolean>(false)
 
@@ -18,7 +18,7 @@ export const Dragger = () => {
 
 
   return (
-    <div id="drag-icon" style={{display: show ? "block" : "none"}}>
+    <div id="drag-icon" className={show ? '' : 'hidden'}>
       <DragIcon />
     </div>
   )

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 
 import {useStore} from "@/store";
+import ThemeController from "@components/theme-controller";
 import Dragger from "@components/dragger";
 import AnalogClock from "@components/analog-clock";
+import SettingsMenu from "@components/settings-menu";
 
 import '@/styles/main.css'
 import '@/styles/tabs.css'
@@ -19,14 +21,18 @@ const App = () => {
     init()
   }, [])
 
-  
+
   if(loading) return null
 
   return (
     <>
+      <ThemeController />
+
       <Dragger />
 
       <div id="top-container">
+
+        <SettingsMenu />
 
         <AnalogClock />
 

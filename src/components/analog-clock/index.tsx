@@ -8,9 +8,7 @@ import {T_ClockDate, T_ClockHands} from "./types";
 import './style.css';
 
 
-
-
-export const AnalogClock = () => {
+const AnalogClock = () => {
 
   const [clockHands, setClockHands] = useState<T_ClockHands>({hour: 0, minute: 0, second: 0})
   const [clockDate, setClockDate] = useState<T_ClockDate>({ date: '', weekday: '' })

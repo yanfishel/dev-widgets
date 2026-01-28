@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openExternal: (path: string) =>
     ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL, path),
 
-  openAboutWinow: () =>
+  openAboutWindow: () =>
     ipcRenderer.invoke(IpcChannels.OPEN_ABOUT_WINDOW),
 
   getAppInfo: () => ipcRenderer.invoke(IpcChannels.GET_APP_INFO),

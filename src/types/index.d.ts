@@ -39,6 +39,7 @@ type T_Store = {
   toggleLockPosition: (locked: boolean) => void
   setWidgetsSize: (size: TWidgetsSize) => void
 
+  setSettingsValue: (key: keyof IWidgetsSettings, value: unknown) => void
   storeSettings: () => void
   restoreSettings: () => IWidgetsSettings
   electronEventsHandler: () => void
@@ -81,7 +82,7 @@ interface Window {
     setWidgetsSize: (size: string) => void
     setLockPosition: (locked: boolean) => void
     openExternal: (url: string) => Promise<void>
-    openAboutWinow: () => Promise<void>
+    openAboutWindow: () => Promise<void>
     getAppInfo: () => Promise<{ packageJson:IPackageJson, versions:string[][] }>
     getDiskUsage: () => Promise< S_FsSizeData[] >
     getSystemInfo: () => Promise< { info:S_CurrentLoadData, memory:S_MemData } >

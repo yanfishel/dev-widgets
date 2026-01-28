@@ -5,7 +5,7 @@ select {
   border: 0;
   border-radius: 4px;
   background: var(--input-background);
-  color: var(--text-primary);
+  color: var(--text-primary) !important;
   font-size: 0.8rem;
   font-family: inherit;
 
