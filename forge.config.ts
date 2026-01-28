@@ -40,7 +40,7 @@ const config: ForgeConfig = {
           {
             name: 'about_window',
             html: './src/views/about/index.html',
-            js: './src/views/about/renderer.ts',
+            js: './src/views/about/renderer.tsx',
             preload: {
               js: './src/views/about/preload.ts',
             },

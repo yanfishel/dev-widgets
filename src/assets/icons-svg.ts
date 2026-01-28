@@ -1,5 +1,10 @@
 
+/*
 export const logoIcon = `<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><circle fill="#71BACA" cx="254.8" cy="256.1" r="255.2"/><path fill="#285E63" d="M322,263.6L250.4,192c-1.7-1.7-2.9-3.5-3.6-5.5c-0.7-2-1.1-4.1-1.1-6.3c0-2.2,0.3-4.4,1.1-6.3c0.7-2,1.9-3.8,3.6-5.5L322,96.8c1.7-1.7,3.5-2.9,5.5-3.6c2-0.7,4.1-1.1,6.3-1.1c2.2,0,4.4,0.3,6.3,1.1s3.8,1.9,5.5,3.6l71.6,71.6c1.7,1.7,2.9,3.5,3.6,5.5c0.7,2,1.1,4.1,1,6.3c0,2.2-0.4,4.4-1,6.3c-0.7,2-1.9,3.8-3.6,5.5l-71.6,71.6c-1.7,1.7-3.5,2.9-5.5,3.6c-2,0.7-4.1,1.1-6.3,1c-2.2,0-4.4-0.4-6.3-1C325.5,266.5,323.7,265.3,322,263.6 M103.8,224.8V123.7c0-4.8,1.6-8.8,4.9-12c3.2-3.2,7.2-4.8,12-4.9h101.1c4.8,0,8.8,1.6,12,4.9c3.2,3.2,4.8,7.2,4.8,12v101.1c0,4.8-1.6,8.8-4.9,12c-3.2,3.2-7.2,4.8-12,4.8H120.6c-4.8,0-8.8-1.6-12-4.9C105.4,233.6,103.8,229.6,103.8,224.8 M272.3,393.3V292.2c0-4.8,1.6-8.8,4.9-12s7.2-4.8,12-4.9h101.1c4.8,0,8.8,1.6,12,4.9c3.2,3.2,4.8,7.2,4.8,12v101.1c0,4.8-1.6,8.8-4.9,12c-3.2,3.2-7.2,4.8-12,4.8H289.1c-4.8,0-8.8-1.6-12-4.9C273.9,402,272.3,398,272.3,393.3 M103.8,393.3V292.2c0-4.8,1.6-8.8,4.9-12s7.2-4.8,12-4.9h101.1c4.8,0,8.8,1.6,12,4.9c3.2,3.2,4.8,7.2,4.8,12v101.1c0,4.8-1.6,8.8-4.9,12c-3.2,3.2-7.2,4.8-12,4.8H120.6c-4.8,0-8.8-1.6-12-4.9C105.4,402,103.8,398,103.8,393.3 M137.5,208h67.4v-67.4h-67.4V208z M334.2,228.2l47.6-47.6L334.2,133l-47.6,47.6L334.2,228.2zM306,376.4h67.4V309H306V376.4z M137.5,376.4h67.4V309h-67.4V376.4z"/></svg>`
+
+
+
+
 
 export const dragIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 15 15"><g fill="currentColor"><circle cx="4.5" cy="2.5" r=".6" /><circle cx="4.5" cy="4.5" r=".6" /><circle cx="4.5" cy="6.499" r=".6" /><circle cx="4.5" cy="8.499" r=".6" /><circle cx="4.5" cy="10.498" r=".6" /><circle cx="4.5" cy="12.498" r=".6" /><circle cx="6.5" cy="2.5" r=".6" /><circle cx="6.5" cy="4.5" r=".6" /><circle cx="6.5" cy="6.499" r=".6" /><circle cx="6.5" cy="8.499" r=".6" /><circle cx="6.5" cy="10.498" r=".6" /><circle cx="6.5" cy="12.498" r=".6" /><circle cx="8.499" cy="2.5" r=".6" /><circle cx="8.499" cy="4.5" r=".6" /><circle cx="8.499" cy="6.499" r=".6" /><circle cx="8.499" cy="8.499" r=".6" /><circle cx="8.499" cy="10.498" r=".6" /><circle cx="8.499" cy="12.498" r=".6" /><circle cx="10.499" cy="2.5" r=".6" /><circle cx="10.499" cy="4.5" r=".6" /><circle cx="10.499" cy="6.499" r=".6" /><circle cx="10.499" cy="8.499" r=".6" /><circle cx="10.499" cy="10.498" r=".6" /><circle cx="10.499" cy="12.498" r=".6" /></g></svg>`
 
@@ -56,6 +61,8 @@ export const searchIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" h
   <circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="2" />
   <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m15 15l-5-5" />
 </svg>`
+*/
+
 
 export const lightOnIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m21 2l-1 1M3 2l1 1m17 13l-1-1M3 16l1-1m5 3h6m-5 3h4M12 3C8 3 5.952 4.95 6 8c.023 1.487.5 2.5 1.5 3.5S9 13 9 15h6c0-2 .5-2.5 1.5-3.5h0c1-1 1.477-2.013 1.5-3.5c.048-3.05-2-5-6-5"/></svg>`
 
@@ -86,3 +93,5 @@ export const spinnerIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" 
 export const endpointIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M18 5v2h5.563L11.28 19.281l1.438 1.438L25 8.437V14h2V5zM5 9v18h18V14l-2 2v9H7V11h9l2-2z"/></svg>`
 
 export const responseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16"><path fill="currentColor" d="M2.25 5a1.25 1.25 0 1 0 0-2.5a1.25 1.25 0 0 0 0 2.5m0 4.25a1.25 1.25 0 1 0 0-2.5a1.25 1.25 0 0 0 0 2.5m4.75 3a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0M5.75 3a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5zM5 8a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 5 8m4.25 3.5a.75.75 0 0 0 0 1.5h5a.75.75 0 0 0 0-1.5z"/></svg>`
+
+

@@ -1,0 +1,16 @@
+
+#drag-icon {
+  position: fixed;
+  top: 0;
+  left: 10px;
+  cursor: grab;
+  color: var(--text-primary);
+  z-index: 9;
+  -webkit-app-region: drag;
+
+  svg {
+    width: 2em;
+    height: auto;
+    filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.35));
+  }
+}

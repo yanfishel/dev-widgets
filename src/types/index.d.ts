@@ -28,6 +28,22 @@ type TWidgets = {
   notes: TWidget
 }
 
+type T_Store = {
+  loading: boolean
+  currentDate: Date | null
+  settings: IWidgetsSettings
+
+  init: () => void
+  updateDate: () => void
+
+  toggleLockPosition: (locked: boolean) => void
+  setWidgetsSize: (size: TWidgetsSize) => void
+
+  storeSettings: () => void
+  restoreSettings: () => IWidgetsSettings
+  electronEventsHandler: () => void
+}
+
 interface IPackageJson {
   productName?: string;
   version?: string;

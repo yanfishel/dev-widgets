@@ -89,11 +89,6 @@ html { height: 100% }
 body {
   margin: 0;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--widgets-distance);
   padding: 0;
   background: transparent;
   font-family: var(--font-family);
@@ -104,14 +99,17 @@ body {
 
 #root {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  gap: var(--widgets-distance);
 }
 
 #top-container {
   width: 100%;
+  height: var(--top-container-height);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -131,22 +129,6 @@ body {
   #analog-clock,
   #digital-clock { order:1; }
   #weather-widget { order: 2; }
-}
-
-#drag-icon {
-  position: fixed;
-  top: 0;
-  left: 10px;
-  cursor: grab;
-  color: var(--text-primary);
-  z-index: 9;
-  -webkit-app-region: drag;
-
-  svg {
-    width: 2em;
-    height: auto;
-    filter: drop-shadow(1px 1px 0px rgba(255,255,255,0.35));
-  }
 }
 
 
