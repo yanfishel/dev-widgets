@@ -84,10 +84,10 @@ export const useStore = createWithEqualityFn<T_Store>()(
           return {
             ...WIDGETS_SETTINGS_DEFAULT,
             ...parsedSettings,
-            widgets: {
-              ...WIDGETS_SETTINGS_DEFAULT.widgets,
+            widgets: [
+              ...WIDGETS_SETTINGS_DEFAULT.widgets.filter(w => parsedSettings.widgets.find((pw:TWidget) => pw.id === w.id) === undefined),
               ...parsedSettings.widgets
-            }
+            ]
           }
         } catch (e) {
           console.log(e);

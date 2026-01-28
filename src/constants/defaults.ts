@@ -24,38 +24,44 @@ export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
   },
   autoGeoPosition: true,
   location: { name:'', lat: 0, lon: 0 },
-  widgets: {
-    dailyWeather: {
+  widgets: [
+    {
       id: 'widget-daily-weather',
+      title: 'Daily Weather',
       active: true,
       order: 1
     },
-    webSearch: {
+    {
       id: 'widget-web-search',
+      title: 'Web Search',
       active: true,
       order: 2
     },
-    systemInfo: {
+    {
       id: 'widget-system-info',
+      title: 'System Info',
       active: true,
       order: 3
     },
-    mockServer: {
+    {
       id: 'widget-mock-server',
+      title: 'Mock Server',
       active: true,
       order: 4
     },
-    devUtils: {
+    {
       id: 'widget-dev-utils',
+      title: 'Dev Utils',
       active: true,
       order: 5
     },
-    notes: {
+    {
       id: 'widget-notes',
+      title: 'Notes',
       active: true,
       order: 6
     }
-  }
+  ]
 }
 
 export const MOCK_SERVER_SCHEME_DEFAULT = [

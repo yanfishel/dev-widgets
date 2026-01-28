@@ -15,6 +15,7 @@ type TWidgetsSize = 'small' | 'medium' | 'large'
 
 type TWidget = {
   id: string
+  title: string
   active: boolean
   order: number
 }
@@ -26,6 +27,12 @@ type TWidgets = {
   devUtils: TWidget
   mockServer: TWidget
   notes: TWidget
+}
+
+type TLocation = {
+  name: string,
+  lat: number,
+  lon: number
 }
 
 type T_Store = {
@@ -61,8 +68,8 @@ interface IWidgetsSettings {
   locked: boolean,
   weather: { id:string, active: boolean }
   autoGeoPosition: boolean
-  location: { name: string, lat: number, lon: number } | null
-  widgets: TWidgets
+  location: TLocation | null
+  widgets: TWidget[]
 }
 
 

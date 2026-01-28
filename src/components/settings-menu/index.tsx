@@ -1,19 +1,16 @@
-import {useCallback, useEffect} from "react";
+import { useEffect } from "react";
 
-import {useStore} from "@/store";
-import {CloseIcon, SettingsIconHover, SettingsIconRegular} from "@/assets";
-import './style.css'
+import {AboutIcon, CloseIcon, SettingsIconHover, SettingsIconRegular} from "@/assets";
 import LockPosition from "./items/lock-position";
 import WidgetsSize from "./items/widgets-size";
 import ThemeSelect from "./items/theme-select";
+import Weather from "./items/weather";
+import {WidgetsList} from "./items/widgets-list";
 
+import './style.css'
 
 
 const SettingsMenu = () => {
-
-  const settings = useStore(({settings}) => settings)
-  const storeSettings = useStore(({storeSettings}) => storeSettings)
-
 
   const settingsMenuOpen = () => {
     (document.getElementById('settings-dialog') as HTMLDialogElement).showModal();
@@ -27,6 +24,10 @@ const SettingsMenu = () => {
     const target = e.target as HTMLElement;
     if(target.closest('.settings-menu') || target.closest('.settings-menu-open')) return;
     settingsMenuClose();
+  }
+
+  const openAboutWindow = () => {
+    window.electronAPI.openAboutWindow()
   }
 
 
@@ -45,17 +46,25 @@ const SettingsMenu = () => {
       <dialog id={'settings-dialog'} closedby="any">
         <div className={"container settings-menu"}>
           <div className={"circle-button settings-menu-close"} onClick={settingsMenuClose}>
-            <CloseIcon />
+            <CloseIcon/>
           </div>
-          <h1 style={{paddingTop:"16px"}}>Settings</h1>
+          <h1 style={{paddingTop: "16px"}}>Settings</h1>
 
-          <LockPosition />
+          <LockPosition/>
 
-          <WidgetsSize />
+          <WidgetsSize/>
 
-          <ThemeSelect />
+          <ThemeSelect/>
 
+          <Weather />
 
+          <WidgetsList />
+
+          <div className="settings-menu-footer">
+            <div className={"footer-content"}>
+              <a href="#" onClick={ openAboutWindow }><AboutIcon /> About</a>
+            </div>
+          </div>
 
         </div>
       </dialog>
