@@ -233,9 +233,9 @@ class WinController {
     })
 
     // Hide the traffic light buttons (minimize, maximize, close)
-    if(is.macOS()) {
+    /*if(is.macOS()) {
       this.#aboutWindow.setWindowButtonVisibility(false)
-    }
+    }*/
 
     this.#aboutWindow.loadURL(ABOUT_WINDOW_WEBPACK_ENTRY)
 

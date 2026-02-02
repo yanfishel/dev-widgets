@@ -2,18 +2,17 @@ import {useEffect, useState} from "react";
 
 import { LogoClockIcon } from "@/assets";
 import {useStore} from "@/store";
-import {formatDate} from "@/utils";
 
-import {T_ClockDate, T_ClockHands} from "./types";
+import {T_ClockHands} from "./types";
 import './style.css';
 
 
 const AnalogClock = () => {
 
   const [clockHands, setClockHands] = useState<T_ClockHands>({hour: 0, minute: 0, second: 0})
-  const [clockDate, setClockDate] = useState<T_ClockDate>({ date: '', weekday: '' })
 
   const currentDate = useStore(({currentDate}) => currentDate)
+  const displayDate = useStore(({displayDate}) => displayDate)
 
 
   useEffect(()=>{
@@ -31,11 +30,6 @@ const AnalogClock = () => {
       second: second * 6 - 90
     })
 
-    setClockDate({
-      date: formatDate(currentDate, { day: 'numeric', month: 'short' }),
-      weekday: formatDate(currentDate, { weekday:'long' })
-    })
-
   }, [currentDate])
 
 
@@ -51,8 +45,8 @@ const AnalogClock = () => {
         <LogoClockIcon />
       </div>
       <div className="date">
-        <span>{ clockDate.weekday }</span>
-        { clockDate.date }
+        <span>{ displayDate.weekday }</span>
+        { displayDate.shortdate }
       </div>
       <div className="hourhand" style={{ transform: `rotate(${clockHands.hour}deg)` }} />
       <div className="minutehand" style={{ transform: `rotate(${clockHands.minute}deg)` }} />

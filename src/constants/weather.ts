@@ -1,4 +1,6 @@
 
+export const LOCATION_UPDATE_INTERVAL = 30 * 60 * 1000
+
 export const WEATHER_DATA = [
   { code: [0], description: 'Clear', icon: 'clear' },
   { code: [1, 2], description: 'Partly cloudy', icon: 'partly_cloudy' },

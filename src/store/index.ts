@@ -1,24 +1,32 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { subscribeWithSelector } from "zustand/middleware";
 
-import {STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
-import {getStorageItem, setStorageItem} from "@/utils";
+import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
+import { getStorageItem, setStorageItem } from "@/utils";
+import {getUserIPLocation} from "@services/weather";
+import {shallow} from "zustand/vanilla/shallow";
 
 
 
 export const useStore = createWithEqualityFn<T_Store>()(
-  subscribeWithSelector<T_Store>((set, get) => ({
+  subscribeWithSelector<T_Store>((set, get, api) => ({
 
     loading: true,
     currentDate: new Date(),
+    displayDate: { date: '', shortdate: '', weekday: '' },
+    currentLocation: DEFAULT_LOCATION,
 
     settings: WIDGETS_SETTINGS_DEFAULT,
 
+    unsubLocationChange: ()=>null,
+
 
     init: () =>{
-      const { updateDate, electronEventsHandler, restoreSettings } = get()
+      const { updateDate, updateDisplayDate, updateLocation, electronEventsHandler, restoreSettings, subscribers } = get()
 
       updateDate()
+
+      updateDisplayDate()
 
       electronEventsHandler()
 
@@ -26,13 +34,77 @@ export const useStore = createWithEqualityFn<T_Store>()(
         loading: false,
         settings: restoreSettings()
       })
+
+      updateLocation()
+
+      subscribers()
+
     },
 
+    subscribers: () => {
+      get().unsubLocationChange = api.subscribe(state => [state.settings.autoGeoPosition, state.settings.location], get().onLocationChange, {
+        equalityFn: shallow
+      })
+    },
+
+    onLocationChange: () => {
+      const { updateLocation } = get()
+      updateLocation()
+    },
+
+
     updateDate: () => {
+      const { currentDate, updateDisplayDate } = get()
+      if(currentDate.getMinutes() === 0 && currentDate.getSeconds() === 0) {
+        updateDisplayDate()
+      }
       set({
         currentDate: new Date()
       })
-      setTimeout(() => get().updateDate(), 1000)
+      setTimeout(() => {
+        get().updateDate()
+      }, 1000)
+    },
+
+    updateDisplayDate: () => {
+      const now = new Date()
+      const weekday = now.toLocaleDateString('en-US', { weekday: 'long' })
+      const date = now.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' })
+      const shortdate = now.toLocaleDateString('en-US', { day: 'numeric', month: 'short' })
+      set({ displayDate: { date, shortdate, weekday } })
+    },
+
+    updateLocation: async () => {
+      const { settings } = get()
+
+      if(!settings.autoGeoPosition) {
+        set({ currentLocation: settings.location })
+        return
+      }
+
+      // Get Location from Storage
+      const storedLocation = getStorageItem(STORAGE_KEYS.WIDGET_WEATHER_LOCATION)
+      if(storedLocation){
+        const parsed = JSON.parse(storedLocation)
+        if(parsed.timestamp + LOCATION_UPDATE_INTERVAL > new Date().getTime()){
+          set({ currentLocation: parsed })
+          return
+        }
+      }
+
+      // ELSE Get Location from IP
+      const location:TLocation = await getUserIPLocation()
+      if(location){
+        const data = {
+          ...location,
+          timestamp: new Date().getTime()
+        }
+        setStorageItem(STORAGE_KEYS.WIDGET_WEATHER_LOCATION, JSON.stringify(data))
+        set({ currentLocation: data })
+        return
+      }
+      /*set({ currentLocation: DEFAULT_LOCATION })
+      return DEFAULT_LOCATION*/
     },
 
     toggleLockPosition: (locked: boolean) => {

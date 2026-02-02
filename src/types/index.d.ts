@@ -30,18 +30,25 @@ type TWidgets = {
 }
 
 type TLocation = {
-  name: string,
+  country?: string,
+  countryCode?: string,
+  city: string,
   lat: number,
-  lon: number
+  lon: number,
+  timestamp?: number
 }
 
 type T_Store = {
   loading: boolean
   currentDate: Date | null
+  displayDate: { date: string, shortdate:string, weekday: string }
+  currentLocation: TLocation
   settings: IWidgetsSettings
 
   init: () => void
   updateDate: () => void
+  updateDisplayDate: () => void
+  updateLocation: () => Promise<void>
 
   toggleLockPosition: (locked: boolean) => void
   setWidgetsSize: (size: TWidgetsSize) => void
@@ -50,6 +57,10 @@ type T_Store = {
   storeSettings: () => void
   restoreSettings: () => IWidgetsSettings
   electronEventsHandler: () => void
+
+  subscribers: () => void
+  unsubLocationChange: () => void
+  onLocationChange: () => void
 }
 
 interface IPackageJson {

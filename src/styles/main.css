@@ -198,6 +198,16 @@ dialog {
   }
 }
 
+/* -- TOAST - */
+.react-hot-toast {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  svg {
+    width: 0.8rem;
+    height: auto;
+  }
+}
+
 /* -- BUTTON - */
 .circle-button {
   width: 34px;

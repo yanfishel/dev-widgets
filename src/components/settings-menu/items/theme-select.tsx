@@ -15,7 +15,7 @@ const ThemeSelect = () => {
       <label htmlFor="theme">Theme</label>
       <select name="theme"
               id="theme"
-              value={theme}
+              value={ theme }
               onChange={e => setSettingsValue('theme', e.target.value)}>
         <option value="system">System</option>
         <option value="light">Light</option>

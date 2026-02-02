@@ -5,8 +5,3 @@ export type T_ClockHands = {
   minute: number,
   second: number
 }
-
-export type T_ClockDate = {
-  date: string,
-  weekday: string
-}

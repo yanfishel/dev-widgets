@@ -4,12 +4,12 @@ import {useStore} from "@/store";
 
 const Weather = () => {
 
-  const [manual, setManual] = useState<TLocation>({ name: '', lat: 0, lon: 0 })
 
 
   const settings = useStore(({settings}) => settings)
   const setSettingsValue = useStore(({setSettingsValue}) => setSettingsValue)
 
+  const [manual, setManual] = useState<TLocation>(settings.location)
 
   const checked = useMemo(() => settings.weather.active, [settings.weather.active])
 
@@ -18,11 +18,6 @@ const Weather = () => {
     setSettingsValue('location', manual)
   }, [manual]);
 
-  useEffect(()=>{
-    if(settings.location) {
-      setManual(settings.location)
-    }
-  }, [])
 
 
   return (
@@ -45,21 +40,21 @@ const Weather = () => {
             <div>
               <label htmlFor="city">City</label>
               <input id="city" name="city" type="text"
-                     value={ settings.location?.name ?? '' }
-                     onChange={ e => setManual(prevState => ({ ...prevState, name: e.target.value })) }   />
+                     value={ manual.city ?? '' }
+                     onChange={ e => setManual(prevState => ({ ...prevState, city: e.target.value })) }   />
             </div>
 
             <div>
               <label htmlFor="lat">Latitude</label>
               <input id="lat" name="lat" type="text"
-                     value={ settings.location?.lat ?? '' }
+                     value={ manual.lat ?? '' }
                      onChange={ e => setManual(prevState => ({ ...prevState, lat: Number(e.target.value) })) } />
             </div>
 
             <div>
               <label htmlFor="lon">Longitude</label>
               <input id="lon" name="lon" type="text"
-                     value={ settings.location?.lon ?? '' }
+                     value={ manual.lon ?? '' }
                      onChange={ e => setManual(prevState => ({ ...prevState, lon: Number(e.target.value) })) } />
             </div>
 

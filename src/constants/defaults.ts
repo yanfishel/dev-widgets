@@ -14,6 +14,12 @@ export const APP_SETTINGS_DEFAULT:IAppSettings = {
   openAtLogin: false
 }
 
+export const DEFAULT_LOCATION = {
+  city:'',
+  lat: 0,
+  lon: 0
+}
+
 export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
   theme: 'system',
   size: 'large',
@@ -23,7 +29,7 @@ export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
     active: true
   },
   autoGeoPosition: true,
-  location: { name:'', lat: 0, lon: 0 },
+  location: DEFAULT_LOCATION,
   widgets: [
     {
       id: 'widget-daily-weather',

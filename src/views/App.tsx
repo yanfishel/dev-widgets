@@ -5,6 +5,7 @@ import ThemeController from "@components/theme-controller";
 import Dragger from "@components/dragger";
 import AnalogClock from "@components/analog-clock";
 import SettingsMenu from "@components/settings-menu";
+import WeatherCurrent from "@components/weather-current";
 
 import '@/styles/main.css'
 import '@/styles/tabs.css'
@@ -35,6 +36,8 @@ const App = () => {
         <SettingsMenu />
 
         <AnalogClock />
+
+        <WeatherCurrent />
 
       </div>
 

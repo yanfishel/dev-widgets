@@ -26,6 +26,7 @@ const config: ForgeConfig = {
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
       mainConfig,
+      devContentSecurityPolicy: "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: http://ip-api.com/ https://api.open-meteo.com/",
       renderer: {
         config: rendererConfig,
         entryPoints: [
