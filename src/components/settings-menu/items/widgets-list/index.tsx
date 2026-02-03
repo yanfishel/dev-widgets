@@ -1,16 +1,15 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ReactSortable} from "react-sortablejs";
 
-import {useStore} from "@/store";
-import {WidgetsItem} from "./widgets-item";
+import { useSettingsStore} from "@/store";
+import {WidgetItem} from "./widget-item";
 
 
 export const WidgetsList = () => {
 
   const [widgets, setWidgets] = useState<TWidget[]>([])
 
-  const settings = useStore(({settings}) => settings)
-  const setSettingsValue = useStore(({setSettingsValue}) => setSettingsValue)
+  const settingsWidgets = useSettingsStore(({widgets}) => widgets)
 
 
   const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>, widgetId: string) => {
@@ -30,11 +29,11 @@ export const WidgetsList = () => {
       if('chosen' in widget) delete widget.chosen
       return widget
     })
-    setSettingsValue('widgets', newWidgets)
+    useSettingsStore.setState(state => ({...state, widgets:newWidgets }) )
   }, [widgets]);
 
   useEffect(()=>{
-    setWidgets(settings.widgets.sort((a, b) => a.order - b.order))
+    setWidgets(settingsWidgets.sort((a, b) => a.order - b.order))
   }, [])
 
 
@@ -49,11 +48,11 @@ export const WidgetsList = () => {
                      dataIdAttr={'data-widget'}
                      className={'sortable-container'}>
         { widgets.map( widget =>
-          <WidgetsItem key={widget.id}
-                       title={widget.title}
-                       fieldName={widget.id}
-                       checked={widget.active}
-                       onChange={ onChangeHandler } />
+          <WidgetItem key={widget.id}
+                      title={widget.title}
+                      fieldName={widget.id}
+                      checked={widget.active}
+                      onChange={ onChangeHandler } />
         ) }
       </ReactSortable>
 

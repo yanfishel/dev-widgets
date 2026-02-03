@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import {DragItemIcon} from "@/assets";
+
 
 interface IProps {
   title: string
@@ -7,7 +9,7 @@ interface IProps {
   checked: boolean
   onChange: (event: React.ChangeEvent<HTMLInputElement>, widgetId: string) => void
 }
-export const WidgetsItem = ({ title, fieldName, checked, onChange }: IProps) => {
+export const WidgetItem = ({ title, fieldName, checked, onChange }: IProps) => {
   return (
     <div className={'settings-menu-item'}>
       <div className={"menu-item-handle"}><DragItemIcon /></div>

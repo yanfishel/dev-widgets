@@ -8,7 +8,7 @@ export const getUserIPLocation = async () => {
   }
 }
 
-export const getWeatherData = async (location:TLocation) => {
+export const getWeatherData = async (location:TLocation):Promise<TWeatherData | undefined> => {
   try {
     const apiBaseURL = 'https://api.open-meteo.com/v1/forecast'
     const urlLocation = `latitude=${location.lat}&longitude=${location.lon}`

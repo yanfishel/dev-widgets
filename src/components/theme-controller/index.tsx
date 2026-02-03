@@ -1,18 +1,19 @@
-import {useStore} from "@/store";
 import {useCallback, useEffect} from "react";
+
+import { useSettingsStore} from "@/store";
 
 
 const ThemeController = ():null => {
 
-  const settings = useStore(({settings}) => settings)
+  const theme = useSettingsStore(({theme}) => theme)
 
 
   const setSystemTheme = useCallback((isDark: boolean) => {
-    if(settings.theme !== 'system') {
+    if(theme !== 'system') {
       return
     }
     toggleDarkTheme(isDark)
-  }, [settings.theme])
+  }, [theme])
 
   const toggleDarkTheme = (dark:boolean) => {
     if(dark){
@@ -27,22 +28,22 @@ const ThemeController = ():null => {
     const systemDarkTheme = window.matchMedia("(prefers-color-scheme: dark)")
     systemDarkTheme.addEventListener("change", (e)=>setSystemTheme(e.matches))
 
-    if(settings.theme === 'system') {
+    if(theme === 'system') {
       toggleDarkTheme(systemDarkTheme.matches);
     } else {
-      toggleDarkTheme(settings.theme === 'dark')
+      toggleDarkTheme(theme === 'dark')
     }
   }, [])
 
 
   useEffect(()=>{
-    if(settings.theme === 'system'){
+    if(theme === 'system'){
       const systemDarkTheme = window.matchMedia("(prefers-color-scheme: dark)");
       toggleDarkTheme(systemDarkTheme.matches)
     } else {
-      toggleDarkTheme(settings.theme === 'dark')
+      toggleDarkTheme(theme === 'dark')
     }
-  }, [settings.theme])
+  }, [theme])
 
 
   return null

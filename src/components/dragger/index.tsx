@@ -1,7 +1,4 @@
-import {useEffect, useState} from "react";
-
-
-import {useStore} from "@/store";
+import { useSettingsStore } from "@/store";
 import {DragIcon} from "@/assets";
 
 import './style.css'
@@ -9,16 +6,10 @@ import './style.css'
 
 const Dragger = () => {
 
-  const [show, setShow] = useState<boolean>(false)
-
-  const settings = useStore(({settings}) => settings)
-
-
-  useEffect(()=> setShow(!settings.locked), [settings.locked])
-
+  const locked = useSettingsStore(({locked}) => locked)
 
   return (
-    <div id="drag-icon" className={show ? '' : 'hidden'}>
+    <div id="drag-icon" className={locked ? 'hidden' : ''}>
       <DragIcon />
     </div>
   )

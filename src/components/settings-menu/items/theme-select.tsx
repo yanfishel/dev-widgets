@@ -1,13 +1,12 @@
 import {memo, useMemo} from "react";
-import {useStore} from "@/store";
+import { useSettingsStore} from "@/store";
 
 
 const ThemeSelect = () => {
 
-  const settings = useStore(({settings}) => settings)
-  const setSettingsValue = useStore(({setSettingsValue}) => setSettingsValue)
+  const theme = useSettingsStore(({theme}) => theme)
 
-  const theme = useMemo(() => settings.theme, [settings.theme])
+  const selectedTheme = useMemo(() => theme, [theme])
 
 
   return (
@@ -15,8 +14,8 @@ const ThemeSelect = () => {
       <label htmlFor="theme">Theme</label>
       <select name="theme"
               id="theme"
-              value={ theme }
-              onChange={e => setSettingsValue('theme', e.target.value)}>
+              value={ selectedTheme }
+              onChange={e => useSettingsStore.setState(state => ({...state, theme:e.target.value as TTheme}) )}>
         <option value="system">System</option>
         <option value="light">Light</option>
         <option value="dark">Dark</option>

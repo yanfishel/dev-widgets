@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 import { LogoClockIcon } from "@/assets";
-import {useStore} from "@/store";
+import {useGlobalStore} from "@/store";
 
 import {T_ClockHands} from "./types";
 import './style.css';
@@ -11,18 +11,18 @@ const AnalogClock = () => {
 
   const [clockHands, setClockHands] = useState<T_ClockHands>({hour: 0, minute: 0, second: 0})
 
-  const currentDate = useStore(({currentDate}) => currentDate)
-  const displayDate = useStore(({displayDate}) => displayDate)
+  const globalDateTime = useGlobalStore(({globalDateTime}) => globalDateTime)
+  const displayDate = useGlobalStore(({displayDate}) => displayDate)
 
 
   useEffect(()=>{
-    if(!currentDate) {
+    if(!globalDateTime) {
       return
     }
 
-    const hour = currentDate.getHours() // Get the current hour
-    const minute = currentDate.getMinutes() // Get the current minute
-    const second = currentDate.getSeconds() // Get the current second
+    const hour = globalDateTime.getHours() // Get the current hour
+    const minute = globalDateTime.getMinutes() // Get the current minute
+    const second = globalDateTime.getSeconds() // Get the current second
 
     setClockHands({
       hour: (hour * 30) + (minute / 2) - 90,
@@ -30,7 +30,7 @@ const AnalogClock = () => {
       second: second * 6 - 90
     })
 
-  }, [currentDate])
+  }, [globalDateTime])
 
 
   return (

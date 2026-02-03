@@ -1,12 +1,12 @@
 import {memo, useMemo} from "react";
-import {useStore} from "@/store";
+import { useSettingsStore} from "@/store";
 
 
 const WidgetsSize = () => {
 
-  const settings = useStore(({settings}) => settings)
+  const size = useSettingsStore(({size}) => size)
 
-  const size = useMemo(() => settings.size, [settings.size])
+  const value = useMemo(() => size, [size])
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const size = e.target.value as TWidgetsSize
@@ -18,7 +18,7 @@ const WidgetsSize = () => {
     <div className={"settings-menu-item"}>
       <label htmlFor="widgets-size">Size</label>
       <select name="widgets-size" id="widgets-size"
-              value={ size }
+              value={ value }
               onChange={ onChange }>
         <option value="small">Small</option>
         <option value="medium">Medium</option>

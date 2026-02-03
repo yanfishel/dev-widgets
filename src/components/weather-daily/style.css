@@ -1,83 +1,6 @@
 
-#weather-current-widget {
-  width: calc(100% - 4px);
-  height: 45px;
-  position: absolute;
-  left: 2px;
-  top: calc(var(--top-container-height) - 40px);
-  border:0;
-
-  .weather-info {
-    position: absolute;
-    left:0;
-    bottom: 0;
-    width: 100%;
-    height: 45px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    padding: 0 15px 5px;
-    line-height: 1em;
-    color: var(--text-primary);
-    text-shadow: var(--text-shadow);
-
-    .date {
-      text-align: start;
-      /*text-transform: uppercase;*/
-      opacity: 0.85;
-      font-size: 0.7rem;
-      letter-spacing: 0.25px;
-
-      .country {
-        font-weight: 600;
-      }
-      .day {
-        font-weight: 600;
-        span {
-          font-weight: 500;
-        }
-      }
-    }
-
-    .weather {
-      text-align: end;
-      position: relative;
-      width: calc((100% - var(--top-container-height) - 15px) / 2);
-
-      .icon {
-        position: absolute;
-        bottom: 5px;
-        right: 50%;
-        transform: translateX(50%);
-        opacity: 0.95;
-
-        img {
-          width: var(--weather-icon-size);
-          height: auto;
-          z-index:-1;
-        }
-      }
-
-      .temperature {
-        color: var(--text-primary);
-        font-size: 1.3rem;
-        position: relative;
-        font-weight: 600;
-        z-index: 2;
-      }
-
-      .description {
-        font-size: .65rem;
-        position: relative;
-        z-index: 2;
-      }
-    }
-  }
-
-}
-
 /* -- DAILY WEATHER - */
-#weather-daily-widget {
+#widget-daily-weather:not(input) {
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -171,18 +94,14 @@
 
 /* -- DARK THEME - */
 .theme-dark {
-  #weather-current-widget.container .weather-info .weather .icon img {
-    filter: brightness(0.7);
-  }
-
-  #weather-daily-widget .container .day .weather .icon img {
+  #widget-daily-weather .container .day .weather .icon img {
     filter: brightness(0.8);
   }
 }
 
 /* -- SMALL SIZE -- */
 .widgets-size-small {
-  #weather-daily-widget .container .day:last-child {
+  #widget-daily-weather .container .day:last-child {
     display: none;
   }
 }

@@ -20,15 +20,6 @@ type TWidget = {
   order: number
 }
 
-type TWidgets = {
-  dailyWeather: TWidget
-  webSearch: TWidget
-  systemInfo: TWidget
-  devUtils: TWidget
-  mockServer: TWidget
-  notes: TWidget
-}
-
 type TLocation = {
   country?: string,
   countryCode?: string,
@@ -38,29 +29,50 @@ type TLocation = {
   timestamp?: number
 }
 
+type TWeatherCurrent = {
+  interval:number
+  is_day: number
+  rain: number
+  showers: number
+  snowfall: number
+  temperature_2m: number
+  time:number
+  weather_code:number
+}
+
+type TWeatherDaily = {
+  temperature_2m_max: number[]
+  temperature_2m_min: number[]
+  weather_code: number[]
+  time: number[]
+}
+
+type TWeatherData = {
+  current: TWeatherCurrent
+  daily: TWeatherDaily
+  timestamp: number
+  lat: number
+  lon: number
+}
+
 type T_Store = {
-  loading: boolean
-  currentDate: Date | null
+  globalDateTime: Date
   displayDate: { date: string, shortdate:string, weekday: string }
-  currentLocation: TLocation
-  settings: IWidgetsSettings
 
-  init: () => void
-  updateDate: () => void
-  updateDisplayDate: () => void
-  updateLocation: () => Promise<void>
+  //weatherForecast: TWeatherData | null
 
-  toggleLockPosition: (locked: boolean) => void
-  setWidgetsSize: (size: TWidgetsSize) => void
+  updateGlobalTimer: () => void
+  //updateWeatherForecast: () => Promise<void>
+}
 
-  setSettingsValue: (key: keyof IWidgetsSettings, value: unknown) => void
-  storeSettings: () => void
-  restoreSettings: () => IWidgetsSettings
-  electronEventsHandler: () => void
+type T_SettingsStore = IWidgetsSettings & {
+  userLocation: TLocation
+  updateLocation: ()=>Promise<void>
+}
 
-  subscribers: () => void
-  unsubLocationChange: () => void
-  onLocationChange: () => void
+type T_WeatherStore = {
+  weatherForecast: TWeatherData | null
+  updateWeatherForecast: (force?:boolean)=>Promise<void>
 }
 
 interface IPackageJson {

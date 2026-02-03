@@ -1,21 +1,23 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {useStore} from "@/store";
+
+import { useSettingsStore } from "@/store";
 
 
 const Weather = () => {
 
+  const autoGeoPosition = useSettingsStore(({autoGeoPosition}) => autoGeoPosition)
+  const weather = useSettingsStore(({weather}) => weather)
+  const location = useSettingsStore(({location}) => location)
+  const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
 
 
-  const settings = useStore(({settings}) => settings)
-  const setSettingsValue = useStore(({setSettingsValue}) => setSettingsValue)
+  const [manual, setManual] = useState<TLocation>(location)
 
-  const [manual, setManual] = useState<TLocation>(settings.location)
-
-  const checked = useMemo(() => settings.weather.active, [settings.weather.active])
+  const checked = useMemo(() => weather.active, [weather.active])
 
 
   useEffect(() => {
-    setSettingsValue('location', manual)
+    useSettingsStore.setState(state => ({...state, location: manual}))
   }, [manual]);
 
 
@@ -29,33 +31,39 @@ const Weather = () => {
             <label htmlFor="geo-position">Location</label>
             <select id="geo-position"
                     name="geo-position"
-                    value={ settings.autoGeoPosition ? 'auto' : 'manual' }
-                    onChange={ e => setSettingsValue('autoGeoPosition', e.target.value === 'auto') }>
+                    value={ autoGeoPosition ? 'auto' : 'manual' }
+                    onChange={ e => {
+                      useSettingsStore.setState(state => ({...state, autoGeoPosition: e.target.value === 'auto' }))
+                      updateLocation()
+                    }}>
               <option value="auto">Auto</option>
               <option value="manual">Manual</option>
             </select>
           </div>
-          <div id="geo-position-manual" className={`item-content-row geo-position-manual ${ !settings.autoGeoPosition ? 'show' : '' }`}>
+          <div id="geo-position-manual" className={`item-content-row geo-position-manual ${ !autoGeoPosition ? 'show' : '' }`}>
 
             <div>
               <label htmlFor="city">City</label>
               <input id="city" name="city" type="text"
                      value={ manual.city ?? '' }
-                     onChange={ e => setManual(prevState => ({ ...prevState, city: e.target.value })) }   />
+                     onChange={ e => setManual(prevState => ({ ...prevState, city: e.target.value })) }
+                     onBlur={ updateLocation } />
             </div>
 
             <div>
               <label htmlFor="lat">Latitude</label>
               <input id="lat" name="lat" type="text"
                      value={ manual.lat ?? '' }
-                     onChange={ e => setManual(prevState => ({ ...prevState, lat: Number(e.target.value) })) } />
+                     onChange={ e => setManual(prevState => ({ ...prevState, lat: Number(e.target.value) })) }
+                     onBlur={ updateLocation } />
             </div>
 
             <div>
               <label htmlFor="lon">Longitude</label>
               <input id="lon" name="lon" type="text"
                      value={ manual.lon ?? '' }
-                     onChange={ e => setManual(prevState => ({ ...prevState, lon: Number(e.target.value) })) } />
+                     onChange={ e => setManual(prevState => ({ ...prevState, lon: Number(e.target.value) })) }
+                     onBlur={ updateLocation } />
             </div>
 
           </div>
@@ -69,7 +77,7 @@ const Weather = () => {
                  name="weather-active"
                  checked={ checked }
                  onChange={ e => {
-                   setSettingsValue('weather', { id: settings.weather.id, active: e.target.checked } )
+                   useSettingsStore.setState(state => ({ weather: { ...state.weather, active: e.target.checked } }))
                  }}
                  role="switch" />
         </div>

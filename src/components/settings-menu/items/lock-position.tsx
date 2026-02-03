@@ -1,12 +1,12 @@
 import {memo, useMemo} from "react";
-import {useStore} from "@/store";
+import { useSettingsStore } from "@/store";
 
 
 const LockPosition = () => {
 
-  const settings = useStore(({settings}) => settings)
+  const locked = useSettingsStore(({locked}) => locked)
 
-  const checked = useMemo(() => settings.locked, [settings.locked])
+  const checked = useMemo(() => locked, [locked])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     window.electronAPI.setLockPosition(e.target.checked)
