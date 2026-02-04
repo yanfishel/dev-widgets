@@ -1,10 +1,9 @@
 
-#weather-current-widget {
+#widget-current-weather {
   width: calc(100% - 4px);
-  height: 45px;
+  height: 43px;
   position: absolute;
-  left: 2px;
-  top: calc(var(--top-container-height) - 40px);
+  inset: auto 2px 0;
   border:0;
 
   .weather-info {
@@ -76,102 +75,10 @@
 
 }
 
-/* -- DAILY WEATHER - */
-#weather-daily-widget {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-
-  .container {
-    min-height: 120px;
-    border:0;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0;
-    padding: 8px 2px 4px;
-
-    .day {
-      width: calc(100% / var(--weather-days-number));
-      min-width: calc(100% / var(--weather-days-number));
-      max-width: calc(100% / var(--weather-days-number));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6rem;
-      position: relative;
-      color: var(--text-primary);
-      text-shadow: var(--text-shadow);
-
-      .date {
-        font-size: 0.55rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        line-height: 1.1em;
-        span {
-          display: block;
-        }
-      }
-
-      .weather {
-        .icon img {
-          width: 38px;
-          height: auto;
-        }
-
-        .temperature {
-          width: 100%;
-          font-size: 0.8rem;
-          font-weight: 700;
-          line-height: 1em;
-          margin-top: -4px;
-          margin-bottom: 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-
-          span:last-child {
-            color: rgb( from var(--text-primary) r g b / 0.7);
-          }
-        }
-
-        .description {
-          width: 90%;
-          max-width: 90%;
-          height: 26px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-transform: lowercase;
-          font-size: 0.525rem;
-          letter-spacing: 0.25px;
-          line-height: 1.1em;
-        }
-      }
-
-      &:after {
-        content: '';
-        position: absolute;
-        bottom: 10%;
-        right: -.5px;
-        transform: translateX(-50%);
-        width: 1px;
-        height: 80%;
-        background-color: rgb( from var(--text-primary) r g b / 0.15);
-      }
-
-      &:last-child:after {
-        display: none;
-      }
-    }
-  }
-}
-
 
 /* -- DARK THEME - */
 .theme-dark {
-  #weather-current-widget.container .weather-info .weather .icon img {
+  #widget-current-weather.container .weather-info .weather .icon img {
     filter: brightness(0.7);
   }
 
@@ -180,9 +87,4 @@
   }
 }
 
-/* -- SMALL SIZE -- */
-.widgets-size-small {
-  #weather-daily-widget .container .day:last-child {
-    display: none;
-  }
-}
+

@@ -13,10 +13,10 @@ export const WidgetItem = ({ title, fieldName, checked, onChange }: IProps) => {
   return (
     <div className={'settings-menu-item'}>
       <div className={"menu-item-handle"}><DragItemIcon /></div>
-      <label htmlFor={ fieldName }>{ title }</label>
+      <label htmlFor={ fieldName+'_checkbox' }>{ title }</label>
       <div className="switch-container">
-        <input type="checkbox" id={ fieldName }
-               name={ fieldName }
+        <input type="checkbox" id={ fieldName+'_checkbox' }
+               name={ fieldName+'_checkbox' }
                checked={ checked }
                onChange={(event) => onChange(event, fieldName)}
                role="switch" />

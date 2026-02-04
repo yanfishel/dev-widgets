@@ -49,11 +49,17 @@ export const DragItemIcon = () => (
   </svg>
 )
 
-
 export const AboutIcon = ()=> (
   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14">
     <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1">
       <path d="M7 13.5a6.5 6.5 0 1 0 0-13a6.5 6.5 0 0 0 0 13M5.5 10h3"/><path d="M7 10V6.5H6m1-2.25a.25.25 0 0 1 0-.5m0 .5a.25.25 0 0 0 0-.5"/>
     </g>
+  </svg>
+)
+
+export const SearchIcon = ()=> (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16">
+    <circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" strokeWidth="2" />
+    <path fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m15 15l-5-5" />
   </svg>
 )

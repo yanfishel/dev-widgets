@@ -1,3 +1,4 @@
+import {WIDGETS_ID} from "@/constants";
 
 export const APP_WIDTH = {
   SMALL: 300,
@@ -25,44 +26,44 @@ export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
   size: 'large',
   locked: false,
   weather: {
-    id: 'widget-weather',
+    id: WIDGETS_ID.CURRENT_WEATHER,
     active: true
   },
   autoGeoPosition: true,
   location: DEFAULT_LOCATION,
   widgets: [
     {
-      id: 'widget-daily-weather',
+      id: WIDGETS_ID.DAILY_WEATHER,
       title: 'Daily Weather',
       active: true,
       order: 1
     },
     {
-      id: 'widget-web-search',
+      id: WIDGETS_ID.WEB_SEARCH,
       title: 'Web Search',
       active: true,
       order: 2
     },
     {
-      id: 'widget-system-info',
+      id: WIDGETS_ID.SYSTEM_INFO,
       title: 'System Info',
       active: true,
       order: 3
     },
     {
-      id: 'widget-mock-server',
+      id: WIDGETS_ID.MOCK_SERVER,
       title: 'Mock Server',
       active: true,
       order: 4
     },
     {
-      id: 'widget-dev-utils',
+      id: WIDGETS_ID.DEV_UTILS,
       title: 'Dev Utils',
       active: true,
       order: 5
     },
     {
-      id: 'widget-notes',
+      id: WIDGETS_ID.NOTES,
       title: 'Notes',
       active: true,
       order: 6

@@ -2,8 +2,7 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
 import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
-import {getStorageItem, setStorageItem} from "@/utils";
-import {getUserIPLocation} from "@services/weather";
+import {getStorageItem, setStorageItem, getUserIPLocation} from "@/utils";
 
 
 export const useSettingsStore = createWithEqualityFn<T_SettingsStore>()(
@@ -46,6 +45,6 @@ export const useSettingsStore = createWithEqualityFn<T_SettingsStore>()(
 
   }),
   {
-    name: 'settings-store'
+    name: 'store-widgets-settings'
   })
 )

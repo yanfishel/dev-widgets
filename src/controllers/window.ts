@@ -19,6 +19,12 @@ declare const ABOUT_WINDOW_WEBPACK_ENTRY: string;
 declare const ABOUT_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
 
+
+/**
+ * Manages control and behavior of application windows, including the main application window
+ * and the "About" window, enabling functions such as creation, resizing, positioning, and locking.
+ * The class follows the Singleton design pattern to ensure that only one instance is created and shared.
+ */
 class WinController {
   static instance: WinController | null = null
 

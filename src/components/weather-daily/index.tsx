@@ -1,29 +1,40 @@
 import {useEffect, useState} from "react";
 
+import { WIDGETS_ID } from "@/constants";
+import { useWeatherStore } from "@/store";
+import { useWidgetProps } from "@/hooks";
+import { weatherForecastMap } from "@/utils";
+import DayItem, { IDayItem } from "./day-item";
 import './style.css'
-import {useSettingsStore} from "@/store";
-
 
 
 const WeatherDaily = () => {
 
-  const [active, setActive] = useState(false)
-  const [order, setOrder] = useState<number>(1)
+  const [dailyWeather, setDailyWeather] = useState<IDayItem[]>([])
 
-  const widgets = useSettingsStore(({widgets}) => widgets)
+  const error = useWeatherStore(({error}) => error)
+  const forecast = useWeatherStore(({forecast}) => forecast)
+
+  const { widgetProps } = useWidgetProps({ widgetId: WIDGETS_ID.DAILY_WEATHER })
 
 
-  useEffect(()=>{
-    const widget = widgets.find(widget => widget.id === 'widget-daily-weather')
-    if(!widget) return
-    setActive(widget.active)
-  }, [widgets])
+  useEffect(() => {
+    const dailyForecast = forecast?.daily ? weatherForecastMap(forecast.daily) : []
+    setDailyWeather( dailyForecast )
+  }, [forecast?.daily]);
 
 
   return (
-    <div id={'widget-daily-weather'} style={{ order, display: active ? 'block' : 'none'}} >
+    <div id={ WIDGETS_ID.DAILY_WEATHER }
+         style={{
+           order: widgetProps.order,
+           display: widgetProps.active ? 'block' : 'none'
+         }} >
       <div className="container">
-
+        { dailyWeather.map( (day, idx) =>
+          <DayItem key={idx} {...day} />
+        )}
+        { error && <div className="alert-message error">{ error }</div> }
       </div>
     </div>
   )

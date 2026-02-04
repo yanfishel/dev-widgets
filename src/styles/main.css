@@ -171,6 +171,24 @@ dialog {
     padding-right: var(--action-bar-padding);
   }
 
+  .alert-message {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    &.error {
+      background-color: #c00;
+      color: white;
+    }
+  }
+
   /* -- ACTION BAR - */
   .action-bar {
     position: absolute;

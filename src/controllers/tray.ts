@@ -8,6 +8,10 @@ import appSettings from "@controllers/settings";
 import winController from "@controllers/window";
 
 
+/**
+ * TrayController is responsible for managing the application's system tray functionality, including creating,
+ * updating, and destroying the tray and its associated context menu and behaviors.
+ */
 class TrayController {
   static instance: TrayController | null = null
 

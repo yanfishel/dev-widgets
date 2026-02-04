@@ -6,21 +6,23 @@ import Dragger from "@components/dragger";
 import AnalogClock from "@components/analog-clock";
 import SettingsMenu from "@components/settings-menu";
 import WeatherCurrent from "@components/weather-current";
+import WeatherDaily from "@components/weather-daily";
 
 import '@/styles/main.css'
 import '@/styles/tabs.css'
 import '@/styles/form.css'
-import WeatherDaily from "@components/weather-daily";
+import WebSearch from "@components/web-search";
 
 
 const App = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
 
-  const updateGlobalTimer = useGlobalStore(({updateGlobalTimer}) => updateGlobalTimer)
+  const appTimer = useGlobalStore(({appTimer}) => appTimer)
   const updateWeatherForecast = useWeatherStore(({updateWeatherForecast}) => updateWeatherForecast)
 
   const userLocation = useSettingsStore(({userLocation}) => userLocation)
+  const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
   const weather = useSettingsStore(({weather}) => weather)
 
 
@@ -43,8 +45,9 @@ const App = () => {
   }
 
   const initApp = async () => {
-    updateGlobalTimer()
+    appTimer()
     electronEventsHandler()
+    await updateLocation()
     await updateWeatherForecast()
 
     setLoading(false)
@@ -82,6 +85,8 @@ const App = () => {
         <div id="content-container">
 
           <WeatherDaily />
+
+          <WebSearch />
 
         </div>
       </div>

@@ -56,13 +56,10 @@ type TWeatherData = {
 }
 
 type T_Store = {
-  globalDateTime: Date
   displayDate: { date: string, shortdate:string, weekday: string }
-
-  //weatherForecast: TWeatherData | null
-
-  updateGlobalTimer: () => void
-  //updateWeatherForecast: () => Promise<void>
+  displayTime: { hours: number, minutes: number, seconds: number }
+  appTimer: () => void
+  updateDisplayDate: () => void
 }
 
 type T_SettingsStore = IWidgetsSettings & {
@@ -71,8 +68,15 @@ type T_SettingsStore = IWidgetsSettings & {
 }
 
 type T_WeatherStore = {
-  weatherForecast: TWeatherData | null
+  loading: boolean
+  error: string|null
+  forecast: TWeatherData|null
   updateWeatherForecast: (force?:boolean)=>Promise<void>
+}
+
+interface IWidgetProps {
+  active: boolean
+  order: number
 }
 
 interface IPackageJson {

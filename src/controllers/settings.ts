@@ -6,6 +6,25 @@ import {config} from "@/config";
 import {APP_SETTINGS_DEFAULT, APP_WIDTH} from "@/constants";
 
 
+/**
+ * Singleton class responsible for managing application settings.
+ *
+ * This class handles loading, reading, and saving application settings
+ * using a JSON configuration file. If the settings file does not exist,
+ * it creates one based on default settings and the primary display's dimensions.
+ *
+ * Properties:
+ * - `instance` (static): Stores the single instance of the class.
+ * - `#appSetings`: Private member storing the cached settings object.
+ *
+ * Methods:
+ * - `getInstance()`: Retrieves the singleton instance of the AppSettings class.
+ * - `readAppSettings()`: Reads and parses the application settings from the file system.
+ *   If the file is missing, initializes it with default settings.
+ * - `save(settings)`: Saves the provided settings object to the settings file.
+ * - `settings`: Getter that lazily reads settings from the file if not cached
+ *   and returns the cached settings object.
+ */
 class AppSettings {
   static instance: AppSettings | null = null
 

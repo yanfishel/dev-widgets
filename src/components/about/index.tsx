@@ -5,7 +5,7 @@ import {LogoIcon} from "@/assets";
 import './style.css'
 
 
-export const About = () => {
+const About = () => {
 
   const [versions, setVersions] = useState<string[][]>([])
   const [packageJson, setPackageJson] = useState<IPackageJson>({})
