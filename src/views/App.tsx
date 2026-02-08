@@ -7,11 +7,12 @@ import AnalogClock from "@components/analog-clock";
 import SettingsMenu from "@components/settings-menu";
 import WeatherCurrent from "@components/weather-current";
 import WeatherDaily from "@components/weather-daily";
+import WebSearch from "@components/web-search";
+import {SystemInfo} from "@components/system-info";
 
 import '@/styles/main.css'
 import '@/styles/tabs.css'
 import '@/styles/form.css'
-import WebSearch from "@components/web-search";
 
 
 const App = () => {
@@ -87,6 +88,8 @@ const App = () => {
           <WeatherDaily />
 
           <WebSearch />
+
+          <SystemInfo />
 
         </div>
       </div>

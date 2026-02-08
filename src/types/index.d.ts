@@ -118,7 +118,7 @@ interface Window {
     openExternal: (url: string) => Promise<void>
     openAboutWindow: () => Promise<void>
     getAppInfo: () => Promise<{ packageJson:IPackageJson, versions:string[][] }>
-    getDiskUsage: () => Promise< S_FsSizeData[] >
+    getDiskUsage: () => Promise<S_FsSizeData[]>
     getSystemInfo: () => Promise< { info:S_CurrentLoadData, memory:S_MemData } >
     getPublicIP: () => Promise<string>
     getNetworkStatsInfo: () => Promise<{ stats:S_NetworkStatsData[], iface:S_NetworkInterfacesData } >

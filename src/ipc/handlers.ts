@@ -2,7 +2,7 @@ import { ipcMain, powerMonitor } from 'electron'
 
 import { IpcChannels } from "@ipc/channels";
 import { getPackageJson, openExternalLink } from "@services/electron";
-//import { getDiskUsage, getNetworkStats, getPublicIP, getSystemInfo } from "@services/sysinfo";
+import { getDiskUsage, getNetworkStats, getPublicIP, getSystemInfo } from "@services/sysinfo";
 import winController from "@controllers/window";
 import serverController from "@controllers/server";
 
@@ -17,10 +17,10 @@ ipcMain.handle(IpcChannels.OPEN_ABOUT_WINDOW, async () => winController.createAb
 
 // System Information
 ipcMain.handle(IpcChannels.GET_APP_INFO, async () => getPackageJson())
-//ipcMain.handle(IpcChannels.GET_SYSTEM_INFO, async () => getSystemInfo())
-//ipcMain.handle(IpcChannels.GET_NETWORK_STATS_INFO, async () => getNetworkStats())
-//ipcMain.handle(IpcChannels.GET_PUBLIC_IP, async () => getPublicIP())
-//ipcMain.handle(IpcChannels.GET_DISK_USAGE, async () => getDiskUsage())
+ipcMain.handle(IpcChannels.GET_SYSTEM_INFO, async () => getSystemInfo())
+ipcMain.handle(IpcChannels.GET_NETWORK_STATS_INFO, async () => getNetworkStats())
+ipcMain.handle(IpcChannels.GET_PUBLIC_IP, async () => getPublicIP())
+ipcMain.handle(IpcChannels.GET_DISK_USAGE, async () => getDiskUsage())
 
 // MOCK SERVER
 ipcMain.handle(IpcChannels.MOCK_SERVER_START, () => serverController.startServer())
