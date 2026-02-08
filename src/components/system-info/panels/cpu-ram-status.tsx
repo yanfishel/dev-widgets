@@ -5,7 +5,6 @@ import {chartInitVals, chartStyle, formatBytesMetric} from "@/utils";
 import {INFO_CHARS_STEPS, INFO_CHARS_UPDATE_INTERVAL} from "@/constants";
 
 
-
 const CpuRamStatus = () => {
 
   const updateTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
@@ -33,8 +32,8 @@ const CpuRamStatus = () => {
 
 
   useEffect(() => {
+    updateTimer.current = setInterval(updateCpuRamStatus, INFO_CHARS_UPDATE_INTERVAL * 1000)
     updateCpuRamStatus()
-    updateTimer.current = setInterval(updateCpuRamStatus, INFO_CHARS_UPDATE_INTERVAL)
 
     return () => clearInterval(updateTimer.current!)
   }, [])

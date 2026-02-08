@@ -2,9 +2,9 @@ import React from 'react';
 
 import { WIDGETS_ID} from "@/constants";
 import { useWidgetProps } from "@/hooks";
-import DisksStatus from "@components/system-info/disks-status";
-import CpuRamStatus from "@components/system-info/cpu-ram-status";
-import {NetworkStatus} from "@components/system-info/network-status";
+import DisksStatus from "./panels/disks-status";
+import CpuRamStatus from "./panels/cpu-ram-status";
+import {NetworkStatus} from "./panels/network-status";
 
 import './style.css'
 
@@ -20,19 +20,19 @@ export const SystemInfo = () => {
            order: widgetProps.order,
            display: widgetProps.active ? 'block' : 'none'
          }}>
-
       <div className="container">
-        <div className="system-info-container">
+        { widgetProps.active &&
+          <div className="system-info-container">
 
-          { widgetProps.active && <CpuRamStatus /> }
+            <CpuRamStatus />
 
-          { widgetProps.active && <NetworkStatus /> }
+            <NetworkStatus />
 
-          { widgetProps.active && <DisksStatus /> }
+            <DisksStatus />
 
-        </div>
+          </div>
+        }
       </div>
-
     </div>
   )
 }

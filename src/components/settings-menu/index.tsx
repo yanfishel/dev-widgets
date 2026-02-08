@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import {useEffect, useRef} from "react";
 
 import {AboutIcon, CloseIcon, SettingsIconHover, SettingsIconRegular} from "@/assets";
 import LockPosition from "./items/lock-position";
@@ -12,12 +12,14 @@ import './style.css'
 
 const SettingsMenu = () => {
 
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
   const settingsMenuOpen = () => {
-    (document.getElementById('settings-dialog') as HTMLDialogElement).showModal();
+    dialogRef.current?.showModal();
   }
 
   const settingsMenuClose = () => {
-    (document.getElementById('settings-dialog') as HTMLDialogElement).close()
+    dialogRef.current?.close()
   }
 
   const backdropClick = (e: MouseEvent) => {
@@ -39,11 +41,11 @@ const SettingsMenu = () => {
 
   return (
     <div id={'settings-container'}>
-      <div className={"circle-button settings-menu-open"} onClick={settingsMenuOpen}>
+      <div className={"circle-button settings-menu-open"} onClick={ settingsMenuOpen }>
         <SettingsIconRegular />
         <SettingsIconHover />
       </div>
-      <dialog id={'settings-dialog'} closedby="any">
+      <dialog id={'settings-dialog'} closedby={"any"} ref={dialogRef} >
         <div className={"container settings-menu"}>
           <div className={"circle-button settings-menu-close"} onClick={settingsMenuClose}>
             <CloseIcon/>

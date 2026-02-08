@@ -18,8 +18,13 @@ export const NetworkStatus = () => {
 
 
   const updateIP = async () => {
-    const ip = await window.electronAPI.getPublicIP()
-    setPublicIP(ip)
+    try {
+      const ip = await window.electronAPI.getPublicIP()
+      setPublicIP(ip)
+    } catch (e) {
+      console.log(e);
+      setPublicIP('Offline')
+    }
   }
 
   const updateNetworkStatus = async () => {
@@ -35,10 +40,14 @@ export const NetworkStatus = () => {
     setTxSec(prev => prev.length > INFO_CHARS_STEPS ? [...prev.slice(1), tx_sec] : [...prev, tx_sec])
   }
 
+  const startHandler = async () => {
+    await Promise.all([updateIP(), updateNetworkStatus()])
+  }
+
   const onLineHandler = () => {
-    updateIP()
     clearInterval(updateTimer.current!)
-    updateTimer.current = setInterval(updateNetworkStatus, INFO_CHARS_UPDATE_INTERVAL)
+    updateTimer.current = setInterval(updateNetworkStatus, INFO_CHARS_UPDATE_INTERVAL*1000)
+    startHandler()
   }
 
   const offLineHandler = () => {
@@ -55,9 +64,8 @@ export const NetworkStatus = () => {
   }, [rxSec, txSec]);
 
   useEffect(() => {
-    updateIP()
-    updateNetworkStatus()
-    updateTimer.current = setInterval(updateNetworkStatus, INFO_CHARS_UPDATE_INTERVAL)
+    updateTimer.current = setInterval(updateNetworkStatus, INFO_CHARS_UPDATE_INTERVAL*1000)
+    startHandler()
     window.addEventListener("online", onLineHandler);
     window.addEventListener("offline", offLineHandler);
 

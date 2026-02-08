@@ -9,6 +9,7 @@ import WeatherCurrent from "@components/weather-current";
 import WeatherDaily from "@components/weather-daily";
 import WebSearch from "@components/web-search";
 import {SystemInfo} from "@components/system-info";
+import Notes from "@components/notes";
 
 import '@/styles/main.css'
 import '@/styles/tabs.css'
@@ -90,6 +91,8 @@ const App = () => {
           <WebSearch />
 
           <SystemInfo />
+
+          <Notes />
 
         </div>
       </div>

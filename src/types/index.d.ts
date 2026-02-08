@@ -67,6 +67,11 @@ type T_SettingsStore = IWidgetsSettings & {
   updateLocation: ()=>Promise<void>
 }
 
+type T_NotesStore = {
+  notes: string
+  updateNotes: (notes:string)=>void
+}
+
 type T_WeatherStore = {
   loading: boolean
   error: string|null

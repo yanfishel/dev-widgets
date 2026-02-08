@@ -1,5 +1,6 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { subscribeWithSelector } from "zustand/middleware";
+import {shallow} from "zustand/vanilla/shallow";
 
 import {formatDate} from "@/utils";
 
@@ -42,5 +43,6 @@ export const useGlobalStore = createWithEqualityFn<T_Store>()(
     }
 
 
-  }))
+  })),
+  shallow
 )

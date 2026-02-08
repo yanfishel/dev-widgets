@@ -9,16 +9,18 @@ const DisksStatus = () => {
 
   const updateTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
 
+  const [loading, setLoading] = useState(true)
   const [diskUsage, setDiskUsage] = useState<T_DiskInfo[]>([])
 
   const updateDiskUsage = async () => {
     const disksUsage = await window.electronAPI.getDiskUsage()
     setDiskUsage( disksUsage ? disksUsage.map(diskInfoMap) : [] )
+    setLoading(false)
   }
 
   useEffect(() => {
     updateDiskUsage()
-    updateTimer.current = setInterval(updateDiskUsage, DISKS_USAGE_UPDATE_INTERVAL)
+    updateTimer.current = setInterval(updateDiskUsage, DISKS_USAGE_UPDATE_INTERVAL*1000)
 
     return () => clearInterval(updateTimer.current!)
   }, []);
@@ -41,7 +43,9 @@ const DisksStatus = () => {
               </div>
             </div>
           ))
-          : <p className="error">No data available</p>
+          : !loading
+            ? <p className="error">No data available</p>
+            : null
         }
       </div>
     </div>

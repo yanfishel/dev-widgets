@@ -1,0 +1,123 @@
+:root {
+  --widget-notes-height: 120px;
+}
+
+#widget-notes {
+  position: relative;
+  width: 100%;
+  height: var(--widget-notes-height);
+
+  .container {
+    height: 100%;
+    padding: 8px var(--action-bar-padding) 8px 10px;
+
+    textarea {
+      resize: none;
+      width: calc(100% - 10px - var(--action-bar-padding));
+      height: calc(100% - 16px);
+      position: absolute;
+      background: transparent;
+      color: var(--text-primary);
+      border: none;
+      outline: none;
+      font-family: var(--font-family);
+      font-size: 0.75rem;
+      line-height: 1.35em;
+      text-align: start;
+      padding: 0;
+      padding-inline-start: 1rem;
+    }
+
+    .notes-view {
+      position: absolute;
+      width: calc(100% - 10px - var(--action-bar-padding));
+      height: calc(100% - 16px);
+      background: transparent;
+      color: var(--text-primary);
+      border: none;
+      outline: none;
+      font-family: var(--font-family);
+      font-size: 0.75rem;
+      line-height: 1.35em;
+      text-align: start;
+      word-break: break-all;
+      overflow: auto;
+      opacity: 1;
+
+      ul {
+        padding: 0;
+        padding-inline-start: 1rem;
+        margin: 0;
+
+        li {
+          padding:0;
+          margin:0;
+          &::marker {
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    #clear-notes-dialog {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      padding: 0;
+      background: transparent;
+
+      .dialog-content {
+        transform: translateY( calc( var(--widget-notes-height) / 2 - 75px ) );
+        width: fit-content;
+        min-height: 75px;
+        min-width: 200px;
+        max-width: 200px;
+        background: var(--main-background);
+        border: 1px solid rgb(from #c00 r g b / 35%);
+        padding: 0.35rem;
+        border-radius: 6px;
+        box-shadow: var(--container-box-shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 3px;
+
+        & h3 {
+          margin: 0;
+          padding: 0;
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: #c00;
+        }
+        & p {
+          margin: 0;
+          padding: 0;
+          font-size: 0.7rem;
+        }
+
+        & .dialog-buttons {
+          padding-top: 5px;
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          gap: 5px;
+
+          button {
+            font-size: 0.6rem;
+            background: var(--input-background);
+            opacity: 0.65;
+            &.btn-delete {
+              background: #c00;
+              color: #fff;
+            }
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

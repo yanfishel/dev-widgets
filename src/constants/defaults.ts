@@ -21,6 +21,8 @@ export const DEFAULT_LOCATION = {
   lon: 0
 }
 
+export const DEFAULT_NOTE = 'TYPE YOUR NOTES HERE'
+
 export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
   theme: 'system',
   size: 'large',
