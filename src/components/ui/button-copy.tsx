@@ -3,10 +3,13 @@ import React from 'react';
 import {ButtonCopyIcon} from "@/assets";
 
 
-export const ButtonCopy = () => {
+interface IProps {
+  onClick: () => void
+}
+export const ButtonCopy = ({onClick}:IProps) => {
 
   return (
-    <button className="circle-button copy-button">
+    <button onClick={onClick} className="circle-button copy-button">
       <ButtonCopyIcon />
       <ButtonCopyIcon hover />
     </button>

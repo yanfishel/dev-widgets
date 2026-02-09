@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 
 import { WIDGETS_ID } from "@/constants";
 import { useWeatherStore } from "@/store";
 import { useWidgetProps } from "@/hooks";
 import { weatherForecastMap } from "@/utils";
 import DayItem, { IDayItem } from "./day-item";
+
 import './style.css'
 
 
@@ -40,4 +41,4 @@ const WeatherDaily = () => {
   )
 }
 
-export default WeatherDaily
+export default memo(WeatherDaily)

@@ -1,3 +1,5 @@
+import {memo} from "react";
+
 import { useSettingsStore } from "@/store";
 import {DragIcon} from "@/assets";
 
@@ -15,4 +17,4 @@ const Dragger = () => {
   )
 }
 
-export default Dragger;
+export default memo(Dragger)

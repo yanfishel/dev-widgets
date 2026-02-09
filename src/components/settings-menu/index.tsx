@@ -1,4 +1,4 @@
-import {useEffect, useRef} from "react";
+import {memo, useEffect, useRef} from "react";
 
 import {AboutIcon, CloseIcon, SettingsIconHover, SettingsIconRegular} from "@/assets";
 import LockPosition from "./items/lock-position";
@@ -75,4 +75,4 @@ const SettingsMenu = () => {
 
 }
 
-export default SettingsMenu;
+export default memo(SettingsMenu);

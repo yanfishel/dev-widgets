@@ -1,4 +1,4 @@
-import {useCallback, useEffect} from "react";
+import {memo, useCallback, useEffect} from "react";
 
 import { useSettingsStore} from "@/store";
 
@@ -40,4 +40,4 @@ const ThemeController = ():null => {
   return null
 }
 
-export default ThemeController;
+export default memo(ThemeController);

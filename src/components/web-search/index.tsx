@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import {memo, useCallback, useState} from "react";
 
 import {useWidgetProps} from "@/hooks";
 import {SEARCH_ENGINES, WIDGETS_ID} from "@/constants";
@@ -71,4 +71,4 @@ const WebSearch = () => {
   )
 }
 
-export default WebSearch;
+export default memo(WebSearch)

@@ -5,11 +5,12 @@ interface IDialogProps {
   id: string
   open?: boolean
   modal?: boolean
+  className?: string
   onClose?: () => void
-  triggerClassNames?: string[]
+  openerClassName?: string
   children: React.ReactNode
 }
-export const Dialog = ({ id, open, modal, onClose, triggerClassNames, children }:IDialogProps) => {
+export const Dialog = ({ id, open, modal, onClose, className, openerClassName, children }:IDialogProps) => {
 
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -24,7 +25,12 @@ export const Dialog = ({ id, open, modal, onClose, triggerClassNames, children }
 
   const backdropClick = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    if( target.closest(`#${ id }`) || target.closest(`.${ triggerClassNames?.join('.') }`) ) return;
+    if(
+      target.closest(`#${ id }`)
+      || (openerClassName && target.closest(`${ openerClassName }`))
+    ) {
+      return
+    }
     if(onClose) {
       onClose()
       dialogClose()
@@ -44,7 +50,7 @@ export const Dialog = ({ id, open, modal, onClose, triggerClassNames, children }
 
 
   return (
-    <dialog id={ id } ref={dialogRef}>
+    <dialog id={ id } ref={dialogRef} className={ className }>
       { children }
     </dialog>
   )

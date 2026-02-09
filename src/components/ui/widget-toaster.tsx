@@ -1,17 +1,19 @@
+import {memo} from "react";
 import {Toaster} from "react-hot-toast";
+import {CheckCircleIcon} from "@/assets";
 
 
 interface IProps {
   toasterId?: string,
   className?: string
 }
-const WidgetToaster = ({ toasterId = 'default', className }: IProps) => {
+const WToaster = ({ toasterId = 'default', className }: IProps) => {
 
 
   return (
     <Toaster
       toasterId={ toasterId }
-      position="top-center"
+      position={ "top-center" }
       reverseOrder={false}
       gutter={8}
       containerClassName={ className }
@@ -31,8 +33,8 @@ const WidgetToaster = ({ toasterId = 'default', className }: IProps) => {
 
         // Default options for specific types
         success: {
-          style: { color: '#fff', backgroundColor: '#01A781' },
-          iconTheme: { primary: '#fff', secondary: '#01A781' }
+          icon: <CheckCircleIcon />,
+          style: { color: '#fff', backgroundColor: '#01A781' }
         },
         error: {
           style: { color: '#fff', backgroundColor: '#cc0000' },
@@ -43,4 +45,4 @@ const WidgetToaster = ({ toasterId = 'default', className }: IProps) => {
   )
 }
 
-export default WidgetToaster;
+export const WidgetToaster = memo(WToaster);

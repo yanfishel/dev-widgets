@@ -1,9 +1,9 @@
-import {useEffect, useState} from "react";
-
-import { LogoClockIcon } from "@/assets";
-import {useGlobalStore, useWeatherStore} from "@/store";
+import {memo, useEffect, useState} from "react";
 
 import {T_ClockHands} from "./types";
+import {useGlobalStore} from "@/store";
+import { LogoClockIcon } from "@/assets";
+
 import './style.css';
 
 
@@ -50,4 +50,4 @@ const AnalogClock = () => {
   );
 };
 
-export default AnalogClock;
+export default memo(AnalogClock)

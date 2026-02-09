@@ -8,7 +8,7 @@ import SettingsMenu from "@components/settings-menu";
 import WeatherCurrent from "@components/weather-current";
 import WeatherDaily from "@components/weather-daily";
 import WebSearch from "@components/web-search";
-import {SystemInfo} from "@components/system-info";
+import SystemInfo from "@components/system-info";
 import Notes from "@components/notes";
 
 import '@/styles/main.css'

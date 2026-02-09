@@ -1,18 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import { toast } from "react-hot-toast";
 
+import {useNotesStore} from "@/store";
 import {useWidgetProps} from "@/hooks";
 import {WIDGETS_ID} from "@/constants";
-import {ButtonCopy, ButtonTrash, Dialog} from "@components/ui";
+import {ButtonCopy, ButtonTrash, ConfirmDialog, WidgetToaster} from "@components/ui";
 
 import './style.css'
-import {useNotesStore} from "@/store";
 
 
 const Notes = () => {
 
   const noteRef = useRef<HTMLTextAreaElement>(undefined)
-
-  const { widgetProps } = useWidgetProps({ widgetId: WIDGETS_ID.NOTES })
 
   const [mode, setMode] = useState<'view' | 'edit'>('view')
   const [clearConfirm, setClearConfirm] = useState(false)
@@ -20,14 +19,35 @@ const Notes = () => {
   const notes = useNotesStore(({notes}) => notes)
   const updateNotes = useNotesStore(({updateNotes}) => updateNotes)
 
+  const { widgetProps } = useWidgetProps({ widgetId: WIDGETS_ID.NOTES })
+
+  const toasterProps = useMemo(() => ({ toasterId:'notes-toast' }), [])
+
+
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const notes = e.target.value.trim().split('\n').filter(n=>n!=='').join('\n')
     updateNotes(notes)
-    setMode('view')
   }
 
+  const onCopyHandler = useCallback(async () => {
+    if(!notes.trim()) return
+    try {
+      await navigator.clipboard.writeText(notes)
+      toast.success('Copied!', toasterProps)
+    } catch (err) {
+      toast.error('Failed to copy!', toasterProps)
+      console.error('Failed to copy: ', err)
+    }
+  }, [notes])
+
   const onClearHandler = () => {
+    toast.dismiss()
     setClearConfirm(true)
+  }
+
+  const clearNotes = () => {
+    setClearConfirm(false)
+    updateNotes('')
   }
 
 
@@ -45,9 +65,11 @@ const Notes = () => {
       <div className="container">
 
         <div className="action-bar">
-          <ButtonCopy />
+          <ButtonCopy onClick={ onCopyHandler } />
           <ButtonTrash onClick={ onClearHandler } />
         </div>
+
+        <WidgetToaster {...toasterProps} />
 
         { mode === 'view' &&
           <div className={"notes-view"} onClick={ ()=>setMode('edit') }>
@@ -59,26 +81,24 @@ const Notes = () => {
           </div>
         }
         { mode === 'edit' &&
-          <textarea ref={ noteRef } onBlur={ onChangeHandler }>{ notes }</textarea>
+          <textarea ref={ noteRef }
+                    value={ notes }
+                    onChange={ onChangeHandler }
+                    onBlur={ ()=>setMode('view') } />
         }
 
-        <Dialog id={ 'clear-notes-dialog' }
-                open={ clearConfirm }
-                onClose={ () => setClearConfirm(false) }
-                triggerClassNames={['clear-button']}>
-          <div className={"dialog-content"}>
-            <h3>Are you sure?</h3>
-            <p>All notes will be deleted.</p>
-            <div className={"dialog-buttons"}>
-              <button className={'btn-cancel'} onClick={ () => setClearConfirm(false) }>Cancel</button>
-              <button className={'btn-delete'} onClick={ () => { setClearConfirm(false); updateNotes('') } }>Delete</button>
-            </div>
-          </div>
-        </Dialog>
-
+        { clearConfirm &&
+          <ConfirmDialog id={'clear-notes-dialog'}
+                         title={'Are you sure?'}
+                         text={'All notes will be deleted.'}
+                         open={ clearConfirm }
+                         openerClassName={'.clear-button'}
+                         onClose={() => setClearConfirm(false)}
+                         onApply={() => clearNotes()} />
+        }
       </div>
     </div>
   )
 }
 
-export default Notes;
+export default memo(Notes)

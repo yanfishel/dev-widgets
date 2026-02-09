@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 
+import {WIDGETS_ID} from "@/constants";
 import {useGlobalStore, useSettingsStore, useWeatherStore} from "@/store";
 import {weatherConditionByCode} from "@/utils";
 
 import './style.css'
-import {WIDGETS_ID} from "@/constants";
 
 
 const InitCurrentWeather = { temp: '-', icon: '', description: '-'}
@@ -60,4 +60,4 @@ const WeatherCurrent = () => {
   )
 }
 
-export default WeatherCurrent;
+export default memo(WeatherCurrent)

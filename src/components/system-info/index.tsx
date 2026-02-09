@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import { WIDGETS_ID} from "@/constants";
 import { useWidgetProps } from "@/hooks";
@@ -9,7 +9,7 @@ import {NetworkStatus} from "./panels/network-status";
 import './style.css'
 
 
-export const SystemInfo = () => {
+const SystemInfo = () => {
 
   const { widgetProps } = useWidgetProps({ widgetId: WIDGETS_ID.SYSTEM_INFO })
 
@@ -36,3 +36,5 @@ export const SystemInfo = () => {
     </div>
   )
 }
+
+export default memo(SystemInfo)
