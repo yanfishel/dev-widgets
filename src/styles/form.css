@@ -83,3 +83,78 @@ input {
     outline-offset: -1px;
   }
 }
+
+/* -- BUTTON - */
+.circle-button {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgb( from var(--main-background-invert) r g b / 0.2);
+  color: var(--text-primary);
+  cursor: pointer;
+  position: relative;
+  opacity: var(--button-opacity);
+  filter: drop-shadow(var(--text-shadow));
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 1 !important;
+  }
+
+  svg {
+    width: 1.2em;
+    height: auto;
+  }
+
+  .icon-regular,
+  .icon-hover {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+  }
+  .icon-regular {
+    opacity: 1;
+  }
+  .icon-hover {
+    opacity: 0;
+  }
+  &:has(.icon-hover):hover .icon-regular {
+    opacity: 0;
+  }
+  &:hover .icon-hover {
+    opacity: 1;
+  }
+  &.danger-button:hover .icon-hover {
+    color: #ff0000;
+    opacity: 1;
+  }
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb( from var(--accent) r g b / 0.25);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 0.65rem;
+  min-height: 20px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:not(:disabled):hover {
+    background: rgb( from var(--accent) r g b / 0.45);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

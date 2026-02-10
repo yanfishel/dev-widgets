@@ -14,6 +14,7 @@ import Notes from "@components/notes";
 import '@/styles/main.css'
 import '@/styles/tabs.css'
 import '@/styles/form.css'
+import DevUtils from "@components/dev-utils";
 
 
 const App = () => {
@@ -73,7 +74,7 @@ const App = () => {
 
       <Dragger />
 
-      <div id="top-container">
+      <div id={'top-container'}>
 
         <SettingsMenu />
 
@@ -83,14 +84,16 @@ const App = () => {
 
       </div>
 
-      <div className="content-container-wrapper">
-        <div id="content-container">
+      <div id={'main-container'}>
+        <div className={'containers-wrapper'}>
 
           <WeatherDaily />
 
           <WebSearch />
 
           <SystemInfo />
+
+          <DevUtils />
 
           <Notes />
 

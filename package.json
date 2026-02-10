@@ -67,6 +67,7 @@
     "react-dom": "^19.2.3",
     "react-hot-toast": "^2.6.0",
     "react-sortablejs": "^6.1.4",
+    "react-tabs": "^6.1.0",
     "sortablejs": "^1.15.6",
     "systeminformation": "^5.30.6",
     "use-sync-external-store": "^1.6.0",

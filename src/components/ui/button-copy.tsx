@@ -9,7 +9,7 @@ interface IProps {
 export const ButtonCopy = ({onClick}:IProps) => {
 
   return (
-    <button onClick={onClick} className="circle-button copy-button">
+    <button title={"Copy to clipboard"} onClick={onClick} className="circle-button copy-button">
       <ButtonCopyIcon />
       <ButtonCopyIcon hover />
     </button>

@@ -79,6 +79,24 @@ type T_WeatherStore = {
   updateWeatherForecast: (force?:boolean)=>Promise<void>
 }
 
+type T_EncodingType = 'JWT' | 'URL' | 'base64' | 'base32'
+
+type T_EncodingTypes = {
+  label: string,
+  value: T_EncodingType,
+  group: string
+}
+
+type T_EncodingOption = {
+  type: string,
+  options: T_EncodingTypes[]
+}
+
+type T_DevUtilsStore = {
+  encodingType: T_EncodingType
+  updateEncodingType: (encodingType:T_EncodingType)=>void
+}
+
 interface IWidgetProps {
   active: boolean
   order: number

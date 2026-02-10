@@ -1,0 +1,48 @@
+:root {
+  --dev-utils-widget-height: 336px;
+}
+
+#widget-dev-utils {
+  width: 100%;
+
+  & > .container {
+    height: var(--dev-utils-widget-height);
+    padding: 8px;
+  }
+
+  .react-tabs {
+    height: 100%;
+
+    /*ul {
+      li {
+        width: auto;
+        max-width: unset;
+
+        .home-tab {
+          svg {
+            width: .9rem;
+            min-width: .9rem;
+            height: .9rem;
+          }
+        }
+      }
+    }*/
+
+    .react-tabs__tab-panel {
+      height: calc(var(--dev-utils-widget-height) - 26px - 16px);
+
+      section {
+        height: 100%;
+        position: relative;
+      }
+
+      .container {
+        height: 100%;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+    }
+  }
+}
