@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ButtonDownloadIcon } from "@/assets";
+import { DownloadIcon } from "@/assets";
 
 
 interface IProps {
@@ -9,9 +9,10 @@ interface IProps {
 export const ButtonDownload = ({onClick}:IProps) => {
 
   return (
-    <button title={"Download file"} onClick={onClick} className={"circle-button download-button"}>
-      <ButtonDownloadIcon />
-      <ButtonDownloadIcon hover />
+    <button title={"Download file"}
+            onClick={onClick}
+            className={"circle-button download-button"}>
+      <DownloadIcon />
     </button>
   )
 }

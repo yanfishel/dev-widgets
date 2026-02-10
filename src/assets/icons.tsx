@@ -85,6 +85,7 @@ export const CheckCircleIcon = ({size = 24}:{size?:number} ) => {
 /* -- BUTTON ICONS - */
 interface IButtonIcon {
   hover?: boolean
+  size?: number
 }
 export const ButtonCopyIcon = ({hover}:IButtonIcon) => hover
   ? (
@@ -130,24 +131,34 @@ export const DownloadIcon = () => (
     <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 22V5M9 16l7 7l7-7M9 27h14"/>
   </svg>
 )
+export const DropFileIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+      <path d="M12 15V3m9 12v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <path d="m7 10l5 5l5-5"/>
+    </g>
+  </svg>
+)
 
-export const downloadIconRegular = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" class="icon-regular"><path fill="currentColor" d="M8 17v-2h8v2zm8-7l-4 4l-4-4h2.5V6h3v4zm-4-8c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2m0 2c-4.42 0-8 3.58-8 8s3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8"/></svg>`
-
-export const downloadIconHover = `<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" class="icon-hover"><path fill="currentColor" d="M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12S6.5 2 12 2M8 17h8v-2H8zm8-7h-2.5V6h-3v4H8l4 4z"/></svg>`
+export const DocumentFileIcon = ({size=24}:IButtonIcon) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 56 56">
+    <path fill="currentColor" d="M28 51.906c13.055 0 23.906-10.828 23.906-23.906c0-13.055-10.875-23.906-23.93-23.906C14.899 4.094 4.095 14.945 4.095 28c0 13.078 10.828 23.906 23.906 23.906m0-3.984C16.937 47.922 8.1 39.062 8.1 28c0-11.04 8.813-19.922 19.876-19.922c11.039 0 19.921 8.883 19.945 19.922c.023 11.063-8.883 19.922-19.922 19.922m-6.75-6.844h13.43c2.601 0 3.89-1.336 3.89-3.96V25.843H29.29c-1.617 0-2.39-.75-2.39-2.367V14.03h-5.65c-2.577 0-3.89 1.336-3.89 3.961v19.125c0 2.649 1.313 3.961 3.89 3.961m8.227-17.133h8.953c-.07-.515-.446-1.03-1.055-1.64l-6.938-7.078c-.586-.61-1.125-.985-1.64-1.055v9.094c0 .445.234.68.68.68"/>
+  </svg>
+)
 
 
 /* -- TABS ICONS -- */
-export const EncodeIcon = ({size=12}:{size?:number}) => (
+export const EncodeIcon = ({size=12}:IButtonIcon) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 20 16">
     <path fill="currentColor" d="M12.736.064c.52.2.787.805.598 1.353L8.546 15.305c-.19.548-.763.83-1.282.631c-.52-.2-.787-.805-.598-1.353L11.454.695c.19-.548.763-.83 1.282-.631M2.414 8.256L5.95 11.99c.39.412.39 1.08 0 1.492a.963.963 0 0 1-1.414 0L.293 9.003a1.1 1.1 0 0 1 0-1.493l4.243-4.48a.963.963 0 0 1 1.414 0a1.1 1.1 0 0 1 0 1.494zm15.172 0L14.05 4.524a1.1 1.1 0 0 1 0-1.493a.963.963 0 0 1 1.414 0l4.243 4.479c.39.412.39 1.08 0 1.493l-4.243 4.478a.963.963 0 0 1-1.414 0a1.1 1.1 0 0 1 0-1.492z"/>
   </svg>
 )
-export const DateTimeIcon = ({size=12}:{size?:number}) => (
+export const DateTimeIcon = ({size=12}:IButtonIcon) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 2048 2048">
     <path fill="currentColor" d="M1792 993q60 41 107 93t81 114t50 131t18 141q0 119-45 224t-124 183t-183 123t-224 46q-91 0-176-27t-156-78t-126-122t-85-157H128V128h256V0h128v128h896V0h128v128h256zM256 256v256h1408V256h-128v128h-128V256H512v128H384V256zm643 1280q-3-31-3-64q0-86 24-167t73-153h-97v-128h128v86q41-51 91-90t108-67t121-42t128-15q100 0 192 33V640H256v896zm573 384q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36m64-512h192v128h-320v-384h128zM384 1024h128v128H384zm256 0h128v128H640zm0-256h128v128H640zm0 512h128v128H640zm384-384H896V768h128zm256 0h-128V768h128zM384 768h128v128H384z"/>
   </svg>
 )
-export const ColorIcon = ({size=12}:{size?:number}) => (
+export const ColorIcon = ({size=12}:IButtonIcon) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 512 512">
     <path fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32" d="M430.11 347.9c-6.6-6.1-16.3-7.6-24.6-9c-11.5-1.9-15.9-4-22.6-10c-14.3-12.7-14.3-31.1 0-43.8l30.3-26.9c46.4-41 46.4-108.2 0-149.2c-34.2-30.1-80.1-45-127.8-45c-55.7 0-113.9 20.3-158.8 60.1c-83.5 73.8-83.5 194.7 0 268.5c41.5 36.7 97.5 55 152.9 55.4h1.7c55.4 0 110-17.9 148.8-52.4c14.4-12.7 11.99-36.6.1-47.7Z"/>
     <circle cx="144" cy="208" r="32" fill="currentColor"/>

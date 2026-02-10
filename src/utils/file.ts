@@ -48,6 +48,32 @@ export const fileFromBase64 = (base64String:string) => {
   return new File([bytes], 'decoded-file.txt', { type: 'text/plain' });
 }
 
+export const createFileFromBase64 = (text:string) =>{
+  const base64Data = text.split(',')
+  if(base64Data.length !== 2) {
+    return null
+  }
+  const mimeType = base64Data[0].match(/:(.*?);/)?.[1]
+  try {
+    // Decode Base64 to a binary string
+    const binaryString = window.atob(base64Data[1]);
+
+    // Create a Uint8Array from the binary string
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+
+    // Create a Blob object
+    const blob = new Blob([bytes], { type: mimeType });
+    return new File([blob], 'decoded-file', {type: blob.type})
+  } catch (e) {
+    console.log('Error create file', e);
+    return null
+  }
+}
+
 // Check if a string is a Base64 string
 export const isBase64 = (value:string) => {
   return /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(value);
