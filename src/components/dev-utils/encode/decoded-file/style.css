@@ -1,0 +1,113 @@
+
+.decoded-container {
+
+  .file-error-message {
+    background: #cc0000;
+    color: white;
+    height: fit-content !important;
+    padding: 3px 7px;
+    font-size: 0.6rem;
+    line-height: 1.2em;
+    border-radius: 3px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .drag-zone {
+    /*border: 1px dashed var(--border);*/
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    font-family: sans-serif;
+    color: rgb(from var(--text-primary) r g b / 0.65);
+    background: var(--input-background);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.highlight {
+      outline: 1px dashed var(--accent); /* Highlight on drag over */
+      outline-offset: -5px;
+      /*background-color: rgb(from var(--accent) r g b / 0.005);*/
+    }
+
+    .placeholder {
+      font-size: 0.7rem;
+      letter-spacing: 0.5px;
+      color: rgb(from var(--text-primary) r g b / 0.55);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      svg {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .decoded-file-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    border: 1px solid var(--input-background);
+    font-size: 0.7rem;
+    line-height: 1.1em;
+
+    /* -- FILE Preview - */
+    img,
+    span {
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      border: 1px solid var(--input-background);
+      background: var(--input-background);
+      object-fit: cover;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+    }
+
+    & div {
+      flex: 1;
+      text-align: left;
+      height: 30px;
+      max-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      /* -- FILE Name - */
+      p {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        max-height: 30px;
+        margin: 0;
+        padding: 0;
+        display: block;
+        overflow: hidden;
+      }
+
+      /* -- FILE Size - */
+      &:last-child {
+        flex: unset;
+        justify-content: flex-end;
+        white-space: nowrap;
+      }
+    }
+  }
+}

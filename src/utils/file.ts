@@ -98,3 +98,24 @@ export const htmlFilePreview = (file:File|string) => {
   }
   return image
 }
+
+
+export const downloadFile = (file:File) =>{
+  if(!file) {
+    return
+  }
+  const fileName = file.name ?? `decoded-file.${ file.type.split('/')[1] || '' }`
+  const downloadFile = new File(
+    [file],
+    fileName,
+    { type:file.type }
+  )
+  // Create a download link and trigger the download
+  const downloadLink = document.createElement('a');
+  downloadLink.href = window.URL.createObjectURL(downloadFile);
+  downloadLink.download = fileName;
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  window.URL.revokeObjectURL(downloadLink.href);
+}

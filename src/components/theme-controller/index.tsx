@@ -1,6 +1,7 @@
 import {memo, useCallback, useEffect} from "react";
 
-import { useSettingsStore} from "@/store";
+import {E_THEME} from "@/constants";
+import {useGlobalStore, useSettingsStore} from "@/store";
 
 
 const ThemeController = ():null => {
@@ -9,7 +10,7 @@ const ThemeController = ():null => {
 
 
   const setSystemTheme = useCallback((isDark: boolean) => {
-    if(theme !== 'system') {
+    if(theme !== E_THEME.SYSTEM) {
       return
     }
     toggleDarkTheme(isDark)
@@ -21,15 +22,16 @@ const ThemeController = ():null => {
     } else {
       document.documentElement.classList.remove("theme-dark")
     }
+    useGlobalStore.setState(state => ({...state, selectedTheme: dark ? E_THEME.DARK : E_THEME.LIGHT}))
   }
 
   const setTheme = useCallback(() => {
-    if(theme === 'system') {
+    if(theme === E_THEME.SYSTEM) {
       const systemDarkTheme = window.matchMedia("(prefers-color-scheme: dark)")
       systemDarkTheme.addEventListener("change", (e)=>setSystemTheme(e.matches))
       toggleDarkTheme(systemDarkTheme.matches);
     } else {
-      toggleDarkTheme(theme === 'dark')
+      toggleDarkTheme(theme === E_THEME.DARK)
     }
   }, [theme, setSystemTheme])
 

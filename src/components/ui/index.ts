@@ -1,6 +1,7 @@
 export * from './button-copy'
 export * from './button-trash'
 export * from './button-download'
+export * from './button-close'
 export * from './widget-toaster'
 export * from './dialog'
 export * from './confirm-dialog'

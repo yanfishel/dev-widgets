@@ -24,7 +24,7 @@ const WToaster = ({ toasterId = 'default', className }: IProps) => {
       toastOptions={{
         // Define default options
         className: 'react-hot-toast',
-        duration: 5000,
+        duration: 3000,
         removeDelay: 1000,
         style: {
           background: '#363636',

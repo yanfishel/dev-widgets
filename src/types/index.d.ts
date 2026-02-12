@@ -56,6 +56,7 @@ type TWeatherData = {
 }
 
 type T_Store = {
+  selectedTheme: TTheme
   displayDate: { date: string, shortdate:string, weekday: string }
   displayTime: { hours: number, minutes: number, seconds: number }
   appTimer: () => void
@@ -93,7 +94,18 @@ type T_EncodingOption = {
 }
 
 type T_DevUtilsStore = {
+  processing: boolean
   encodingType: T_EncodingType
+  decodedFile: File | null
+  decodedText: string
+  decodedJWT: { header:string, claim:string } | null
+  decodedError: string | null
+  encodedText: string
+  encodedError: string | null
+  signature: string | null
+  reset: ()=>void
+  resetDecoded: ()=>void
+  resetEncoded: ()=>void
   updateEncodingType: (encodingType:T_EncodingType)=>void
 }
 

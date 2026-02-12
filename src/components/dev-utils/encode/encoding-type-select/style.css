@@ -1,0 +1,8 @@
+
+.encode-type-container {
+  select {
+    font-size: 0.7rem;
+    padding: 4px 6px;
+    outline: none;
+  }
+}

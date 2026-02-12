@@ -1,0 +1,40 @@
+
+.decoded-container {
+  & pre {
+    outline: none;
+    padding: 0 !important;
+    text-align: left;
+    color: var(--text-primary);
+    background: transparent !important;
+    border-radius: 5px;
+    & code {
+      outline: none;
+      display: block;
+      height: 100%;
+      background: var(--input-background);
+      font-size: 0.65rem;
+      padding: 2px 5px;
+      overflow: auto;
+
+      &:before {
+        content: attr(data-placeholder);
+        color: var(--text-muted);
+        font-family: var(--font-family);
+        position: absolute;
+        pointer-events: none;
+      }
+
+      &:focus, &:active, &.has-text {
+        &:before {
+          content: none;
+        }
+      }
+      &.has-error {
+        &:before {
+          content: attr(data-errormessage);
+          color: #c00;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+
+.encode-container {
+
+  .action-bar {
+    right: -6px;
+    margin-top: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .decoded-container, .encoded-container {
+    .action-bar {
+      margin-top: 0;
+      transform: none;
+    }
+  }
+
+  .decoded-container {
+    .action-bar {
+      top: 0;
+      right: -27px;
+      bottom: auto;
+    }
+  }
+
+  .encoded-container {
+    .action-bar {
+      top: auto;
+      right: -27px;
+      bottom: 0;
+    }
+  }
+
+
+  #clear-encoding-dialog {
+    top:5px;
+    z-index: 10;
+  }
+
+  #clear-encoding-dialog-all {
+    top: 44px;
+    margin-left: -11px;
+    z-index: 10;
+  }
+
+}

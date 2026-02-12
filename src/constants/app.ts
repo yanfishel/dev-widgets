@@ -8,3 +8,9 @@ export enum WIDGETS_ID {
   DEV_UTILS = 'widget-dev-utils',
   NOTES = 'widget-notes'
 }
+
+export enum E_THEME {
+  LIGHT = 'light',
+  DARK = 'dark',
+  SYSTEM = 'system'
+}

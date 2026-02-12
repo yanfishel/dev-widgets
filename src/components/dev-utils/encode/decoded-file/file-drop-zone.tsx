@@ -1,14 +1,16 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useCallback, useState} from 'react';
+
+import {useDevUtilsStore} from "@/store";
+import {filetoBase32, fileToBase64} from "@/utils";
 import {DropFileIcon} from "@/assets";
 
 
-interface IProps {
-  onFileHandler: (file: File) => void
-}
-const FileDropZone = ({ onFileHandler }:IProps) => {
+const FileDropZone = () => {
 
   const [dragOver, setDragOver] = useState(false)
 
+  const encodingType = useDevUtilsStore(({encodingType}) => encodingType)
+  const reset = useDevUtilsStore(({reset}) => reset)
 
   const dragEnterHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -28,9 +30,27 @@ const FileDropZone = ({ onFileHandler }:IProps) => {
     setDragOver(false)
     const file = e.dataTransfer?.files[0]
     if(file ) {
-      onFileHandler(file)
+      encodeFile(file)
     }
   }
+
+  const encodeFile = useCallback(async (file: File) => {
+    if(encodingType !== 'base32' && encodingType !== 'base64') {
+      return
+    }
+    reset()
+    useDevUtilsStore.setState(state => ({...state, processing: true}))
+    const result = encodingType === 'base64'
+      ? await fileToBase64(file)
+      : await filetoBase32(file)
+    if(result){
+      useDevUtilsStore.setState(state => ({...state, ...{ processing: false, decodedFile:file, encodedText: result.toString()}}) )
+    } else {
+      useDevUtilsStore.setState(state => ({...state, ...{ processing: false, encodedError: 'File encode error'}}) )
+    }
+
+  }, [encodingType])
+
 
   return (
     <div onDragEnter={ dragEnterHandler }

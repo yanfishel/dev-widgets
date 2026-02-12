@@ -100,7 +100,7 @@ input {
   filter: drop-shadow(var(--text-shadow));
   transition: opacity 0.2s ease-in-out;
 
-  &:hover {
+  &:not(:disabled):hover {
     opacity: 1 !important;
   }
 
@@ -122,13 +122,13 @@ input {
   .icon-hover {
     opacity: 0;
   }
-  &:has(.icon-hover):hover .icon-regular {
+  &:not(:disabled):has(.icon-hover):hover .icon-regular {
     opacity: 0;
   }
-  &:hover .icon-hover {
+  &:not(:disabled):hover .icon-hover {
     opacity: 1;
   }
-  &.danger-button:hover .icon-hover {
+  &:not(:disabled).danger-button:hover .icon-hover {
     color: #ff0000;
     opacity: 1;
   }
@@ -154,7 +154,7 @@ button {
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.35;
     cursor: not-allowed;
   }
 }

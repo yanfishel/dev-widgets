@@ -1,4 +1,4 @@
-import {WIDGETS_ID} from "@/constants";
+import { WIDGETS_ID } from "@/constants";
 
 export const APP_WIDTH = {
   SMALL: 300,
@@ -22,6 +22,8 @@ export const DEFAULT_LOCATION = {
 }
 
 export const DEFAULT_NOTE = 'TYPE YOUR NOTES HERE'
+
+export const DEFAULT_JWT_SECRET = 's3cre!'
 
 export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
   theme: 'system',

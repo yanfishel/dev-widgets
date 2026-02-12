@@ -1,4 +1,10 @@
 
+
+interface IButtonIcon {
+  hover?: boolean
+  size?: number
+}
+
 export const LogoIcon = () =>  (
   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512">
     <circle fill="#71BACA" cx="254.8" cy="256.1" r="255.2"/>
@@ -74,7 +80,7 @@ export const WiFiIcon = () => (
   </svg>
 )
 
-export const CheckCircleIcon = ({size = 24}:{size?:number} ) => {
+export const CheckCircleIcon = ({size = 24}:IButtonIcon ) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24">
       <path fill="currentColor" d="M20 12a8 8 0 0 1-8 8a8 8 0 0 1-8-8a8 8 0 0 1 8-8c.76 0 1.5.11 2.2.31l1.57-1.57A9.8 9.8 0 0 0 12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10M7.91 10.08L6.5 11.5L11 16L21 6l-1.41-1.42L11 13.17z"></path>
@@ -82,11 +88,15 @@ export const CheckCircleIcon = ({size = 24}:{size?:number} ) => {
   )
 }
 
-/* -- BUTTON ICONS - */
-interface IButtonIcon {
-  hover?: boolean
-  size?: number
+export const LoadingAnimatedIcon = ({size = 24}:IButtonIcon ) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" className={'rotate-icon'}>
+      <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 16h5v5M10 8H5V3m14.418 6.003A8 8 0 0 0 5.086 7.976m-.504 7.021a8 8 0 0 0 14.331 1.027"></path>
+    </svg>
+  )
 }
+
+/* -- BUTTON ICONS - */
 export const ButtonCopyIcon = ({hover}:IButtonIcon) => hover
   ? (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" className={"icon-hover"}>

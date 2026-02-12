@@ -13,21 +13,6 @@
   .react-tabs {
     height: 100%;
 
-    /*ul {
-      li {
-        width: auto;
-        max-width: unset;
-
-        .home-tab {
-          svg {
-            width: .9rem;
-            min-width: .9rem;
-            height: .9rem;
-          }
-        }
-      }
-    }*/
-
     .react-tabs__tab-panel {
       height: calc(var(--dev-utils-widget-height) - 26px - 16px);
 

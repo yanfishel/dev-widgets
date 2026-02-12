@@ -8,6 +8,7 @@ import Weather from "./items/weather";
 import {WidgetsList} from "./items/widgets-list";
 
 import './style.css'
+import {ButtonClose} from "@components/ui/button-close";
 
 
 const SettingsMenu = () => {
@@ -47,9 +48,7 @@ const SettingsMenu = () => {
       </div>
       <dialog id={'settings-dialog'} closedby={"any"} ref={dialogRef} >
         <div className={"container settings-menu"}>
-          <div className={"circle-button settings-menu-close"} onClick={settingsMenuClose}>
-            <CloseIcon/>
-          </div>
+          <ButtonClose onClick={ settingsMenuClose } />
           <h1 style={{paddingTop: "16px"}}>Settings</h1>
 
           <LockPosition/>

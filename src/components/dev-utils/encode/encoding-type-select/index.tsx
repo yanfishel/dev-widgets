@@ -1,17 +1,20 @@
 import React, {memo} from 'react';
 
 import {encodingSelectOptions} from "@/utils";
+import {useDevUtilsStore} from "@/store";
+
+import './style.css'
 
 
-interface IProps {
-  value: string
-  onChange: (value: T_EncodingType) => void
-}
-const EncodingTypeSelect = ({value, onChange}:IProps) => {
+const EncodingTypeSelect = () => {
+
+  const encodingType = useDevUtilsStore(({encodingType}) => encodingType)
+  const updateEncodingType = useDevUtilsStore(({updateEncodingType}) => updateEncodingType)
+
 
   return (
     <div className="encode-type-container">
-      <select value={ value } onChange={(e) => onChange(e.target.value as T_EncodingType)} >
+      <select value={ encodingType } onChange={(e) => updateEncodingType(e.target.value as T_EncodingType)} >
         { encodingSelectOptions().map(group =>
           <optgroup key={ group.type } label={ group.type.toUpperCase() }>
             { group.options.map(option =>

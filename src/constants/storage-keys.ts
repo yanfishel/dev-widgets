@@ -8,4 +8,6 @@ export const STORAGE_KEYS = {
   WIDGET_DEVUTILS_COLOR: 'widget-dev-utils-color',
   WIDGET_DEVUTILS_RUBBER_DUCK_ON: 'widget-dev-utils-rubber-duck-on',
   WIDGET_NOTES_NOTES: 'widget-notes-notes',
+
+  WIDGET_DEVUTILS_JWT_SECRET:"dev-utils-signature-secret"
 }

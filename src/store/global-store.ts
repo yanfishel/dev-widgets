@@ -2,12 +2,14 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { subscribeWithSelector } from "zustand/middleware";
 import {shallow} from "zustand/vanilla/shallow";
 
+import {E_THEME} from "@/constants";
 import {formatDate} from "@/utils";
 
 
 export const useGlobalStore = createWithEqualityFn<T_Store>()(
   subscribeWithSelector<T_Store>((set, get) => ({
 
+    selectedTheme: E_THEME.SYSTEM,
     globalDateTime: new Date(),
     displayDate: { date: '', shortdate: '', weekday: '' },
     displayTime: { hours: 0, minutes: 0, seconds: 0 },

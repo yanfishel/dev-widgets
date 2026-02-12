@@ -7,7 +7,7 @@
   left:0;
   z-index: 99;
 
-  .settings-menu-open, .settings-menu-close {
+  .settings-menu-open, .close-button {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -15,7 +15,7 @@
   .settings-menu-open {
     opacity: 0;
   }
-  .settings-menu-close {
+  .close-button {
     top: 3px;
     left: auto;
     right: 5px;
