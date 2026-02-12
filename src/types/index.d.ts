@@ -1,4 +1,5 @@
 // types.d.ts
+declare module 'prismjs/components/prism-core';
 
 interface IAppSettings {
   width: number
@@ -99,6 +100,7 @@ type T_DevUtilsStore = {
   decodedFile: File | null
   decodedText: string
   decodedJWT: { header:string, claim:string } | null
+  encodedJWT: string
   decodedError: string | null
   encodedText: string
   encodedError: string | null
@@ -107,6 +109,7 @@ type T_DevUtilsStore = {
   resetDecoded: ()=>void
   resetEncoded: ()=>void
   updateEncodingType: (encodingType:T_EncodingType)=>void
+  onDecodedJWTChange: (field:string, code:string)=>void
 }
 
 interface IWidgetProps {

@@ -2,6 +2,7 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
 import {DEFAULT_JWT_SECRET, E_EncodingTypes} from "@/constants";
+import {debounce, jwtEncode} from "@/utils";
 
 
 export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
@@ -9,8 +10,9 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
 
     processing: false,
     encodingType: E_EncodingTypes.JWT,
-    decodedFile: null,
     decodedJWT: null,
+    encodedJWT: '',
+    decodedFile: null,
     decodedText: '',
     decodedError: null,
     encodedText: '',
@@ -42,6 +44,23 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
 
     resetEncoded: () => {
       set({encodedText: '', encodedError: null})
+    },
+
+    onDecodedJWTChange: ( field, code ) => {
+      set({
+        decodedJWT: {...get().decodedJWT, [field]: code}
+      })
+      debounce(async ()=>{
+        const { decodedJWT, signature } = get()
+        if(!decodedJWT) return
+        const { header, claim } = decodedJWT
+        const encodedText = await jwtEncode(header, claim, signature)
+        if(encodedText) {
+          set({ encodedText, encodedError: null })
+        } else {
+          set({ encodedText:'', encodedError: 'Invalid JSON' })
+        }
+      }, 250)()
     }
 
   }),
@@ -51,7 +70,7 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
       ...state,
       ...{
         decodedFile: null,
-        decodedJWT: null,
+        //decodedJWT: null,
         decodedText: '',
         decodedError: null,
         encodedText: '',

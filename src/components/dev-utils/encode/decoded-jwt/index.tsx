@@ -1,46 +1,45 @@
-import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import { a11yLight, a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import React, { useMemo } from 'react';
+import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
 
-import {useDevUtilsStore, useGlobalStore} from "@/store";
-import {E_THEME} from "@/constants";
+import { useDevUtilsStore } from "@/store";
+import '@/styles/code.css'
 import './style.css'
 
 const DecodedJWT = () => {
 
-  const selectedTheme = useGlobalStore((state) => state.selectedTheme)
   const decodedJWT = useDevUtilsStore(({decodedJWT}) => decodedJWT)
+  const onDecodedJWTChange = useDevUtilsStore(({onDecodedJWTChange}) => onDecodedJWTChange)
+
+  const editorStyle = useMemo(() => ({
+    width: '100%', height: '100%',
+    fontFamily: '"Fira code", "Fira Mono", monospace',
+    fontSize: '0.65rem',
+    overflow: 'auto',
+  }), [])
 
 
   return (
     <>
-      <SyntaxHighlighter language={"javascript"}
-                         children={ decodedJWT?.header ?? '' }
-                         codeTagProps={{
-                           contentEditable: true,
-                           spellCheck: false,
-                           onBlur: (e)=>{
-                             console.log(e)
-                           },
-                           'data-placeholder':"- JWT header",
-                           className: `${decodedJWT?.header ? 'has-text' : ''}`
-                         } as React.HTMLProps<HTMLElement>}
-                         customStyle={{ height:'55px', minHeight:'55px', maxHeight:'55px'}}
-                         style={ selectedTheme === E_THEME.DARK ? a11yDark : a11yLight } />
+      <div data-placeholder={'- JWT header'}
+           className={`input-area decoded-jwt-header ${decodedJWT?.header ? 'has-text' : ''}`}>
+        <Editor value={ decodedJWT?.header ?? '' }
+                onValueChange={ code => onDecodedJWTChange('header', code) }
+                highlight={ code => highlight(code, languages.js) }
+                padding={0}
+                style={editorStyle} />
+      </div>
 
-      <SyntaxHighlighter language={"javascript"}
-                         children={ decodedJWT?.claim ?? '' }
-                         codeTagProps={{
-                           contentEditable: true,
-                           spellCheck: false,
-                           onBlur: (e)=>{
-                             console.log(e)
-                           },
-                           'data-placeholder':"- JWT claim",
-                           className: `${decodedJWT?.claim ? 'has-text' : ''}`
-                         } as React.HTMLProps<HTMLElement>}
-                         customStyle={{ height:'80px', minHeight:'80px', maxHeight:'80px'}}
-                         style={ selectedTheme === E_THEME.DARK ? a11yDark : a11yLight } />
+      <div data-placeholder={'- JWT claim'}
+           className={`input-area decoded-jwt-claim ${decodedJWT?.header ? 'has-text' : ''}`}>
+        <Editor value={ decodedJWT?.claim ?? '' }
+                onValueChange={code => onDecodedJWTChange('claim', code)}
+                highlight={code => highlight(code, languages.js)}
+                padding={0}
+                style={ editorStyle } />
+      </div>
     </>
   )
 }

@@ -1,5 +1,30 @@
 
 .decoded-container {
+
+  .decoded-jwt-header, .decoded-jwt-claim {
+    padding: 2px 0 2px 4px !important;
+    textarea {
+      outline: none;
+    }
+
+    /*.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+      background: transparent !important;
+    }*/
+
+  }
+
+  .decoded-jwt-header {
+    height: 55px !important;
+    min-height: 55px !important;
+    max-height: 55px !important;
+  }
+
+  .decoded-jwt-claim {
+    height: 75px !important;
+    min-height: 75px !important;
+    max-height: 75px !important;
+  }
+
   & pre {
     outline: none;
     padding: 0 !important;

@@ -54,10 +54,9 @@ const EncodedText = () => {
               spellCheck={ false }
               contentEditable={ true }
               placeholder={ placeholder }
-         data-errormessage={"Invalid JSON"}
-
-         onChange={ onChangeHandler }
-         value={ encodedText } />
+              data-errormessage={"Invalid JSON"}
+              onChange={ onChangeHandler }
+              value={ encodedText } />
   )
 }
 
