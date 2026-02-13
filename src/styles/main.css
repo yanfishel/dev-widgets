@@ -62,7 +62,6 @@
   --weather-days-number: 6;
 }
 
-
 ::-webkit-scrollbar-track, *::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: var(--scrollbar-background);
@@ -153,7 +152,7 @@ body {
 .container {
   position: relative;
   width: 100%;
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: var(--border-radius);
   /*box-shadow: var( --container-box-shadow);*/
   background: rgba(from var(--container-background) r g b / var(--container-opacity));
@@ -168,7 +167,7 @@ body {
   }
 
   &:has(.action-bar) {
-    padding-right: var(--action-bar-padding);
+    padding-right: calc(var(--action-bar-padding) + 8px);
   }
 
   .alert-message {
@@ -192,8 +191,8 @@ body {
   /* -- ACTION BAR - */
   .action-bar {
     position: absolute;
-    top: 6px;
-    right: 3px;
+    top: 8px;
+    right: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;

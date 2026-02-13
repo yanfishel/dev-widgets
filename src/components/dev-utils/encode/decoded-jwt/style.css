@@ -2,15 +2,10 @@
 .decoded-container {
 
   .decoded-jwt-header, .decoded-jwt-claim {
-    padding: 2px 0 2px 4px !important;
+    padding: 2px 0 2px 6px !important;
     textarea {
       outline: none;
     }
-
-    /*.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
-      background: transparent !important;
-    }*/
-
   }
 
   .decoded-jwt-header {

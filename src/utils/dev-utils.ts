@@ -4,6 +4,7 @@ import * as jose from "jose";
 import {DEFAULT_JWT_SECRET, ENCODING_TYPES} from "@/constants";
 
 
+
 export const encodingSelectOptions = () => {
   const optGroups: T_EncodingOption[] = []
   ENCODING_TYPES.forEach(type => {
@@ -23,11 +24,6 @@ export const encodingSelectOptions = () => {
 export const textareaValue = (event:React.SyntheticEvent<HTMLTextAreaElement>) =>{
   const { value } = event.target as HTMLTextAreaElement
   return value.replace(/\s/g, '').trim()
-}
-
-export const getEditableText = (event:React.SyntheticEvent<HTMLDivElement>) =>{
-  const { textContent } = event.target as HTMLElement
-  return textContent.replace(/\s/g, '').trim()
 }
 
 export const jwtDecodeHeader = (text:string) =>{
@@ -59,7 +55,7 @@ export const jwtEncode = async (header:string, claim:string, signSecret:string) 
     const jwt = await new jose.SignJWT(obj)
       .setProtectedHeader(protectedHeader)
       .setIssuedAt()
-      .setExpirationTime('2h')
+      //.setExpirationTime('2h')
       .sign(secret)
     return jwt
   } catch (e) {

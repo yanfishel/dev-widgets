@@ -96,18 +96,21 @@ type T_EncodingOption = {
 
 type T_DevUtilsStore = {
   processing: boolean
-  encodingType: T_EncodingType
-  decodedFile: File | null
-  decodedText: string
-  decodedJWT: { header:string, claim:string } | null
-  encodedJWT: string
-  decodedError: string | null
-  encodedText: string
-  encodedError: string | null
-  signature: string | null
+  encodingType: string
+
+  decodedJWT: { header:string, claim:string, signature:string, error:string }
+  encodedJWT: { text:string, error:string }
+
+  decodedURL: { url:string, error:string }
+  encodedURL: { text:string, error:string }
+
+  decodedFile: { file:File | null, error:string }
+  encodedFile: { text:string, error:string }
+
   reset: ()=>void
   resetDecoded: ()=>void
   resetEncoded: ()=>void
+
   updateEncodingType: (encodingType:T_EncodingType)=>void
   onDecodedJWTChange: (field:string, code:string)=>void
 }

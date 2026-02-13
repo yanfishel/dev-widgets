@@ -6,7 +6,7 @@
     font-size: 0.8rem;
     height: 100%;
     width: 100%;
-    padding-right: calc(var(--action-bar-padding) - 8px);
+    padding-right: calc(var(--action-bar-padding) - 4px);
     padding-left: 0;
     padding-bottom: 0;
     display: flex;
@@ -23,8 +23,10 @@
     }
 
     .control-bar {
-      width: 100%;
+      width: calc(100% + var(--action-bar-padding) - 4px);
       height: 26px;
+      position: relative;
+      left: calc((var(--action-bar-padding) - 4px) / 2);
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
@@ -42,7 +44,6 @@
       &.encoded {
         position: relative;
         height: auto;
-        align-items: flex-start;
       }
     }
 
@@ -74,13 +75,6 @@
       }
     }
 
-    /*.decoded-container {
-      .decoded-jwt-header-editable {
-        height: 50px;
-        max-height: 50px;
-      }
-    }*/
-
     .input-area {
       width: 100%;
       height: 100%;
@@ -90,7 +84,7 @@
       padding: 3px 8px;
       margin: 0;
       text-align: left;
-      font-family: var(--font-family);
+      font-family: 'Fira code', 'Fira Mono', monospace !important;
       border-radius: 5px;
       border: 0;
       color: var(--text-primary);
@@ -102,7 +96,7 @@
         color: var(--text-muted);
       }
 
-      &:before {
+      &::before {
         content: attr(data-placeholder);
         color: var(--text-muted);
         position: absolute;
@@ -115,7 +109,10 @@
         }
       }
       &.has-error {
-        &:before {
+        &::placeholder {
+          color: #c00;
+        }
+        &::before {
           content: attr(data-errormessage);
           color: #c00;
         }
@@ -126,8 +123,6 @@
       margin: 0;
       padding: 0;
     }
-
-
 
     /*&.encode-type-JWT,
     &.encode-type-URL {

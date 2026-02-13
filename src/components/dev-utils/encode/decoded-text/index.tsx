@@ -4,20 +4,19 @@ import {useDevUtilsStore} from "@/store";
 import {debounce, textareaValue } from "@/utils";
 
 
-
 const DecodedText = () => {
 
-  const decodedText = useDevUtilsStore(({decodedText}) => decodedText)
+  const decodedURL = useDevUtilsStore(({decodedURL}) => decodedURL)
 
   const encodeUrl = (text:string)=>{
-    useDevUtilsStore.setState({encodedText: encodeURIComponent(text)})
+    useDevUtilsStore.setState({encodedURL: { text:encodeURIComponent(text), error:''}})
   }
 
   const debounceEncodeUrl = debounce(encodeUrl, 250)
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const decodedText = textareaValue(e)
-    useDevUtilsStore.setState({decodedText})
+    useDevUtilsStore.setState({ decodedURL: { url:decodedText, error:'' } })
     debounceEncodeUrl(decodedText)
   }
 
@@ -25,7 +24,7 @@ const DecodedText = () => {
   return (
     <textarea className={`input-area decoded-text-editable`}
               placeholder={'- Decoded URL'}
-              spellCheck={'false'} value={ decodedText } onChange={ onChangeHandler }  >
+              spellCheck={'false'} value={ decodedURL.url } onChange={ onChangeHandler }  >
     </textarea>
   )
 }

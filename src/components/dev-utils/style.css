@@ -7,7 +7,7 @@
 
   & > .container {
     height: var(--dev-utils-widget-height);
-    padding: 8px;
+    padding: 8px 12px;
   }
 
   .react-tabs {

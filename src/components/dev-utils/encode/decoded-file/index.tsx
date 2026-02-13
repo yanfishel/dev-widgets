@@ -9,14 +9,14 @@ import './style.css'
 
 const DecodedFile = () => {
 
-  const decodedError = useDevUtilsStore(({decodedError}) => decodedError)
+  const decodedFile = useDevUtilsStore(({decodedFile}) => decodedFile)
 
 
   return (
     <>
-      { decodedError &&
+      { decodedFile.error &&
         <div className={"decoded-file-container"}>
-          <div className={"file-error-message"}>{ decodedError }</div>
+          <div className={"file-error-message"}>{ decodedFile.error }</div>
         </div>
       }
 

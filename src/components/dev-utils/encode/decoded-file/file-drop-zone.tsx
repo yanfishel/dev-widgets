@@ -3,6 +3,7 @@ import React, {memo, useCallback, useState} from 'react';
 import {useDevUtilsStore} from "@/store";
 import {filetoBase32, fileToBase64} from "@/utils";
 import {DropFileIcon} from "@/assets";
+import {DEFAULT_DECODED_FILE, DEFAULT_ENCODED} from "@/constants";
 
 
 const FileDropZone = () => {
@@ -10,7 +11,6 @@ const FileDropZone = () => {
   const [dragOver, setDragOver] = useState(false)
 
   const encodingType = useDevUtilsStore(({encodingType}) => encodingType)
-  const reset = useDevUtilsStore(({reset}) => reset)
 
   const dragEnterHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -34,21 +34,44 @@ const FileDropZone = () => {
     }
   }
 
+
   const encodeFile = useCallback(async (file: File) => {
     if(encodingType !== 'base32' && encodingType !== 'base64') {
       return
     }
-    reset()
-    useDevUtilsStore.setState(state => ({...state, processing: true}))
+    useDevUtilsStore.setState(state => ({
+      ...state, processing: true,
+      decodedFile: DEFAULT_DECODED_FILE,
+      encodedFile: DEFAULT_ENCODED
+    }))
     const result = encodingType === 'base64'
       ? await fileToBase64(file)
       : await filetoBase32(file)
     if(result){
-      useDevUtilsStore.setState(state => ({...state, ...{ processing: false, decodedFile:file, encodedText: result.toString()}}) )
+      useDevUtilsStore.setState(state => ({
+        ...state,
+        ...{
+          processing: false,
+          decodedFile: { file, error: '' },
+          encodedFile: {
+            text: result.toString(),
+            error: ''
+          }
+        }
+      }))
     } else {
-      useDevUtilsStore.setState(state => ({...state, ...{ processing: false, encodedError: 'File encode error'}}) )
+      useDevUtilsStore.setState(state => ({
+        ...state,
+        ...{
+          processing: false,
+          decodedFile: DEFAULT_DECODED_FILE,
+          encodedFile: {
+            text: '',
+            error: 'File encode error'
+          }
+        }
+      }))
     }
-
   }, [encodingType])
 
 

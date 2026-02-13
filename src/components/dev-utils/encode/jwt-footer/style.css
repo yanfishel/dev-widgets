@@ -1,0 +1,12 @@
+
+.encode-container {
+  .encode-footer {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+  }
+}

@@ -14,7 +14,8 @@ const EncodingTypeSelect = () => {
 
   return (
     <div className="encode-type-container">
-      <select value={ encodingType } onChange={(e) => updateEncodingType(e.target.value as T_EncodingType)} >
+      <select value={ encodingType }
+              onChange={(e) => updateEncodingType(e.target.value as T_EncodingType)} >
         { encodingSelectOptions().map(group =>
           <optgroup key={ group.type } label={ group.type.toUpperCase() }>
             { group.options.map(option =>

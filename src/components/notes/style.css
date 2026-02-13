@@ -9,16 +9,17 @@
 
   .container {
     height: 100%;
-    padding: 8px var(--action-bar-padding) 8px 10px;
+    /*padding: 8px var(--action-bar-padding) 8px 10px;*/
 
     textarea {
       resize: none;
-      width: calc(100% - 10px - var(--action-bar-padding));
+      width: calc(100% - 24px - var(--action-bar-padding));
       height: calc(100% - 16px);
       position: absolute;
-      background: transparent;
+      background: var(--input-background);
       color: var(--text-primary);
-      border: none;
+      border: 0;
+      border-radius: 5px;
       outline: none;
       font-family: var(--font-family);
       font-size: 0.75rem;
@@ -30,11 +31,12 @@
 
     .notes-view {
       position: absolute;
-      width: calc(100% - 10px - var(--action-bar-padding));
+      width: calc(100% - 24px - var(--action-bar-padding));
       height: calc(100% - 16px);
-      background: transparent;
+      background: var(--input-background);
       color: var(--text-primary);
-      border: none;
+      border-radius: 5px;
+      border: 0;
       outline: none;
       font-family: var(--font-family);
       font-size: 0.75rem;

@@ -5,11 +5,11 @@ import {WidgetToaster} from "@components/ui";
 import {LoadingAnimatedIcon} from "@/assets";
 import EncodingTypeSelect from "./encoding-type-select";
 import EncodedText from "./encoded-text";
-import JwtSignature from "./jwt-signature";
 import DecodedFile from "./decoded-file";
 import DecodedText from "./decoded-text";
 import DecodedJWT from "./decoded-jwt";
 import ActionBar from "./action-bar";
+import JwtFooter from "./jwt-footer";
 
 import './style.css'
 
@@ -48,7 +48,6 @@ const Encode = () => {
 
       <div className={'control-bar encoded'}>
         <div className="title">Encoded</div>
-        { encodingType === 'JWT' && <JwtSignature /> }
       </div>
 
       {/* -- ENCODED CONTAINER - */}
@@ -61,6 +60,10 @@ const Encode = () => {
       </div>
 
       <ActionBar />
+
+      { encodingType === 'JWT' &&
+        <JwtFooter />
+      }
 
     </div>
   )

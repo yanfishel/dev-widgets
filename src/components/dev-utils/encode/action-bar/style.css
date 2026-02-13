@@ -2,8 +2,8 @@
 .encode-container {
 
   .action-bar {
-    right: -6px;
-    margin-top: 40px;
+    right: 0;
+    margin-top: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -41,6 +41,12 @@
     top: 44px;
     margin-left: -11px;
     z-index: 10;
+  }
+
+  &.encode-type-JWT {
+    & > .action-bar {
+      margin-top: 36px;
+    }
   }
 
 }

@@ -6,3 +6,13 @@
     max-height: 90px;
   }
 }
+
+.encode-type-JWT {
+  .encoded-container {
+    .encoded-text-editable {
+      height: 80px;
+      min-height: 80px;
+      max-height: 80px;
+    }
+  }
+}

@@ -14,7 +14,7 @@ export const ButtonTrash = ({title = 'Clear', onClick, disabled, className}:IPro
     <button title={ title }
             disabled={ disabled }
             onClick={ onClick }
-            className={`circle-button danger-button clear-button ${className || ''}`}>
+            className={`circle-button danger-button clear-button ${ className ?? '' }`}>
       <ButtonTrashIcon />
       <ButtonTrashIcon hover />
     </button>
