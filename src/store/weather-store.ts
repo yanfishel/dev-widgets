@@ -1,6 +1,7 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
 
+import {T_WeatherStore} from "@/types/weather";
 import { WEATHER_FORECAST_LIFE_TIME } from "@/constants";
 import { useSettingsStore } from "@/store";
 import { getWeatherData} from "@/utils";

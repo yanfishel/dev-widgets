@@ -1,9 +1,11 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
-import {merge} from "ts-deepmerge";
 
+import {T_Location} from "@/types/weather";
+import {T_SettingsStore} from "@/types/settings";
 import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
 import {getStorageItem, setStorageItem, getUserIPLocation} from "@/utils";
+
 
 
 export const useSettingsStore = createWithEqualityFn<T_SettingsStore>()(
@@ -32,7 +34,7 @@ export const useSettingsStore = createWithEqualityFn<T_SettingsStore>()(
       }
 
       // ELSE Get Location from IP
-      const ipLocation:TLocation = await getUserIPLocation()
+      const ipLocation:T_Location = await getUserIPLocation()
       if(ipLocation){
         const data = {
           ...ipLocation,

@@ -2,8 +2,10 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
 import { merge } from "ts-deepmerge";
 
+import {T_DevUtilsStore} from "@/types/dev-utils";
 import {DEFAULT_DECODED_FILE, DEFAULT_DECODED_JWT, DEFAULT_DECODED_URL, DEFAULT_DEV_UTILS_STORE, DEFAULT_ENCODED, E_EncodingTypes} from "@/constants";
 import {debounce, jwtEncode, jwtVerify} from "@/utils";
+
 
 
 export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
@@ -90,7 +92,8 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
       debounce(async ()=>{
         const { decodedJWT, signatureJWT } = get()
         const { header, claim } = decodedJWT
-        await jwtEncode(header, claim, signatureJWT.secret)
+        const { secret, algorithm} = signatureJWT
+        await jwtEncode(header, claim, secret, algorithm)
               .then(res => {
                 set({encodedJWT: {text: res, error: ''}})
               })
@@ -116,14 +119,15 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
     name: 'store-widgets-dev-utils',
     merge: (persisted, current) => merge(current, persisted as T_DevUtilsStore),
     partialize: (state) => ({
-      ...state,
-      ...{
-        processing: false,
-        decodedJWT: state.decodedJWT.error || state.encodedJWT.error ? { ...state.decodedJWT, ...{ header:'', claim:'', error:'' } } : state.decodedJWT,
-        encodedJWT: state.decodedJWT.error || state.encodedJWT.error ? DEFAULT_ENCODED : state.encodedJWT,
-        decodedFile: DEFAULT_DECODED_FILE,
-        encodedFile: DEFAULT_ENCODED
-      }
-    })
+        ...state,
+        ...{
+          processing: false,
+          signatureJWT:  {...state.signatureJWT, ...{error: ''}},
+          decodedJWT: DEFAULT_DECODED_JWT,
+          encodedJWT: DEFAULT_ENCODED,
+          decodedFile: DEFAULT_DECODED_FILE,
+          encodedFile: DEFAULT_ENCODED
+        }
+      })
   })
 )

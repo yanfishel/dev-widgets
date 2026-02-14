@@ -8,7 +8,7 @@ import './style.css'
 const About = () => {
 
   const [versions, setVersions] = useState<string[][]>([])
-  const [packageJson, setPackageJson] = useState<IPackageJson>({})
+  const [packageJson, setPackageJson] = useState<I_PackageJson>({})
 
 
   const getInfo = async () => {

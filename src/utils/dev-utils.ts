@@ -1,8 +1,8 @@
 import React from "react";
 import * as jose from "jose";
 
-import {DEFAULT_JWT_SECRET, ENCODING_TYPES} from "@/constants";
-
+import { ENCODING_TYPES } from "@/constants";
+import {T_Algorithms, T_EncodingOption} from "@/types/dev-utils";
 
 
 export const encodingSelectOptions = () => {
@@ -44,24 +44,23 @@ export const jwtDecode = (text:string) =>{
   }
 }
 
-export const jwtEncode = async (header:string, claim:string, signSecret:string) => {
-    const obj = JSON.parse(claim)
-    const secret = new TextEncoder().encode(signSecret && signSecret !== '' ? signSecret : DEFAULT_JWT_SECRET)
-    let protectedHeader = {alg:'HS256', typ: "JWT"}
-    if(header) {
-      protectedHeader = JSON.parse(header)
-    }
-    const jwt = await new jose.SignJWT(obj)
-      .setProtectedHeader(protectedHeader)
-      .setIssuedAt()
-      //.setExpirationTime('2h')
-      .sign(secret)
-    return jwt
+export const jwtEncode = async (header:string, claim:string, secret:string, alg:T_Algorithms) => {
+  const obj = JSON.parse(claim)
+  const protectedHeader = JSON.parse(header)
+  let signSecret:Uint8Array|CryptoKey = new TextEncoder().encode(secret)
+  if(alg.startsWith('RS')) {
+    signSecret = await jose.importPKCS8(secret, alg)
+  }
+  return await new jose.SignJWT(obj)
+    .setProtectedHeader( protectedHeader)
+    .setIssuedAt()
+    //.setExpirationTime('2h')
+    .sign(signSecret)
 }
 
 export const jwtVerify = async (text:string, signSecret:string) => {
   try {
-    const secret = new TextEncoder().encode(signSecret && signSecret !== '' ? signSecret : DEFAULT_JWT_SECRET)
+    const secret = new TextEncoder().encode(signSecret)
     const verified = await jose.jwtVerify(text, secret)
     return !!verified
   } catch (e) {

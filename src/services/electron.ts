@@ -25,7 +25,7 @@ export const openExternalLink = async (url:string) => {
  *
  * @async
  * @function
- * @returns {Promise<{packageJson: IPackageJson, versions: Array<[string, string]>}>}
+ * @returns {Promise<{packageJson: I_PackageJson, versions: Array<[string, string]>}>}
  *          A promise that resolves to an object containing the package.json data and version information for
  *          'electron', 'chrome', 'node', and 'v8'.
  * @throws {Error} Logs an error to the console if the operation fails.
@@ -33,7 +33,7 @@ export const openExternalLink = async (url:string) => {
 export const getPackageJson = async () => {
   try {
     const versions = ['electron', 'chrome', 'node', 'v8'].map(e => [e, process.versions[e]]);
-    const packageJson:IPackageJson = await import('../../package.json')
+    const packageJson:I_PackageJson = await import('../../package.json')
     return { packageJson, versions }
   } catch (error) {
     console.error('Error getting app info:', error)

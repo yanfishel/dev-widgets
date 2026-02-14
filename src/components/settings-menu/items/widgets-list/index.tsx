@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ReactSortable} from "react-sortablejs";
 
+import {T_Widget} from "@/types/settings";
 import { useSettingsStore} from "@/store";
 import {WidgetItem} from "./widget-item";
 
 
 export const WidgetsList = () => {
 
-  const [widgets, setWidgets] = useState<TWidget[]>([])
+  const [widgets, setWidgets] = useState<T_Widget[]>([])
 
   const settingsWidgets = useSettingsStore(({widgets}) => widgets)
 

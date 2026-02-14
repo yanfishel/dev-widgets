@@ -1,135 +1,7 @@
 // types.d.ts
 declare module 'prismjs/components/prism-core';
 
-interface IAppSettings {
-  width: number
-  height: number
-  x: number
-  y: number
-  locked: boolean
-  openAtLogin: boolean
-}
-
-type TTheme = 'system' | 'light' | 'dark'
-
-type TWidgetsSize = 'small' | 'medium' | 'large'
-
-type TWidget = {
-  id: string
-  title: string
-  active: boolean
-  order: number
-  collapsed?: boolean
-}
-
-type TLocation = {
-  country?: string,
-  countryCode?: string,
-  city: string,
-  lat: number,
-  lon: number,
-  timestamp?: number
-}
-
-type TWeatherCurrent = {
-  interval:number
-  is_day: number
-  rain: number
-  showers: number
-  snowfall: number
-  temperature_2m: number
-  time:number
-  weather_code:number
-}
-
-type TWeatherDaily = {
-  temperature_2m_max: number[]
-  temperature_2m_min: number[]
-  weather_code: number[]
-  time: number[]
-}
-
-type TWeatherData = {
-  current: TWeatherCurrent
-  daily: TWeatherDaily
-  timestamp: number
-  lat: number
-  lon: number
-}
-
-type T_Store = {
-  selectedTheme: TTheme
-  displayDate: { date: string, shortdate:string, weekday: string }
-  displayTime: { hours: number, minutes: number, seconds: number }
-  appTimer: () => void
-  updateDisplayDate: () => void
-}
-
-type T_SettingsStore = IWidgetsSettings & {
-  userLocation: TLocation
-  updateLocation: ()=>Promise<void>
-}
-
-type T_NotesStore = {
-  notes: string
-  updateNotes: (notes:string)=>void
-}
-
-type T_WeatherStore = {
-  processing: boolean
-  connectionAttempts: number
-  error: string|null
-  forecast: TWeatherData|null
-  isActive: (location:TLocation) => boolean
-  updateWeatherForecast: (force?:boolean)=>Promise<void>
-  getForecast: (location:TLocation)=>Promise<void>
-}
-
-type T_EncodingType = 'JWT' | 'URL' | 'base64' | 'base32'
-
-type T_EncodingTypes = {
-  label: string,
-  value: T_EncodingType,
-  group: string
-}
-
-type T_EncodingOption = {
-  type: string,
-  options: T_EncodingTypes[]
-}
-
-type T_DevUtilsStore = {
-  processing: boolean
-  selectedTab: number
-  encodingType: T_EncodingType
-
-  signatureJWT: { secret:string, error:string }
-
-  decodedJWT: { header:string, claim:string, error:string }
-  encodedJWT: { text:string, error:string }
-
-  decodedURL: { url:string, error:string }
-  encodedURL: { text:string, error:string }
-
-  decodedFile: { file:File | null, error:string }
-  encodedFile: { text:string, error:string }
-
-  reset: (encodingType?: T_EncodingType)=>void
-  resetDecoded: (encodingType?: T_EncodingType)=>void
-  resetEncoded: (encodingType?: T_EncodingType)=>void
-
-  updateEncodingType: (encodingType:T_EncodingType)=>void
-  onDecodedJWTChange: (field:string, code:string)=>void
-  checkJWTSignature: (text:string)=>Promise<void>
-}
-
-interface IWidgetProps {
-  active: boolean
-  order: number
-  collapsed?: boolean
-}
-
-interface IPackageJson {
+interface I_PackageJson {
   productName?: string;
   version?: string;
   description?: string;
@@ -138,17 +10,6 @@ interface IPackageJson {
   bugs?: { url: string };
   license?: string | LicenseEntry;
 }
-
-interface IWidgetsSettings {
-  theme: TTheme
-  size: TWidgetsSize
-  locked: boolean,
-  weather: { id:string, active: boolean }
-  autoGeoPosition: boolean
-  location: TLocation | null
-  widgets: TWidget[]
-}
-
 
 type S_NetworkStatsData = Systeminformation.NetworkStatsData
 
@@ -160,14 +21,13 @@ type S_MemData = Systeminformation.MemData
 
 type S_FsSizeData = Systeminformation.FsSizeData
 
-
 interface Window {
   electronAPI: {
     setWidgetsSize: (size: string) => void
     setLockPosition: (locked: boolean) => void
     openExternal: (url: string) => Promise<void>
     openAboutWindow: () => Promise<void>
-    getAppInfo: () => Promise<{ packageJson:IPackageJson, versions:string[][] }>
+    getAppInfo: () => Promise<{ packageJson:I_PackageJson, versions:string[][] }>
     getDiskUsage: () => Promise<S_FsSizeData[]>
     getSystemInfo: () => Promise< { info:S_CurrentLoadData, memory:S_MemData } >
     getPublicIP: () => Promise<string>

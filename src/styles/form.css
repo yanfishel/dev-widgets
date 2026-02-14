@@ -8,6 +8,7 @@ select {
   color: var(--text-primary) !important;
   font-size: 0.8rem;
   font-family: inherit;
+  outline: none;
 
   optgroup,
   option {
@@ -15,8 +16,11 @@ select {
   }
 }
 
-input {
+input, textarea {
   outline: none;
+  resize: none;
+  margin: 0;
+  text-align: left;
 
   &:not([type="checkbox"]) {
     width: 100%;
@@ -25,8 +29,15 @@ input {
     border-radius: 4px;
     background: var(--input-background);
     color: var(--text-primary);
-    font-size: 0.8rem;
+    font-size: inherit;
     font-family: inherit;
+  }
+
+
+  &::placeholder {
+    color: var(--text-muted);
+    font-size: inherit;
+    font-family: var(--font-family);
   }
 
   /* -- SWITCH CHECKBOX - */
@@ -81,7 +92,11 @@ input {
     background: rgba( 204, 0, 0, 0.05);
     outline: 1px dashed rgba( 204, 0, 0, 0.35);
     outline-offset: -1px;
+    &::placeholder {
+      color: #c00;
+    }
   }
+
 }
 
 /* -- BUTTON - */

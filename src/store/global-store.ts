@@ -2,6 +2,7 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { subscribeWithSelector } from "zustand/middleware";
 import {shallow} from "zustand/vanilla/shallow";
 
+import {T_Store} from "@/types/app";
 import {E_THEME} from "@/constants";
 import {formatDate} from "@/utils";
 

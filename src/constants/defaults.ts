@@ -1,4 +1,7 @@
-import {WIDGETS_ID} from "@/constants";
+import {E_EncodingTypes, JWT_SIGNATURE_ALGORITHMS, SECRET_KEYS} from "./dev-utils";
+import {WIDGETS_ID} from "./app";
+import {T_WidgetsSettings} from "@/types/settings";
+import {T_AppSettings} from "@/types/app";
 
 export const APP_WIDTH = {
   SMALL: 300,
@@ -6,7 +9,7 @@ export const APP_WIDTH = {
   LARGE: 440,
 }
 
-export const APP_SETTINGS_DEFAULT:IAppSettings = {
+export const APP_SETTINGS_DEFAULT:T_AppSettings = {
   width: APP_WIDTH.LARGE,
   height: APP_WIDTH.LARGE,
   x: 0,
@@ -24,14 +27,6 @@ export const DEFAULT_LOCATION = {
 export const DEFAULT_NOTE = 'TYPE YOUR NOTES HERE'
 
 /* -- WIDGET DEV UTILS - */
-export enum E_EncodingTypes {
-  JWT = 'JWT',
-  URL = 'URL',
-  base64 = 'base64',
-  base32 = 'base32'
-}
-
-export const DEFAULT_JWT_SECRET = 's3cre!'
 export const DEFAULT_ENCODED = {
   text:'',
   error:''
@@ -41,10 +36,19 @@ export const DEFAULT_DECODED_JWT = {
   claim:'',
   error:''
 }
-export const DEFAULT_SIGNATURE_JWT = { secret:DEFAULT_JWT_SECRET, error:'' }
-export const DEFAULT_DECODED_URL = { url:'', error:'' }
-export const DEFAULT_DECODED_FILE:{file:File|null, error:string} = { file:null, error:'' }
-
+export const DEFAULT_SIGNATURE_JWT = {
+  algorithm: JWT_SIGNATURE_ALGORITHMS.HS256,
+  secret: SECRET_KEYS[JWT_SIGNATURE_ALGORITHMS.HS256],
+  error:''
+}
+export const DEFAULT_DECODED_URL = {
+  url:'',
+  error:''
+}
+export const DEFAULT_DECODED_FILE: { file:File|null, error:string } = {
+  file:null,
+  error:''
+}
 export const DEFAULT_DEV_UTILS_STORE = {
   processing: false,
   selectedTab: 0,
@@ -59,7 +63,7 @@ export const DEFAULT_DEV_UTILS_STORE = {
 }
 
 /* -- WIDGET SETTINGS - */
-export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
+export const WIDGETS_SETTINGS_DEFAULT:T_WidgetsSettings = {
   theme: 'system',
   size: 'large',
   locked: false,

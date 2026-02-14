@@ -1,7 +1,8 @@
 import React, {memo} from 'react';
 
-import {encodingSelectOptions} from "@/utils";
+import {T_EncodingType} from "@/types/dev-utils";
 import {useDevUtilsStore} from "@/store";
+import {encodingSelectOptions} from "@/utils";
 
 import './style.css'
 

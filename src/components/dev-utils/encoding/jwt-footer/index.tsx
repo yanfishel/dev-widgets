@@ -1,6 +1,6 @@
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 
-import { EXAMPLE_JWT_CLAIM, EXAMPLE_JWT_HEADER } from "@/constants";
+import { EXAMPLE_JWT_CLAIM  } from "@/constants";
 import {useDevUtilsStore} from "@/store";
 import JwtSignature from "../jwt-signature";
 
@@ -10,16 +10,18 @@ import './style.css'
 const EncodingJwtFooter = () => {
 
   const onDecodedJWTChange = useDevUtilsStore(({onDecodedJWTChange}) => onDecodedJWTChange)
+  const signatureJWT = useDevUtilsStore(({signatureJWT}) => signatureJWT)
 
-  const onExapleClickHandler = () => {
-    useDevUtilsStore.setState(state => ({...state, decodedJWT: { ...state.decodedJWT, header:EXAMPLE_JWT_HEADER}} ))
+  const onExampleClickHandler = useCallback(() => {
+    const header = JSON.stringify({alg: signatureJWT.algorithm, typ: 'JWT'}, null, 2)
+    useDevUtilsStore.setState(state => ({...state, decodedJWT: { ...state.decodedJWT, header }} ))
     onDecodedJWTChange('claim', EXAMPLE_JWT_CLAIM)
-  }
+  }, [signatureJWT.algorithm])
 
   return (
     <div className={'encode-footer'}>
 
-      <button onClick={ onExapleClickHandler } className="signature-button" >Example</button>
+      <button onClick={ onExampleClickHandler } className="signature-button" >Example</button>
 
       <JwtSignature />
 

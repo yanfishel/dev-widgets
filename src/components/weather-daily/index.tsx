@@ -4,14 +4,14 @@ import { WIDGETS_ID } from "@/constants";
 import { useWeatherStore } from "@/store";
 import { useWidgetProps } from "@/hooks";
 import { weatherForecastMap } from "@/utils";
-import DayItem, { IDayItem } from "./day-item";
+import DayItem, { I_DayItem } from "./day-item";
 
 import './style.css'
 
 
 const WeatherDaily = () => {
 
-  const [dailyWeather, setDailyWeather] = useState<IDayItem[]>([])
+  const [dailyWeather, setDailyWeather] = useState<I_DayItem[]>([])
 
   const error = useWeatherStore(({error}) => error)
   const forecast = useWeatherStore(({forecast}) => forecast)

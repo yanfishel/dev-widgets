@@ -1,0 +1,42 @@
+import {E_EncodingTypes, JWT_SIGNATURE_ALGORITHMS} from "@/constants";
+
+
+export type T_EncodingType = `${E_EncodingTypes}`
+
+export type T_EncodingTypes = {
+  label: string,
+  value: T_EncodingType,
+  group: string
+}
+
+export type T_EncodingOption = {
+  type: string,
+  options: T_EncodingTypes[]
+}
+
+export type T_Algorithms = `${JWT_SIGNATURE_ALGORITHMS}`
+
+export type T_DevUtilsStore = {
+  processing: boolean
+  selectedTab: number
+  encodingType: T_EncodingType
+
+  signatureJWT: { algorithm:T_Algorithms, secret:string, error:string }
+
+  decodedJWT: { header:string, claim:string, error:string }
+  encodedJWT: { text:string, error:string }
+
+  decodedURL: { url:string, error:string }
+  encodedURL: { text:string, error:string }
+
+  decodedFile: { file:File | null, error:string }
+  encodedFile: { text:string, error:string }
+
+  reset: (encodingType?: T_EncodingType)=>void
+  resetDecoded: (encodingType?: T_EncodingType)=>void
+  resetEncoded: (encodingType?: T_EncodingType)=>void
+
+  updateEncodingType: (encodingType:T_EncodingType)=>void
+  onDecodedJWTChange: (field:string, code:string)=>void
+  checkJWTSignature: (text:string)=>Promise<void>
+}

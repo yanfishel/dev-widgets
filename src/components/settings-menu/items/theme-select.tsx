@@ -1,5 +1,7 @@
 import {memo, useMemo} from "react";
+
 import { useSettingsStore} from "@/store";
+import {T_Theme} from "@/types/settings";
 
 
 const ThemeSelect = () => {
@@ -15,7 +17,7 @@ const ThemeSelect = () => {
       <select name="theme"
               id="theme"
               value={ selectedTheme }
-              onChange={e => useSettingsStore.setState(state => ({...state, theme:e.target.value as TTheme}) )}>
+              onChange={e => useSettingsStore.setState(state => ({...state, theme:e.target.value as T_Theme}) )}>
         <option value="system">System</option>
         <option value="light">Light</option>
         <option value="dark">Dark</option>

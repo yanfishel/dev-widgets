@@ -1,5 +1,6 @@
 import { ipcMain, powerMonitor } from 'electron'
 
+import {T_WidgetsSize} from "@/types/settings";
 import { IpcChannels } from "@ipc/channels";
 import { getPackageJson, openExternalLink } from "@services/electron";
 import { getDiskUsage, getNetworkStats, getPublicIP, getSystemInfo } from "@services/sysinfo";
@@ -7,7 +8,7 @@ import winController from "@controllers/window";
 import serverController from "@controllers/server";
 
 
-ipcMain.handle(IpcChannels.WIDGET_SIZE, (_event, size:TWidgetsSize) => winController.resize(size))
+ipcMain.handle(IpcChannels.WIDGET_SIZE, (_event, size:T_WidgetsSize) => winController.resize(size))
 
 ipcMain.handle(IpcChannels.LOCK_POSITION, (_event, locked) => winController.lock(locked) )
 

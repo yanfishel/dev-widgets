@@ -25,7 +25,7 @@ const WeatherCurrent = () => {
   useEffect(()=>{
     const { minutes, seconds } = displayTime
     if(minutes === 0 && seconds === 0) {
-      updateWeatherForecast()
+      updateWeatherForecast(true)
     }
   }, [displayTime])
 

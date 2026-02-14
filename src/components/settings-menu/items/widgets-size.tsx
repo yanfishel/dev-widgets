@@ -1,5 +1,7 @@
 import {memo, useMemo} from "react";
+
 import { useSettingsStore} from "@/store";
+import {T_WidgetsSize} from "@/types/settings";
 
 
 const WidgetsSize = () => {
@@ -9,7 +11,7 @@ const WidgetsSize = () => {
   const value = useMemo(() => size, [size])
 
   const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const size = e.target.value as TWidgetsSize
+    const size = e.target.value as T_WidgetsSize
     window.electronAPI.setWidgetsSize(size)
   }
 

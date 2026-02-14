@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import {useDevUtilsStore} from "@/store";
+import {E_EncodingTypes} from "@/constants";
 import {WidgetToaster} from "@components/ui";
 import {LoadingAnimatedIcon} from "@/assets";
 import EncodingTypeSelect from "./encoding-type-select";
@@ -12,7 +13,6 @@ import ActionBar from "./action-bar";
 import JwtFooter from "./jwt-footer";
 
 import './style.css'
-import {E_EncodingTypes} from "@/constants";
 
 
 const Encoding = () => {
@@ -40,9 +40,9 @@ const Encoding = () => {
 
         <ActionBar actionContainer={'decoded'} />
 
-        { encodingType === 'JWT'
+        { encodingType === E_EncodingTypes.JWT
           ? <DecodedJWT />
-          : encodingType === 'URL'
+          : encodingType === E_EncodingTypes.URL
             ? <DecodedText />
             : <DecodedFile />
         }
@@ -66,7 +66,7 @@ const Encoding = () => {
 
       <ActionBar />
 
-      { encodingType === 'JWT' &&
+      { encodingType === E_EncodingTypes.JWT &&
         <JwtFooter />
       }
 

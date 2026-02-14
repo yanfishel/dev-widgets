@@ -3,6 +3,8 @@ import React, {useCallback, useEffect, useRef} from 'react';
 
 interface IDialogProps {
   id: string
+  position?: 'top' | 'center' | 'bottom'
+  fullWidth?: boolean
   open?: boolean
   modal?: boolean
   className?: string
@@ -10,7 +12,7 @@ interface IDialogProps {
   openerClassName?: string
   children: React.ReactNode
 }
-export const Dialog = ({ id, open, modal, onClose, className, openerClassName, children }:IDialogProps) => {
+export const Dialog = ({ id, position, fullWidth, open, modal, onClose, className, openerClassName, children }:IDialogProps) => {
 
   const dialogRef = useRef<HTMLDialogElement>(null)
 
@@ -50,7 +52,7 @@ export const Dialog = ({ id, open, modal, onClose, className, openerClassName, c
 
 
   return (
-    <dialog id={ id } ref={dialogRef} className={ className }>
+    <dialog id={ id } ref={dialogRef} className={ `widget-dialog position-${position} ${fullWidth ? 'full-width' : ''} ${className}` }>
       { children }
     </dialog>
   )

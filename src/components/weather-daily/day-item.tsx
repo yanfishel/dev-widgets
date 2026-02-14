@@ -1,6 +1,6 @@
 
 
-export interface IDayItem {
+export interface I_DayItem {
   day: string
   weekday: string
   icon: string
@@ -8,7 +8,7 @@ export interface IDayItem {
   min: number
   description: string
 }
-const DayItem = ({day, weekday, icon, max, min, description}: IDayItem) => {
+const DayItem = ({day, weekday, icon, max, min, description}: I_DayItem) => {
 
   return (
     <div className="day">

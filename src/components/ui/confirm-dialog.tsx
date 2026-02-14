@@ -1,7 +1,6 @@
 import React, {memo} from 'react';
 
-import {Dialog} from "@components/ui/dialog";
-import './style.css'
+import {Dialog} from "./dialog";
 
 
 interface IProps {
@@ -21,12 +20,12 @@ const ConfirmDialogFn = ({ id, title, text, open, openerClassName, onClose, onAp
             onClose={ onClose }
             openerClassName={ openerClassName }
             className={'confirm-modal-dialog'} >
-      <div className={"dialog-content"}>
+      <div className={"dialog-content danger"}>
         <h3>{ title }</h3>
         { text && <p>{ text }</p> }
         <div className={"dialog-buttons"}>
           <button className={'btn-cancel'} onClick={ onClose }>No</button>
-          <button className={'btn-delete'} onClick={ onApply }>Yes</button>
+          <button className={'btn-danger'} onClick={ onApply }>Yes</button>
         </div>
       </div>
     </Dialog>

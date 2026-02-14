@@ -1,7 +1,9 @@
+import {T_Location, T_WeatherDaily, TWeatherData} from "@/types/weather";
 import {WEATHER_DATA} from "@/constants";
 import {WEATHER_ICONS} from "@/assets";
 import {formatDate} from "@/utils";
-import {IDayItem} from "@components/weather-daily/day-item";
+import {I_DayItem} from "@components/weather-daily/day-item";
+
 
 /**
  * Returns weather condition details including icon and description based on the weather code and time of day.
@@ -31,15 +33,15 @@ export const weatherConditionByCode = (code: number = 0, isDay: boolean = true) 
  * This function processes the raw weather data provided in the `TWeatherDaily` format
  * and creates an array of objects with detailed weather information for each day.
  *
- * @param {TWeatherDaily} dailyData - The raw daily weather data, which includes timestamps,
+ * @param {T_WeatherDaily} dailyData - The raw daily weather data, which includes timestamps,
  *        temperature details, and weather condition codes for several days.
  *
- * @returns {IDayItem[]} An array of day items, where each object represents a formatted
+ * @returns {I_DayItem[]} An array of day items, where each object represents a formatted
  *          summary of weather data for a single day, including date, weather description,
  *          minimum and maximum temperatures, and an associated weather icon.
  */
-export const weatherForecastMap = (dailyData:TWeatherDaily):IDayItem[] => {
-  const dailyForecast:IDayItem[] = []
+export const weatherForecastMap = (dailyData:T_WeatherDaily):I_DayItem[] => {
+  const dailyForecast:I_DayItem[] = []
   dailyData.time.forEach((time:number, index:number) => {
     const date = new Date(time * 1000);
     const weekday = formatDate(date, { weekday: 'short'});
@@ -66,7 +68,7 @@ export const weatherForecastMap = (dailyData:TWeatherDaily):IDayItem[] => {
  * retrieves the location details in JSON format. The location data includes
  * information such as country, region, city, and other related details.
  *
- * @returns {Promise<TLocation | undefined>} A promise that resolves to an object
+ * @returns {Promise<T_Location | undefined>} A promise that resolves to an object
  * containing the user's location details or undefined in case of an error.
  *
  * @throws {Error} Logs an error message to the console if the request or
@@ -74,7 +76,7 @@ export const weatherForecastMap = (dailyData:TWeatherDaily):IDayItem[] => {
  */
 export const getUserIPLocation = async () => {
   try {
-    const location:TLocation = await fetch('http://ip-api.com/json/').then((response) => response.json() )
+    const location:T_Location = await fetch('http://ip-api.com/json/').then((response) => response.json() )
     return location
   } catch (error) {
     console.error('Error getting location:', error)
@@ -90,12 +92,12 @@ export const getUserIPLocation = async () => {
  * The response is augmented with additional properties such as the
  * request timestamp and geographic coordinates for the requested location.
  *
- * @param {TLocation} location - The geographic location with latitude (`lat`) and longitude (`lon`) properties.
+ * @param {T_Location} location - The geographic location with latitude (`lat`) and longitude (`lon`) properties.
  * @param signal
  * @returns {Promise<TWeatherData | undefined>} A promise that resolves to the weather data object containing
  *          detailed weather information or `undefined` if an error occurs during the fetch process.
  */
-export const getWeatherData = async (location:TLocation, signal?:AbortSignal):Promise<TWeatherData | undefined> => {
+export const getWeatherData = async (location:T_Location, signal?:AbortSignal):Promise<TWeatherData | undefined> => {
   try {
     const apiBaseURL = 'https://api.open-meteo.com/v1/forecast'
     const urlLocation = `latitude=${location.lat}&longitude=${location.lon}`

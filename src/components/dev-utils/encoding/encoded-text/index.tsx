@@ -22,6 +22,11 @@ const EncodedText = () => {
       return
     }
     if(encodingType === E_EncodingTypes.JWT) {
+      const chunks = text.split('.')
+      if(chunks.length !== 3) {
+        useDevUtilsStore.setState(state => ({...state, decodedJWT: { ...state.decodedJWT, header: '', claim: '', error: 'JWT token invalid' }}))
+        return
+      }
       const header = jwtDecodeHeader(text)
       const claim = jwtDecode(text)
       if(header && claim) {

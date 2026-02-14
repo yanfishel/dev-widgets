@@ -1,6 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 
 import { useSettingsStore } from "@/store";
+import {T_Location} from "@/types/weather";
 
 
 const Weather = () => {
@@ -11,7 +12,7 @@ const Weather = () => {
   const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
 
 
-  const [manual, setManual] = useState<TLocation>(location)
+  const [manual, setManual] = useState<T_Location>(location)
 
   const checked = useMemo(() => weather.active, [weather.active])
 

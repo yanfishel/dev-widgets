@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+import {T_WidgetsSize} from "@/types/settings";
 import {useGlobalStore, useSettingsStore, useWeatherStore} from "@/store";
 import ThemeController from "@components/theme-controller";
 import Dragger from "@components/dragger";
@@ -12,9 +13,11 @@ import SystemInfo from "@components/system-info";
 import Notes from "@components/notes";
 
 import '@/styles/main.css'
+import '@/styles/dialog.css'
 import '@/styles/tabs.css'
 import '@/styles/form.css'
 import DevUtils from "@components/dev-utils";
+
 
 
 const App = () => {
@@ -29,7 +32,7 @@ const App = () => {
   const weather = useSettingsStore(({weather}) => weather)
 
 
-  const setWidgetSize = (size:TWidgetsSize) => {
+  const setWidgetSize = (size:T_WidgetsSize) => {
     document.documentElement.classList.remove("widgets-size-small", "widgets-size-medium", "widgets-size-large")
     document.documentElement.classList.add(`widgets-size-${size}`)
     useSettingsStore.setState(state => ({ ...state, size }))

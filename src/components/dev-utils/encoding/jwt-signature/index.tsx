@@ -3,6 +3,9 @@ import React, {memo, useState} from 'react';
 import {useDevUtilsStore} from "@/store";
 import {Dialog, ButtonClose} from "@components/ui";
 
+import {JWT_SIGNATURE_ALGORITHMS, SECRET_KEYS} from "@/constants";
+import {T_Algorithms} from "@/types/dev-utils";
+
 import './style.css'
 
 
@@ -12,13 +15,23 @@ const JwtSignature = () => {
 
   const signatureJWT = useDevUtilsStore(({signatureJWT}) => signatureJWT)
 
-
-  const onChangeHandler = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const onSelectHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const algorithm = e.target.value as T_Algorithms
     useDevUtilsStore.setState((state) => ({
       ...state,
       signatureJWT: {
         ...state.signatureJWT,
-        secret: (e.target as HTMLInputElement).value
+        ...{ algorithm, secret: SECRET_KEYS[algorithm] }
+      }
+    }))
+  }
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    useDevUtilsStore.setState((state) => ({
+      ...state,
+      signatureJWT: {
+        ...state.signatureJWT,
+        secret: (e.target).value
       }
     }))
   }
@@ -28,15 +41,28 @@ const JwtSignature = () => {
     <>
       <button onClick={() => setOpen(true)} className="signature-button" >Signature</button>
 
-      <Dialog id={'signature-modal'}
+      <Dialog id={'signature-dialog'} position={'bottom'} fullWidth
               className={'signature-modal-dialog'}
               open={ open }
               onClose={() => setOpen(false)}
               openerClassName={'.signature-button'} >
-        <div className="signature-modal">
-          <ButtonClose onClick={() => setOpen(false)} />
-          <label>Secret key</label>
-          <input type={"text"}
+        <div className="dialog-content">
+          <div className="dialog-header">
+            <ButtonClose onClick={() => setOpen(false)} />
+            <div className="dialog-header-title">Algorithm configuration</div>
+          </div>
+
+          <div className={'select-container'}>
+            <label htmlFor={'algorithm-select'}>Algorithm</label>
+            <select id={"algorithm-select"} value={ signatureJWT.algorithm } onChange={ onSelectHandler } >
+              { Object.keys(JWT_SIGNATURE_ALGORITHMS).map((algorithm) =>
+                <option key={algorithm} value={algorithm}>{algorithm}</option>
+              )}
+            </select>
+          </div>
+          <label htmlFor={'secret-key-input'}>Secret key</label>
+          <textarea id={'secret-key-input'} rows={4} placeholder={'Enter your secret key here'}
+                    className={`${!signatureJWT.secret ? 'has-error' : ''}`}
                  value={ signatureJWT.secret }
                  onChange={ onChangeHandler }/>
         </div>

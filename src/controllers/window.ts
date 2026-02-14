@@ -3,12 +3,11 @@ import { register } from 'electron-localshortcut';
 import is from 'electron-is'
 import path from "node:path";
 
+import {T_WidgetsSize} from "@/types/settings";
 import { config } from "@/config";
 import { APP_WIDTH } from "@/constants";
 import { IpcChannels } from "@ipc/channels";
-
 import appSettings from "@controllers/settings";
-
 import trayController from "@controllers/tray";
 
 
@@ -157,7 +156,7 @@ class WinController {
     }
   }
 
-  public resize(size:TWidgetsSize){
+  public resize(size:T_WidgetsSize){
     if(!this.#mainWindow){
       return
     }

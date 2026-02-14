@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 
+import {T_Algorithms} from "@/types/dev-utils";
 import { useDevUtilsStore } from "@/store";
 import '@/styles/code.css'
 import './style.css'
@@ -11,6 +12,7 @@ import './style.css'
 
 const DecodedJWT = () => {
 
+  const signatureJWT = useDevUtilsStore(({signatureJWT}) => signatureJWT)
   const decodedJWT = useDevUtilsStore(({decodedJWT}) => decodedJWT)
   const onDecodedJWTChange = useDevUtilsStore(({onDecodedJWTChange}) => onDecodedJWTChange)
 
@@ -20,6 +22,17 @@ const DecodedJWT = () => {
     fontSize: '0.65rem'
   }), [])
 
+
+  const updateAlgorithm = useCallback((algorithm: T_Algorithms) => {
+    if(decodedJWT.header || decodedJWT.claim){
+      onDecodedJWTChange('header', JSON.stringify({alg: algorithm, typ: 'JWT'}, null, 2))
+    }
+  }, [decodedJWT])
+
+
+  useEffect(() => {
+    updateAlgorithm(signatureJWT.algorithm)
+  }, [signatureJWT.algorithm]);
 
   return (
     <>

@@ -19,65 +19,22 @@
   }
 
   .signature-modal-dialog {
-    position: absolute;
-    inset: 0;
-    top: auto;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    z-index: 5;
-    background: transparent;
-    flex-direction: column;
-    justify-content: stretch;
 
-    &:open {
+    .select-container {
       display: flex;
+      align-items: center;
     }
-  }
-
-  .signature-modal {
-    position: relative;
-    width: 100%;
-    background: var(--main-background);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    gap: 3px;
-    box-shadow: var(--container-box-shadow);
 
     label {
       width: 100%;
       font-size: 0.7rem;
       text-align: left;
     }
-    input {
+    textarea, select {
       font-size: 0.7rem;
-      padding: 4px 6px;
-      outline: none;
-    }
-
-    & .close-button {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      padding: 0;
-      width: 18px;
-      height: 18px;
-      opacity: 0.25;
-      svg {
-        width: 14px;
-        height: 14px;
-      }
+      /*padding: 4px 6px;
+      outline: none;*/
     }
   }
 
-  &.open {
-    .signature-modal {
-      display: flex;
-    }
-  }
 }

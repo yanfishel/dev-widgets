@@ -4,6 +4,7 @@ import {existsSync, mkdirSync, readFileSync, writeFileSync,} from 'node:fs'
 
 import {config} from "@/config";
 import {APP_SETTINGS_DEFAULT, APP_WIDTH} from "@/constants";
+import {T_AppSettings} from "@/types/app";
 
 
 /**
@@ -28,7 +29,7 @@ import {APP_SETTINGS_DEFAULT, APP_WIDTH} from "@/constants";
 class AppSettings {
   static instance: AppSettings | null = null
 
-  #appSetings: IAppSettings | null = null
+  #appSetings: T_AppSettings | null = null
 
   static getInstance() {
     if (!AppSettings.instance) {
@@ -74,7 +75,7 @@ class AppSettings {
     }
   }
 
-  public save(settings: IAppSettings) {
+  public save(settings: T_AppSettings) {
     try {
       writeFileSync(config.appSettingsPath, JSON.stringify(settings, null, 2))
       this.#appSetings = settings
