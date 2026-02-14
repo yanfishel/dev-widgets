@@ -56,14 +56,14 @@ const ActionBar = ({ actionContainer }:IProps) => {
 
   const onClearHandler = useCallback(() => {
     if(actionContainer === 'encoded'){
-      resetEncoded()
+      resetEncoded(encodingType)
     } else if(actionContainer === 'decoded'){
-      resetDecoded()
+      resetDecoded(encodingType)
     } else {
-      reset()
+      reset(encodingType)
     }
     setClearConfirm(false)
-  }, [actionContainer])
+  }, [actionContainer, encodingType])
 
 
   const confirmDialogText = useMemo(() => {

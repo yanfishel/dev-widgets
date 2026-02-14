@@ -2,7 +2,7 @@
 .encode-container {
 
   .action-bar {
-    right: 0;
+    right: -1px;
     margin-top: 20px;
     top: 50%;
     transform: translateY(-50%);
@@ -45,7 +45,7 @@
 
   &.encode-type-JWT {
     & > .action-bar {
-      margin-top: 36px;
+      margin-top: 44px;
     }
   }
 

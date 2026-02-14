@@ -10,38 +10,38 @@ const JwtSignature = () => {
 
   const [open, setOpen] = useState(false)
 
-  const decodedJWT = useDevUtilsStore(({decodedJWT}) => decodedJWT)
+  const signatureJWT = useDevUtilsStore(({signatureJWT}) => signatureJWT)
 
 
   const onChangeHandler = (e: React.SyntheticEvent<HTMLInputElement>) => {
     useDevUtilsStore.setState((state) => ({
       ...state,
-      decodedJWT: {
-        ...state.decodedJWT,
-        signature: (e.target as HTMLInputElement).value
+      signatureJWT: {
+        ...state.signatureJWT,
+        secret: (e.target as HTMLInputElement).value
       }
     }))
   }
 
 
   return (
-    <div className="signature-container">
+    <>
       <button onClick={() => setOpen(true)} className="signature-button" >Signature</button>
 
       <Dialog id={'signature-modal'}
               className={'signature-modal-dialog'}
-              open={open}
+              open={ open }
               onClose={() => setOpen(false)}
               openerClassName={'.signature-button'} >
         <div className="signature-modal">
           <ButtonClose onClick={() => setOpen(false)} />
           <label>Secret key</label>
           <input type={"text"}
-                 value={ decodedJWT.signature }
+                 value={ signatureJWT.secret }
                  onChange={ onChangeHandler }/>
         </div>
       </Dialog>
-    </div>
+    </>
   )
 }
 

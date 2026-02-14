@@ -25,9 +25,10 @@ const EncodedText = () => {
       const header = jwtDecodeHeader(text)
       const claim = jwtDecode(text)
       if(header && claim) {
+        useDevUtilsStore.getState().checkJWTSignature(text)
         useDevUtilsStore.setState(state => ({
           ...state,
-          decodedJWT: { ...state.decodedJWT, ...{ header, claim } }
+          decodedJWT: { ...state.decodedJWT, ...{ header, claim, error: '' } }
         }))
       } else {
         useDevUtilsStore.setState(state => ({...state, decodedJWT: { ...state.decodedJWT, header: '', claim: '', error: 'JWT decode error' }}))

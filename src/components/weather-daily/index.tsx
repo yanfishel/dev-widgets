@@ -27,6 +27,7 @@ const WeatherDaily = () => {
 
   return (
     <div id={ WIDGETS_ID.DAILY_WEATHER }
+         className={'widget-container'}
          style={{
            order: widgetProps.order,
            display: widgetProps.active ? 'block' : 'none'

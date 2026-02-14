@@ -16,6 +16,7 @@ const SystemInfo = () => {
 
   return (
     <div id={WIDGETS_ID.SYSTEM_INFO}
+         className={'widget-container'}
          style={{
            order: widgetProps.order,
            display: widgetProps.active ? 'block' : 'none'

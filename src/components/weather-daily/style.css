@@ -1,9 +1,6 @@
 
 /* -- DAILY WEATHER - */
-#widget-daily-weather:not(input) {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+#widget-daily-weather {
 
   .container {
     min-height: 120px;

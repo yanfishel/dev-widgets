@@ -15,7 +15,7 @@ const DecodedJWT = () => {
   const onDecodedJWTChange = useDevUtilsStore(({onDecodedJWTChange}) => onDecodedJWTChange)
 
   const editorStyle = useMemo(() => ({
-    width: '100%',
+    width: '100%', minHeight: '100%',
     fontFamily: '"Fira code", "Fira Mono", monospace',
     fontSize: '0.65rem'
   }), [])

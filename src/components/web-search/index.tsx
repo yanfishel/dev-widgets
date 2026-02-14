@@ -40,6 +40,7 @@ const WebSearch = () => {
 
   return (
     <div id={ WIDGETS_ID.WEB_SEARCH }
+         className={'widget-container'}
          style={{
            order: widgetProps.order,
            display: widgetProps.active ? 'block' : 'none'

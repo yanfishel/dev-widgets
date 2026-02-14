@@ -1,5 +1,6 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
+import {merge} from "ts-deepmerge";
 
 import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
 import {getStorageItem, setStorageItem, getUserIPLocation} from "@/utils";

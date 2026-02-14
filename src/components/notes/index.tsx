@@ -58,6 +58,7 @@ const Notes = () => {
 
   return (
     <div id={WIDGETS_ID.NOTES}
+         className={'widget-container'}
          style={{
            order: widgetProps.order,
            display: widgetProps.active ? 'block' : 'none'

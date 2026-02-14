@@ -91,10 +91,11 @@ export const getUserIPLocation = async () => {
  * request timestamp and geographic coordinates for the requested location.
  *
  * @param {TLocation} location - The geographic location with latitude (`lat`) and longitude (`lon`) properties.
+ * @param signal
  * @returns {Promise<TWeatherData | undefined>} A promise that resolves to the weather data object containing
  *          detailed weather information or `undefined` if an error occurs during the fetch process.
  */
-export const getWeatherData = async (location:TLocation):Promise<TWeatherData | undefined> => {
+export const getWeatherData = async (location:TLocation, signal?:AbortSignal):Promise<TWeatherData | undefined> => {
   try {
     const apiBaseURL = 'https://api.open-meteo.com/v1/forecast'
     const urlLocation = `latitude=${location.lat}&longitude=${location.lon}`
@@ -102,7 +103,10 @@ export const getWeatherData = async (location:TLocation):Promise<TWeatherData | 
     const urlHourly = 'hourly=weather_code,rain,showers,snowfall,snow_depth,temperature_2m'
     const urlDaily = 'daily=weather_code,temperature_2m_min,temperature_2m_max'
     const apiURL = `${ apiBaseURL }?${ urlLocation }&${ urlCurrent }&${ urlHourly }&${ urlDaily }&timeformat=unixtime&timezone=auto`
-    const response = await fetch(apiURL)
+    const response = await fetch(apiURL, {
+      method: 'GET',
+      signal
+    })
     const responseJson = await response.json()
     return {
       ...responseJson,

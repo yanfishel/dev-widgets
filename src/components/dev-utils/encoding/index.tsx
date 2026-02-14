@@ -12,12 +12,14 @@ import ActionBar from "./action-bar";
 import JwtFooter from "./jwt-footer";
 
 import './style.css'
+import {E_EncodingTypes} from "@/constants";
 
 
-const Encode = () => {
+const Encoding = () => {
 
   const processing = useDevUtilsStore(({processing}) => processing)
   const encodingType = useDevUtilsStore(({encodingType}) => encodingType)
+  const signatureJWT = useDevUtilsStore(({signatureJWT}) => signatureJWT)
 
 
   return (
@@ -48,6 +50,9 @@ const Encode = () => {
 
       <div className={'control-bar encoded'}>
         <div className="title">Encoded</div>
+        { encodingType === E_EncodingTypes.JWT && signatureJWT.error &&
+          <div className="error-message">{ signatureJWT.error }</div>
+        }
       </div>
 
       {/* -- ENCODED CONTAINER - */}
@@ -69,4 +74,4 @@ const Encode = () => {
   )
 }
 
-export default memo(Encode)
+export default memo(Encoding)

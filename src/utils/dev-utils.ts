@@ -45,7 +45,6 @@ export const jwtDecode = (text:string) =>{
 }
 
 export const jwtEncode = async (header:string, claim:string, signSecret:string) => {
-  try {
     const obj = JSON.parse(claim)
     const secret = new TextEncoder().encode(signSecret && signSecret !== '' ? signSecret : DEFAULT_JWT_SECRET)
     let protectedHeader = {alg:'HS256', typ: "JWT"}
@@ -58,7 +57,15 @@ export const jwtEncode = async (header:string, claim:string, signSecret:string) 
       //.setExpirationTime('2h')
       .sign(secret)
     return jwt
+}
+
+export const jwtVerify = async (text:string, signSecret:string) => {
+  try {
+    const secret = new TextEncoder().encode(signSecret && signSecret !== '' ? signSecret : DEFAULT_JWT_SECRET)
+    const verified = await jose.jwtVerify(text, secret)
+    return !!verified
   } catch (e) {
-    console.log('Invalid JSON', e);
+    console.log('Invalid JWT', e);
+    return false
   }
 }

@@ -19,6 +19,7 @@ type TWidget = {
   title: string
   active: boolean
   order: number
+  collapsed?: boolean
 }
 
 type TLocation = {
@@ -75,10 +76,13 @@ type T_NotesStore = {
 }
 
 type T_WeatherStore = {
-  loading: boolean
+  processing: boolean
+  connectionAttempts: number
   error: string|null
   forecast: TWeatherData|null
+  isActive: (location:TLocation) => boolean
   updateWeatherForecast: (force?:boolean)=>Promise<void>
+  getForecast: (location:TLocation)=>Promise<void>
 }
 
 type T_EncodingType = 'JWT' | 'URL' | 'base64' | 'base32'
@@ -96,9 +100,12 @@ type T_EncodingOption = {
 
 type T_DevUtilsStore = {
   processing: boolean
-  encodingType: string
+  selectedTab: number
+  encodingType: T_EncodingType
 
-  decodedJWT: { header:string, claim:string, signature:string, error:string }
+  signatureJWT: { secret:string, error:string }
+
+  decodedJWT: { header:string, claim:string, error:string }
   encodedJWT: { text:string, error:string }
 
   decodedURL: { url:string, error:string }
@@ -107,17 +114,19 @@ type T_DevUtilsStore = {
   decodedFile: { file:File | null, error:string }
   encodedFile: { text:string, error:string }
 
-  reset: ()=>void
-  resetDecoded: ()=>void
-  resetEncoded: ()=>void
+  reset: (encodingType?: T_EncodingType)=>void
+  resetDecoded: (encodingType?: T_EncodingType)=>void
+  resetEncoded: (encodingType?: T_EncodingType)=>void
 
   updateEncodingType: (encodingType:T_EncodingType)=>void
   onDecodedJWTChange: (field:string, code:string)=>void
+  checkJWTSignature: (text:string)=>Promise<void>
 }
 
 interface IWidgetProps {
   active: boolean
   order: number
+  collapsed?: boolean
 }
 
 interface IPackageJson {

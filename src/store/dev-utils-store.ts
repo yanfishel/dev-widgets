@@ -2,8 +2,8 @@ import {createWithEqualityFn} from "zustand/traditional";
 import { persist } from "zustand/middleware";
 import { merge } from "ts-deepmerge";
 
-import {DEFAULT_DECODED_FILE, DEFAULT_DECODED_JWT, DEFAULT_DECODED_URL, DEFAULT_DEV_UTILS_STORE, DEFAULT_ENCODED } from "@/constants";
-import {debounce, jwtEncode} from "@/utils";
+import {DEFAULT_DECODED_FILE, DEFAULT_DECODED_JWT, DEFAULT_DECODED_URL, DEFAULT_DEV_UTILS_STORE, DEFAULT_ENCODED, E_EncodingTypes} from "@/constants";
+import {debounce, jwtEncode, jwtVerify} from "@/utils";
 
 
 export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
@@ -19,47 +19,96 @@ export const useDevUtilsStore = createWithEqualityFn<T_DevUtilsStore>()(
       })
     },
 
-    reset: () => {
-      set({
-        decodedFile: DEFAULT_DECODED_FILE,
-        encodedFile: DEFAULT_ENCODED,
-        decodedJWT: DEFAULT_DECODED_JWT,
-        encodedJWT: DEFAULT_ENCODED,
-        decodedURL: DEFAULT_DECODED_URL,
-        encodedURL: DEFAULT_ENCODED
-      })
+    reset: (encodingType) => {
+      switch ( encodingType) {
+        case E_EncodingTypes.JWT:
+          set({ signatureJWT: {...get().signatureJWT, ...{error:''}}, decodedJWT: DEFAULT_DECODED_JWT, encodedJWT: DEFAULT_ENCODED })
+          break
+        case E_EncodingTypes.URL:
+          set({ decodedURL: DEFAULT_DECODED_URL, encodedURL: DEFAULT_ENCODED })
+          break
+        case E_EncodingTypes.base64 || E_EncodingTypes.base32:
+          set({ decodedFile: DEFAULT_DECODED_FILE, encodedFile: DEFAULT_ENCODED })
+          break
+        default:
+          set({
+            decodedFile: DEFAULT_DECODED_FILE,
+            encodedFile: DEFAULT_ENCODED,
+            decodedJWT: DEFAULT_DECODED_JWT,
+            encodedJWT: DEFAULT_ENCODED,
+            decodedURL: DEFAULT_DECODED_URL,
+            encodedURL: DEFAULT_ENCODED
+          })
+      }
     },
 
-    resetDecoded: () => {
-      set({
-        decodedFile: DEFAULT_DECODED_FILE,
-        decodedJWT: DEFAULT_DECODED_JWT,
-        decodedURL: DEFAULT_DECODED_URL
-      })
+    resetDecoded: (encodingType) => {
+      switch ( encodingType) {
+        case E_EncodingTypes.JWT:
+          set({ signatureJWT: {...get().signatureJWT, ...{error:''}}, decodedJWT: DEFAULT_DECODED_JWT })
+          break
+        case E_EncodingTypes.URL:
+          set({ decodedURL: DEFAULT_DECODED_URL })
+          break
+        case E_EncodingTypes.base64 || E_EncodingTypes.base32:
+          set({ decodedFile: DEFAULT_DECODED_FILE })
+          break
+        default:
+          set({
+            decodedFile: DEFAULT_DECODED_FILE,
+            decodedJWT: DEFAULT_DECODED_JWT,
+            decodedURL: DEFAULT_DECODED_URL
+          })
+      }
     },
 
-    resetEncoded: () => {
-      set({
-        encodedFile: DEFAULT_ENCODED,
-        encodedJWT: DEFAULT_ENCODED,
-        encodedURL: DEFAULT_ENCODED
-      })
+    resetEncoded: (encodingType) => {
+      switch ( encodingType) {
+        case E_EncodingTypes.JWT:
+          set({ signatureJWT: {...get().signatureJWT, ...{error:''}}, encodedJWT: DEFAULT_ENCODED })
+          break
+        case E_EncodingTypes.URL:
+          set({ encodedURL: DEFAULT_ENCODED })
+          break
+        case E_EncodingTypes.base64 || E_EncodingTypes.base32:
+          set({ encodedFile: DEFAULT_ENCODED })
+          break
+        default:
+          set({
+            encodedFile: DEFAULT_ENCODED,
+            encodedJWT: DEFAULT_ENCODED,
+            encodedURL: DEFAULT_ENCODED
+          })
+      }
     },
 
     onDecodedJWTChange: ( field, code ) => {
       set({
+        signatureJWT: {...get().signatureJWT, ...{error:''}},
         decodedJWT: {...get().decodedJWT, ...{[field]: code, error:''}}
       })
       debounce(async ()=>{
-        const { decodedJWT } = get()
-        const { header, claim, signature } = decodedJWT
-        const text = await jwtEncode(header, claim, signature)
-        if(text) {
-          set({ encodedJWT: { text, error:'' }})
-        } else {
-          set({ encodedJWT: { text:'', error:'Invalid JSON' }})
-        }
+        const { decodedJWT, signatureJWT } = get()
+        const { header, claim } = decodedJWT
+        await jwtEncode(header, claim, signatureJWT.secret)
+              .then(res => {
+                set({encodedJWT: {text: res, error: ''}})
+              })
+              .catch(e => {
+                console.log(e)
+                set({ encodedJWT: { text:'', error:`Invalid JSON - ${e.message}` }})
+              })
       }, 250)()
+    },
+
+    checkJWTSignature: async (text:string) => {
+      const { signatureJWT } = get()
+      const { secret } = signatureJWT
+      if(!secret) {
+        set({ signatureJWT: {...signatureJWT, ...{ error:'Signature secret not provided'}} })
+      }
+      const act = await jwtVerify(text, signatureJWT.secret)
+      set({ signatureJWT: {...signatureJWT, ...{ error: act ? '' : 'Signature verification failed' }}})
     }
 
   }),

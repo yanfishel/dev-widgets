@@ -15,8 +15,8 @@ export const useWidgetProps = ({ widgetId }: IProps) => {
   useEffect(() => {
     const widget = widgets.find(widget => widget.id === widgetId)
     if(!widget) return
-    const { active, order } = widget
-    setWidgetProps({ active, order })
+    const { active, order, collapsed } = widget
+    setWidgetProps({ active, order, collapsed })
   }, [widgets])
 
 

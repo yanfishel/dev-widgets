@@ -1,0 +1,17 @@
+
+.encode-container {
+  &.encode-type-JWT {
+    height: calc(100% - 10px) !important;
+    .encode-footer {
+      left: 0;
+      right: calc(var(--action-bar-padding) - 4px);
+      bottom: -15px;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 5px;
+      padding: 0;
+    }
+  }
+}

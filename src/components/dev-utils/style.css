@@ -1,5 +1,5 @@
 :root {
-  --dev-utils-widget-height: 336px;
+  --dev-utils-widget-height: 340px;
 }
 
 #widget-dev-utils {
@@ -7,14 +7,14 @@
 
   & > .container {
     height: var(--dev-utils-widget-height);
-    padding: 8px 12px;
+    padding: 8px 12px 15px;
   }
 
   .react-tabs {
     height: 100%;
 
     .react-tabs__tab-panel {
-      height: calc(var(--dev-utils-widget-height) - 26px - 16px);
+      height: calc(var(--dev-utils-widget-height) - 26px - 8px - 15px);
 
       section {
         height: 100%;

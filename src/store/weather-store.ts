@@ -9,14 +9,12 @@ import { getWeatherData} from "@/utils";
 export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
   persist( (set, get):T_WeatherStore => ({
 
-    loading: false,
+    processing: false,
+    connectionAttempts: 0,
     error: null,
     forecast: null,
 
-
-    updateWeatherForecast: async (force = false) => {
-      const { forecast } = get()
-
+    isActive: () => {
       const weather = useSettingsStore.getState().weather
       const widgets = useSettingsStore.getState().widgets
       const weatherWidget = widgets.find(w => w.id === 'widget-daily-weather')
@@ -29,6 +27,15 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
           error: !isLocationSet ? 'Error getting Location' : null,
           forecast: null
         })
+        return false
+      }
+      return true
+    },
+
+    updateWeatherForecast: async (force = false) => {
+      const { forecast, isActive, getForecast } = get()
+      const location = useSettingsStore.getState().userLocation
+      if( !isActive(location) ) {
         return
       }
 
@@ -41,18 +48,34 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
         return
       }
 
-      const weatherData = await getWeatherData(location)
-      if(weatherData){
-        set({
-          error: null,
-          forecast: weatherData
-        })
+      await getForecast(location)
+    },
+
+    getForecast: async (location) => {
+      if(get().processing){
         return
-      } else {
-        set({
-          error: 'Error getting weather data',
-          forecast: null
-        })
+      }
+      set({ error: null, processing: true })
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 10000)
+      console.log('Get Forecast'+new Date().toLocaleTimeString(), location.lat, location.lon)
+      try {
+        const forecast = await getWeatherData(location, controller.signal)
+        if(forecast) {
+          set({ processing:false, connectionAttempts:0, forecast })
+        }
+      } catch (e) {
+        const { connectionAttempts, getForecast } = get()
+        console.log('Error getting weather data. Connection Attempt:'+connectionAttempts, e)
+        if(connectionAttempts < 3) {
+          set({ connectionAttempts: connectionAttempts + 1 })
+          setTimeout( getForecast, 3_000 )
+        } else {
+          set({ connectionAttempts:0, error: 'Error getting weather data', forecast: null })
+        }
+      } finally {
+        clearTimeout( timeout )
+        set({ processing: false })
       }
     }
 

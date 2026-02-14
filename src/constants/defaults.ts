@@ -1,4 +1,4 @@
-import { WIDGETS_ID} from "@/constants";
+import {WIDGETS_ID} from "@/constants";
 
 export const APP_WIDTH = {
   SMALL: 300,
@@ -24,8 +24,13 @@ export const DEFAULT_LOCATION = {
 export const DEFAULT_NOTE = 'TYPE YOUR NOTES HERE'
 
 /* -- WIDGET DEV UTILS - */
-export const EXAMPLE_JWT_HEADER = `{\n  "alg": "HS256",\n  "typ": "JWT"\n}`
-export const EXAMPLE_JWT_CLAIM = `{\n  "jti": "96492d59-0ad5-4c00-892d-590ad5ac00f3",\n  "sub": "1234567890",\n  "name": "John Doe",\n  "iat": 1681040515\n}`
+export enum E_EncodingTypes {
+  JWT = 'JWT',
+  URL = 'URL',
+  base64 = 'base64',
+  base32 = 'base32'
+}
+
 export const DEFAULT_JWT_SECRET = 's3cre!'
 export const DEFAULT_ENCODED = {
   text:'',
@@ -34,15 +39,17 @@ export const DEFAULT_ENCODED = {
 export const DEFAULT_DECODED_JWT = {
   header:'',
   claim:'',
-  signature: DEFAULT_JWT_SECRET,
   error:''
 }
+export const DEFAULT_SIGNATURE_JWT = { secret:DEFAULT_JWT_SECRET, error:'' }
 export const DEFAULT_DECODED_URL = { url:'', error:'' }
 export const DEFAULT_DECODED_FILE:{file:File|null, error:string} = { file:null, error:'' }
 
 export const DEFAULT_DEV_UTILS_STORE = {
   processing: false,
-  encodingType: 'JWT',
+  selectedTab: 0,
+  encodingType: E_EncodingTypes.JWT,
+  signatureJWT: DEFAULT_SIGNATURE_JWT,
   decodedJWT: DEFAULT_DECODED_JWT,
   encodedJWT: DEFAULT_ENCODED,
   decodedURL: DEFAULT_DECODED_URL,
@@ -67,36 +74,42 @@ export const WIDGETS_SETTINGS_DEFAULT:IWidgetsSettings = {
       id: WIDGETS_ID.DAILY_WEATHER,
       title: 'Daily Weather',
       active: true,
+      collapsed: false,
       order: 1
     },
     {
       id: WIDGETS_ID.WEB_SEARCH,
       title: 'Web Search',
       active: true,
+      collapsed: false,
       order: 2
     },
     {
       id: WIDGETS_ID.SYSTEM_INFO,
       title: 'System Info',
       active: true,
+      collapsed: false,
       order: 3
     },
     {
       id: WIDGETS_ID.MOCK_SERVER,
       title: 'Mock Server',
       active: true,
+      collapsed: false,
       order: 4
     },
     {
       id: WIDGETS_ID.DEV_UTILS,
       title: 'Dev Utils',
       active: true,
+      collapsed: false,
       order: 5
     },
     {
       id: WIDGETS_ID.NOTES,
       title: 'Notes',
       active: true,
+      collapsed: false,
       order: 6
     }
   ]
