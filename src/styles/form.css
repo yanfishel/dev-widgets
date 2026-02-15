@@ -16,6 +16,10 @@ select {
   }
 }
 
+label {
+  cursor: pointer;
+}
+
 input, textarea {
   outline: none;
   resize: none;

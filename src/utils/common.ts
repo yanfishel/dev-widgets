@@ -14,3 +14,13 @@ export const debounce = <T extends (...args: any[]) => void>(
     timeoutId = setTimeout(() => func(...args), delay)
   }
 }
+
+export const copyToClipboard = async (text: string, onSuccess?:()=>void, onError?:()=>void) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    if(onSuccess) onSuccess()
+  } catch (err) {
+    if(onError) onError()
+    console.error('Failed to copy: ', err);
+  }
+}

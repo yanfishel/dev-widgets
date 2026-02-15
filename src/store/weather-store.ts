@@ -70,7 +70,7 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
         console.log('Error getting weather data. Connection Attempt:'+connectionAttempts, e)
         if(connectionAttempts < 3) {
           set({ connectionAttempts: connectionAttempts + 1 })
-          setTimeout( getForecast, 3_000 )
+          setTimeout( ()=>getForecast(location), 3_000 )
         } else {
           set({ connectionAttempts:0, error: 'Error getting weather data', forecast: null })
         }

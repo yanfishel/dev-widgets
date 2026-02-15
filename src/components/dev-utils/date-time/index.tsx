@@ -3,13 +3,15 @@ import {TZDate} from "@date-fns/tz";
 
 import {T_EncodingType} from "@/types/dev-utils";
 import {DATE_FORMAT_STANDARDS} from "@/constants";
-import {formatDateTimeISOString} from "@/utils";
-import {ButtonCopy} from "@components/ui";
+import {copyToClipboard, formatDateTimeISOString} from "@/utils";
+import {ButtonCopy, WidgetToaster} from "@components/ui";
 import DateTimeTable from "./date-time-table";
 import CurrentTimeTable from "./current-time-table";
 import TimeZoneTable from "./time-zone-table";
 
 import './style.css'
+import {toast} from "react-hot-toast";
+import MillisecondsTable from "@components/dev-utils/date-time/milliseconds-table";
 
 
 const DateTime = () => {
@@ -17,27 +19,21 @@ const DateTime = () => {
   const [format, setFormat] = useState(DATE_FORMAT_STANDARDS[0].name)
   const [timeZone, setTimeZone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
-  const [seconds, setSeconds] = useState(0)
   const [milliseconds, setMilliseconds] = useState(0)
   const [tzDate, setTzDate] = useState<TZDate>(new TZDate())
   const [addOffset, setAddOffset] = useState(false)
   const [addTimeZone, setAddTimeZone] = useState(false)
+  const [helpText, setHelpText] = useState('')
   const [resultString, setResultString] = useState('')
 
 
   const setFormatedString = useCallback((milliseconds:number) => {
     const formated = formatDateTimeISOString(milliseconds, format, addOffset, addTimeZone, timeZone)
-    setResultString(formated.formattedString)
+    const { formattedString, helpText } = formated
+    setResultString(formattedString)
+    setHelpText(helpText)
   }, [format, addOffset, addTimeZone, timeZone])
 
-
-  const setNow = useCallback(() => {
-    const date = new Date();
-    const milliseconds = date.getTime();
-    const seconds = Math.floor(milliseconds / 1000);
-    setSeconds(seconds)
-    setMilliseconds(milliseconds)
-  }, [timeZone])
 
   const setTimeZoneDate = useCallback((milliseconds:number) => {
     const tzDate = new TZDate(milliseconds, timeZone)
@@ -45,16 +41,12 @@ const DateTime = () => {
   }, [timeZone])
 
 
-  const onChangeHandler = (name:string, value:number) => {
-    if(name === 'seconds') {
-      setSeconds(value)
-      const milliseconds = value * 1000;
-      setMilliseconds(milliseconds)
-    } else if(name === 'milliseconds') {
-      setMilliseconds(value)
-      const seconds = Math.floor(value / 1000);
-      setSeconds(seconds)
-    }
+  const onCopyClickHandler = async (str:string) => {
+    if(!str)  return
+    const toasterId = `toaster-date-time`
+    await copyToClipboard( str,
+      () => toast.success('Copied!', { toasterId }),
+      () => toast.error('Failed to copy!', { toasterId }) )
   }
 
 
@@ -66,48 +58,21 @@ const DateTime = () => {
     setTimeZoneDate(milliseconds)
   }, [milliseconds])
 
-  useEffect(() => {
-    setNow()
-  }, [])
-
-
 
   return (
     <div className="date-time-container">
 
-      <CurrentTimeTable />
+      <WidgetToaster toasterId={'toaster-date-time'} />
 
-      <table className="convert-time">
-        <tbody>
-        <tr>
-          <td>Seconds</td>
-          <td>Milliseconds</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" name="seconds"
-                   value={ seconds }
-                   onChange={(e)=>onChangeHandler('seconds', Number(e.target.value))} />
-            <span />
-          </td>
-          <td>
-            <input type="text" name="milliseconds"
-                   value={ milliseconds }
-                   onChange={(e)=>onChangeHandler('milliseconds', Number(e.target.value))} />
-            <span />
-          </td>
-          <td rowSpan={2}>
-            <button onClick={ setNow }>Now</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <CurrentTimeTable onCopyHandler={ onCopyClickHandler } />
+
+      <MillisecondsTable onChangeHandler={ setMilliseconds } />
 
       <TimeZoneTable value={timeZone} onChange={setTimeZone} />
 
       <DateTimeTable tzDate={tzDate} />
 
-      <p className="help-text"></p>
+      <p className="help-text">{ helpText }</p>
 
       <table className="convert-time">
         <tbody>
@@ -149,7 +114,7 @@ const DateTime = () => {
         <tr>
           <td><input type="text" name="date-time-string" readOnly value={ resultString } /></td>
           <td>
-            <ButtonCopy onClick={ ()=>null }/>
+            <ButtonCopy onClick={ ()=> onCopyClickHandler(resultString) }/>
           </td>
         </tr>
         </tbody>

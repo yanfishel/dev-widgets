@@ -39,12 +39,11 @@ export const formatBytesMetric = (bytes:number, decimals = 2) => {
 }
 
 export const formatDateTimeISOString = (milliseconds:number, ISOName:string, addOffset:boolean, addTimeZone:boolean, timeZone?:string) => {
-  const date = new Date(+milliseconds)
-
-  const helpText = `${format(date, 'eeee')}, ${format(date, 'Do')} day, ${format(date, 'wo')} week, ${format(date, 'qqqq')}`
-
+  const date = new Date(milliseconds)
+  if(!date) {
+    return { helpText: '', formattedString: ''}
+  }
   const standard = DATE_FORMAT_STANDARDS.find(format => format.name === ISOName)
-
   let formattedString:string
   if(standard?.name === 'ISO-8601-date-time-UTC'){
     const y = date.getUTCFullYear()
@@ -60,6 +59,8 @@ export const formatDateTimeISOString = (milliseconds:number, ISOName:string, add
     const timezone = `${addTimeZone ? `[${timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone}]` : ''}`
     formattedString = format(date, template) + timezone
   }
+
+  const helpText = `${format(date, 'eeee')}, ${format(date, 'Do')} day, ${format(date, 'wo')} week, ${format(date, 'qqqq')}`
 
   return {
     helpText,

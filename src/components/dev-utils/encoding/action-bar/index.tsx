@@ -3,7 +3,7 @@ import {toast} from "react-hot-toast";
 
 import {useDevUtilsStore} from "@/store";
 import {E_EncodingTypes} from "@/enums";
-import {downloadFile} from "@/utils";
+import {copyToClipboard, downloadFile} from "@/utils";
 import {ButtonCopy, ButtonDownload, ButtonTrash, ConfirmDialog} from "@components/ui";
 
 import './style.css'
@@ -43,13 +43,11 @@ const ActionBar = ({ actionContainer }:IProps) => {
     if(!text) {
       return
     }
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success('Copied!', {toasterId: `toaster-${actionContainer}`})
-    } catch (err) {
-      toast.error('Failed to copy!', {toasterId: `toaster-${actionContainer}`})
-      console.error('Failed to copy: ', err);
-    }
+    const toasterId = `toaster-${actionContainer}`
+    await copyToClipboard(text,
+      ()=>toast.success('Copied!', { toasterId }),
+      ()=>toast.error('Failed to copy!', { toasterId }))
+
   }, [actionContainer, encodingType, encodedJWT.text, encodedURL.text, encodedFile.text, decodedURL.url, decodedJWT.header, decodedJWT.claim])
 
   const onClearClickHandler = () => setClearConfirm(true)

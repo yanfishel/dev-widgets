@@ -98,25 +98,25 @@ export const getUserIPLocation = async () => {
  *          detailed weather information or `undefined` if an error occurs during the fetch process.
  */
 export const getWeatherData = async (location:T_Location, signal?:AbortSignal):Promise<TWeatherData | undefined> => {
-  try {
-    const apiBaseURL = 'https://api.open-meteo.com/v1/forecast'
-    const urlLocation = `latitude=${location.lat}&longitude=${location.lon}`
-    const urlCurrent = 'current=temperature_2m,rain,showers,weather_code,is_day,snowfall'
-    const urlHourly = 'hourly=weather_code,rain,showers,snowfall,snow_depth,temperature_2m'
-    const urlDaily = 'daily=weather_code,temperature_2m_min,temperature_2m_max'
-    const apiURL = `${ apiBaseURL }?${ urlLocation }&${ urlCurrent }&${ urlHourly }&${ urlDaily }&timeformat=unixtime&timezone=auto`
-    const response = await fetch(apiURL, {
-      method: 'GET',
-      signal
-    })
-    const responseJson = await response.json()
-    return {
-      ...responseJson,
-      timestamp: new Date().getTime(),
-      lat: location.lat,
-      lon: location.lon
-    }
-  } catch (error) {
-    console.log('Error fetching weather data:', error)
+  const apiURL = weatherApiUrl(location)
+  const response = await fetch(apiURL, {
+    method: 'GET',
+    signal
+  })
+  const responseJson = await response.json()
+  return {
+    ...responseJson,
+    timestamp: new Date().getTime(),
+    lat: location.lat,
+    lon: location.lon
   }
+}
+
+export const weatherApiUrl = (location:T_Location) => {
+  const apiBaseURL = 'https://api.open-meteo.com/v1/forecast'
+  const urlLocation = `latitude=${location.lat}&longitude=${location.lon}`
+  const urlCurrent = 'current=temperature_2m,rain,showers,weather_code,is_day,snowfall'
+  const urlHourly = 'hourly=weather_code,rain,showers,snowfall,snow_depth,temperature_2m'
+  const urlDaily = 'daily=weather_code,temperature_2m_min,temperature_2m_max'
+  return `${ apiBaseURL }?${ urlLocation }&${ urlCurrent }&${ urlHourly }&${ urlDaily }&timeformat=unixtime&timezone=auto`
 }

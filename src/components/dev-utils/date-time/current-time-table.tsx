@@ -4,7 +4,10 @@ import {useGlobalStore} from "@/store";
 import {ButtonCopy} from "@components/ui";
 
 
-const CurrentTimeTable = () => {
+interface IProps {
+  onCopyHandler: (str:string)=>void
+}
+const CurrentTimeTable = ({ onCopyHandler }:IProps) => {
 
   const [current, setCurrent] = useState<{seconds:number, milliseconds:number}>({seconds:0, milliseconds:0})
 
@@ -27,14 +30,14 @@ const CurrentTimeTable = () => {
         <td>Unix Seconds:</td>
         <td><input type="text" readOnly value={ current.seconds } /></td>
         <td>
-          <ButtonCopy onClick={ ()=>null }/>
+          <ButtonCopy onClick={ ()=> onCopyHandler(current.seconds.toString()) }/>
         </td>
       </tr>
       <tr>
         <td>Unix Milliseconds:</td>
         <td><input type="text" readOnly value={ current.milliseconds } /></td>
         <td>
-          <ButtonCopy onClick={ ()=>null }/>
+          <ButtonCopy onClick={ ()=> onCopyHandler(current.milliseconds.toString()) }/>
         </td>
       </tr>
       </tbody>

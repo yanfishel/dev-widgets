@@ -8,6 +8,7 @@ import {useDevUtilsStore} from "@/store";
 import {DateTimeIcon, EncodeIcon, ColorIcon, DuckIcon} from "@/assets";
 import Encoding from "./encoding";
 import DateTime from "./date-time";
+import Color from "./color";
 
 import './style.css'
 
@@ -48,7 +49,7 @@ const DevUtils = () => {
             <DateTime />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <Color />
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>
