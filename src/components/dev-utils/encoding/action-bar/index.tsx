@@ -1,8 +1,8 @@
 import React, {memo, useCallback, useMemo, useState} from 'react';
 import {toast} from "react-hot-toast";
 
-import {E_EncodingTypes} from "@/constants";
 import {useDevUtilsStore} from "@/store";
+import {E_EncodingTypes} from "@/enums";
 import {downloadFile} from "@/utils";
 import {ButtonCopy, ButtonDownload, ButtonTrash, ConfirmDialog} from "@components/ui";
 

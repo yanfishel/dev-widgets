@@ -5,6 +5,7 @@ import {T_Location} from "@/types/weather";
 import {T_SettingsStore} from "@/types/settings";
 import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
 import {getStorageItem, setStorageItem, getUserIPLocation} from "@/utils";
+import {merge} from "ts-deepmerge";
 
 
 
@@ -48,6 +49,14 @@ export const useSettingsStore = createWithEqualityFn<T_SettingsStore>()(
 
   }),
   {
-    name: 'store-widgets-settings'
+    name: 'store-widgets-settings',
+    /*merge: (persisted:T_SettingsStore, current) => {
+      console.log(persisted, current);
+      /!*if(persisted.widgets.length === 0) {
+        persisted.widgets = WIDGETS_SETTINGS_DEFAULT.widgets
+      }*!/
+      return current
+      //return merge(persisted as T_SettingsStore, current, {mergeArrays:false, uniqueArrayItems:true})
+    }*/
   })
 )

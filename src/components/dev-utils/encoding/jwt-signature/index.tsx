@@ -1,10 +1,10 @@
 import React, {memo, useState} from 'react';
 
 import {useDevUtilsStore} from "@/store";
-import {Dialog, ButtonClose} from "@components/ui";
-
-import {JWT_SIGNATURE_ALGORITHMS, SECRET_KEYS} from "@/constants";
+import { SECRET_KEYS} from "@/constants";
+import {E_SignatureAlgorithms} from "@/enums";
 import {T_Algorithms} from "@/types/dev-utils";
+import {Dialog, ButtonClose} from "@components/ui";
 
 import './style.css'
 
@@ -55,7 +55,7 @@ const JwtSignature = () => {
           <div className={'select-container'}>
             <label htmlFor={'algorithm-select'}>Algorithm</label>
             <select id={"algorithm-select"} value={ signatureJWT.algorithm } onChange={ onSelectHandler } >
-              { Object.keys(JWT_SIGNATURE_ALGORITHMS).map((algorithm) =>
+              { Object.keys(E_SignatureAlgorithms).map((algorithm) =>
                 <option key={algorithm} value={algorithm}>{algorithm}</option>
               )}
             </select>

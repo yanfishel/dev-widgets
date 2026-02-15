@@ -1,7 +1,9 @@
-import {E_EncodingTypes, JWT_SIGNATURE_ALGORITHMS, SECRET_KEYS} from "./dev-utils";
-import {WIDGETS_ID} from "./app";
 import {T_WidgetsSettings} from "@/types/settings";
 import {T_AppSettings} from "@/types/app";
+import {E_EncodingTypes, E_SignatureAlgorithms} from "@/enums";
+import { SECRET_KEYS} from "./dev-utils";
+import {WIDGETS_ID} from "./app";
+
 
 export const APP_WIDTH = {
   SMALL: 300,
@@ -37,8 +39,8 @@ export const DEFAULT_DECODED_JWT = {
   error:''
 }
 export const DEFAULT_SIGNATURE_JWT = {
-  algorithm: JWT_SIGNATURE_ALGORITHMS.HS256,
-  secret: SECRET_KEYS[JWT_SIGNATURE_ALGORITHMS.HS256],
+  algorithm: E_SignatureAlgorithms.HS256,
+  secret: SECRET_KEYS[E_SignatureAlgorithms.HS256],
   error:''
 }
 export const DEFAULT_DECODED_URL = {

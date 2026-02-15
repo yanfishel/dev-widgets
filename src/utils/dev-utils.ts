@@ -68,3 +68,26 @@ export const jwtVerify = async (text:string, signSecret:string) => {
     return false
   }
 }
+
+
+export const validNamedField = (name:string, value:string) => {
+  const parsedValue = parseInt(value)
+  let isValid = !isNaN(parsedValue)
+  switch (name) {
+    case 'year': isValid = parsedValue >= 1970 && parsedValue <= 9999; break;
+    case 'month': isValid = parsedValue >= 1 && parsedValue <= 12; break;
+    case 'day': isValid = parsedValue >= 1 && parsedValue <= 31; break;
+    case 'hour': isValid = parsedValue >= 0 && parsedValue <= 23; break;
+    case 'minute': isValid = parsedValue >= 0 && parsedValue <= 59; break;
+    case 'second': isValid = parsedValue >= 0 && parsedValue <= 59; break;
+    default: break;
+  }
+  return isValid
+}
+
+export const validField = (event:KeyboardEvent|InputEvent|Partial<InputEvent>) => {
+    const target = event.target as HTMLInputElement
+    const name = target.name;
+    const parsedValue = parseInt(target.value)
+    return validNamedField(name, parsedValue.toString())
+}

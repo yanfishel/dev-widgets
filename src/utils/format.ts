@@ -1,3 +1,5 @@
+import {format} from "date-fns";
+import {DATE_FORMAT_STANDARDS} from "@/constants";
 
 export const formatDate = (date: Date, options:Intl.DateTimeFormatOptions, locale = 'en-US') => {
   return new Intl.DateTimeFormat(locale, options).format(date)
@@ -34,4 +36,44 @@ export const formatBytesMetric = (bytes:number, decimals = 2) => {
   const formattedSize = (bytes / Math.pow(base, safeUnitIndex)).toFixed(dm);
 
   return `${parseFloat(formattedSize)} ${units[safeUnitIndex]}`;
+}
+
+export const formatDateTimeISOString = (milliseconds:number, ISOName:string, addOffset:boolean, addTimeZone:boolean, timeZone?:string) => {
+  const date = new Date(+milliseconds)
+
+  const helpText = `${format(date, 'eeee')}, ${format(date, 'Do')} day, ${format(date, 'wo')} week, ${format(date, 'qqqq')}`
+
+  const standard = DATE_FORMAT_STANDARDS.find(format => format.name === ISOName)
+
+  let formattedString:string
+  if(standard?.name === 'ISO-8601-date-time-UTC'){
+    const y = date.getUTCFullYear()
+    const m = (date.getUTCMonth()+1).toString().padStart(2, '0')
+    const d = date.getUTCDate().toString().padStart(2, '0')
+    const H = date.getUTCHours().toString().padStart(2, '0')
+    const M = date.getUTCMinutes().toString().padStart(2, '0')
+    const s = date.getUTCSeconds().toString().padStart(2, '0')
+    const ms = date.getUTCMilliseconds().toString().padStart(3, '0')
+    formattedString = `${y}-${m}-${d}T${H}:${M}:${s}.${ms}Z`;
+  } else {
+    const template = `${standard?.format ?? DATE_FORMAT_STANDARDS[0].format}${addOffset ? 'xxx' : ''}`
+    const timezone = `${addTimeZone ? `[${timeZone ?? Intl.DateTimeFormat().resolvedOptions().timeZone}]` : ''}`
+    formattedString = format(date, template) + timezone
+  }
+
+  return {
+    helpText,
+    formattedString
+  }
+}
+
+export const dateObjMap = (date:Date) => {
+  return ({
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    second: date.getSeconds()
+  })
 }

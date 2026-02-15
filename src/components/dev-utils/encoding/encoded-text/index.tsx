@@ -1,7 +1,8 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {E_EncodingTypes} from "@/constants";
+
 import {useDevUtilsStore} from "@/store";
+import {E_EncodingTypes} from "@/enums";
 import {createFileFromBase64, debounce, jwtDecode, jwtDecodeHeader, textareaValue} from "@/utils";
 
 import './style.css'

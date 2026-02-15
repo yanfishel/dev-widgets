@@ -1,5 +1,5 @@
 
-export const DATE_FORMAT_STANDARTS = [
+export const DATE_FORMAT_STANDARDS = [
   {  name: 'ISO-8601-date-time', format:`yyyy-MM-dd'T'HH:mm:ss.SSS`, label:'ISO-8601 date time' },
   {  name: 'ISO-8601-date-time-UTC', format:`yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`, label:'ISO-8601 date time UTC'},
   {  name: 'ISO-8601-date', format:`yyyy-MM-dd`, label:'ISO-8601 date'},

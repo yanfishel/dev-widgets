@@ -10,13 +10,13 @@ import WeatherCurrent from "@components/weather-current";
 import WeatherDaily from "@components/weather-daily";
 import WebSearch from "@components/web-search";
 import SystemInfo from "@components/system-info";
+import DevUtils from "@components/dev-utils";
 import Notes from "@components/notes";
 
 import '@/styles/main.css'
 import '@/styles/dialog.css'
 import '@/styles/tabs.css'
 import '@/styles/form.css'
-import DevUtils from "@components/dev-utils";
 
 
 

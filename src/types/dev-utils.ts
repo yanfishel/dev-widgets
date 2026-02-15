@@ -1,4 +1,4 @@
-import {E_EncodingTypes, JWT_SIGNATURE_ALGORITHMS} from "@/constants";
+import {E_SignatureAlgorithms, E_EncodingTypes} from "@/enums";
 
 
 export type T_EncodingType = `${E_EncodingTypes}`
@@ -14,7 +14,7 @@ export type T_EncodingOption = {
   options: T_EncodingTypes[]
 }
 
-export type T_Algorithms = `${JWT_SIGNATURE_ALGORITHMS}`
+export type T_Algorithms = `${E_SignatureAlgorithms}`
 
 export type T_DevUtilsStore = {
   processing: boolean

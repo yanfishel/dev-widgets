@@ -7,6 +7,7 @@ import {WIDGETS_ID} from "@/constants";
 import {useDevUtilsStore} from "@/store";
 import {DateTimeIcon, EncodeIcon, ColorIcon, DuckIcon} from "@/assets";
 import Encoding from "./encoding";
+import DateTime from "./date-time";
 
 import './style.css'
 
@@ -44,7 +45,7 @@ const DevUtils = () => {
             <Encoding />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <DateTime />
           </TabPanel>
           <TabPanel>
             <h2>Any content 2</h2>

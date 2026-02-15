@@ -1,13 +1,11 @@
-import {T_EncodingTypes} from "@/types/dev-utils";
+//import {T_EncodingTypes} from "@/types/dev-utils";
 
-export enum E_EncodingTypes {
-  JWT = 'JWT',
-  URL = 'URL',
-  base64 = 'base64',
-  base32 = 'base32'
-}
 
-export const ENCODING_TYPES: T_EncodingTypes[] = [
+
+import { T_EncodingTypes } from "@/types/dev-utils";
+import { E_EncodingTypes } from "@/enums";
+
+export const ENCODING_TYPES:T_EncodingTypes[] = [
   { label: 'JSON Web Token (JWT)', value: E_EncodingTypes.JWT, group: 'text' },
   { label: 'URL', value: E_EncodingTypes.URL, group: 'text' },
   { label: 'Base64', value: E_EncodingTypes.base64, group: 'file' },
@@ -17,14 +15,7 @@ export const ENCODING_TYPES: T_EncodingTypes[] = [
 
 export const EXAMPLE_JWT_CLAIM = `{\n  "jti": "96492d59-0ad5-4c00-892d-590ad5ac00f3",\n  "sub": "1234567890",\n  "name": "John Doe",\n  "iat": 1681040515\n}`
 
-export enum JWT_SIGNATURE_ALGORITHMS {
-  HS256='HS256',
-  HS384='HS384',
-  HS512='HS512',
-  RS256='RS256',
-  RS384='RS384',
-  RS512='RS512'
-}
+
 
 
 export const PUBLIC_KEY_RS = `-----BEGIN PRIVATE KEY-----

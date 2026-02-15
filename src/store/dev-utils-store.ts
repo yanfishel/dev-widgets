@@ -3,7 +3,8 @@ import { persist } from "zustand/middleware";
 import { merge } from "ts-deepmerge";
 
 import {T_DevUtilsStore} from "@/types/dev-utils";
-import {DEFAULT_DECODED_FILE, DEFAULT_DECODED_JWT, DEFAULT_DECODED_URL, DEFAULT_DEV_UTILS_STORE, DEFAULT_ENCODED, E_EncodingTypes} from "@/constants";
+import {DEFAULT_DECODED_FILE, DEFAULT_DECODED_JWT, DEFAULT_DECODED_URL, DEFAULT_DEV_UTILS_STORE, DEFAULT_ENCODED} from "@/constants";
+import {E_EncodingTypes} from "@/enums";
 import {debounce, jwtEncode, jwtVerify} from "@/utils";
 
 

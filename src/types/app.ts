@@ -11,6 +11,7 @@ export type T_AppSettings = {
 
 export type T_Store = {
   selectedTheme: T_Theme
+  globalDateTime: Date
   displayDate: { date: string, shortdate:string, weekday: string }
   displayTime: { hours: number, minutes: number, seconds: number }
   appTimer: () => void

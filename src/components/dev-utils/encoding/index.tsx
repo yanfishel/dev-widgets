@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import {useDevUtilsStore} from "@/store";
-import {E_EncodingTypes} from "@/constants";
+import {E_EncodingTypes} from "@/enums";
 import {WidgetToaster} from "@components/ui";
 import {LoadingAnimatedIcon} from "@/assets";
 import EncodingTypeSelect from "./encoding-type-select";

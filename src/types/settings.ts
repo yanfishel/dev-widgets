@@ -1,4 +1,4 @@
-import {T_Location} from "@/types/weather";
+import {T_Location} from "./weather";
 
 export type T_Theme = 'system' | 'light' | 'dark'
 

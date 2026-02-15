@@ -1,6 +1,5 @@
 import {createWithEqualityFn} from "zustand/traditional";
 import { subscribeWithSelector } from "zustand/middleware";
-import {shallow} from "zustand/vanilla/shallow";
 
 import {T_Store} from "@/types/app";
 import {E_THEME} from "@/constants";
@@ -27,6 +26,7 @@ export const useGlobalStore = createWithEqualityFn<T_Store>()(
         updateDisplayDate()
       }
       set({
+        globalDateTime: now,
         displayTime: { hours, minutes, seconds }
       })
       setTimeout(() => {
@@ -46,6 +46,5 @@ export const useGlobalStore = createWithEqualityFn<T_Store>()(
     }
 
 
-  })),
-  shallow
+  }))
 )
