@@ -91,3 +91,28 @@ export const validField = (event:KeyboardEvent|InputEvent|Partial<InputEvent>) =
     const parsedValue = parseInt(target.value)
     return validNamedField(name, parsedValue.toString())
 }
+
+export const expandHex = (hex:string) => {
+  if(!hex) return ''
+  // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  return hex.replace(shorthandRegex, function(m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+}
+
+export const hexToRgb = (hex:string) => {
+  hex = expandHex(hex);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    R: parseInt(result[1], 16), // Convert the red component to decimal
+    G: parseInt(result[2], 16), // Convert the green component to decimal
+    B: parseInt(result[3], 16) // Convert the blue component to decimal
+  } : null; // Return null if the format is invalid
+}
+
+
+export const rgbToHex = (r:number, g:number, b:number) => {
+  if(!r || !g || !b) return null;
+  return `${ [r, g, b].map(x => (+x).toString(16).padStart(2, '0')).join('') }`;
+}

@@ -15,12 +15,16 @@ const WeatherCurrent = () => {
   const displayTime = useGlobalStore(({displayTime}) => displayTime)
   const userLocation = useSettingsStore(({userLocation}) => userLocation)
   const weather = useSettingsStore(({weather}) => weather)
-
+  const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
   const weatherForecast = useWeatherStore(({forecast}) => forecast)
   const updateWeatherForecast = useWeatherStore(({updateWeatherForecast}) => updateWeatherForecast)
 
   const [currentWeather, setCurrentWeather] = useState<{temp:number | string, icon:string, description:string}>(InitCurrentWeather)
 
+
+  useEffect(() => {
+    updateWeatherForecast()
+  }, [userLocation]);
 
   useEffect(()=>{
     const { minutes, seconds } = displayTime
@@ -39,6 +43,10 @@ const WeatherCurrent = () => {
       setCurrentWeather(InitCurrentWeather)
     }
   }, [weatherForecast?.current, weather.active]);
+
+  useEffect(() => {
+    updateLocation()
+  }, []);
 
 
   return (

@@ -3,6 +3,8 @@ import {T_AppSettings} from "@/types/app";
 import {E_EncodingTypes, E_SignatureAlgorithms} from "@/enums";
 import { SECRET_KEYS} from "./dev-utils";
 import {WIDGETS_ID} from "./app";
+import {T_DevUtilsStore} from "@/types/dev-utils";
+import {ColorTranslator} from "colortranslator";
 
 
 export const APP_WIDTH = {
@@ -51,6 +53,16 @@ export const DEFAULT_DECODED_FILE: { file:File|null, error:string } = {
   file:null,
   error:''
 }
+
+export const DEFAULT_COLOR_HEX = '38bdf8'
+
+export const DEFAULT_COLOR_RGB = {
+  R: 56,
+  G: 189,
+  B: 246
+}
+
+
 export const DEFAULT_DEV_UTILS_STORE = {
   processing: false,
   selectedTab: 0,
@@ -61,7 +73,15 @@ export const DEFAULT_DEV_UTILS_STORE = {
   decodedURL: DEFAULT_DECODED_URL,
   encodedURL: DEFAULT_ENCODED,
   decodedFile: DEFAULT_DECODED_FILE,
-  encodedFile: DEFAULT_ENCODED
+  encodedFile: DEFAULT_ENCODED,
+
+  colorError: false,
+  inputColor: {
+    ...DEFAULT_COLOR_RGB,
+    A: 100,
+    Hex: DEFAULT_COLOR_HEX,
+    Alpha: 100
+  }
 }
 
 /* -- WIDGET SETTINGS - */

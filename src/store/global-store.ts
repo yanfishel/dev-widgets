@@ -12,7 +12,7 @@ export const useGlobalStore = createWithEqualityFn<T_Store>()(
     selectedTheme: E_THEME.SYSTEM,
     globalDateTime: new Date(),
     displayDate: { date: '', shortdate: '', weekday: '' },
-    displayTime: { hours: 0, minutes: 0, seconds: 0 },
+    displayTime: { hours: Infinity, minutes: Infinity, seconds: Infinity },
 
 
     appTimer: () => {

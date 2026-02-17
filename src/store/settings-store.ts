@@ -5,7 +5,7 @@ import {T_Location} from "@/types/weather";
 import {T_SettingsStore} from "@/types/settings";
 import {DEFAULT_LOCATION, LOCATION_UPDATE_INTERVAL, STORAGE_KEYS, WIDGETS_SETTINGS_DEFAULT} from "@/constants";
 import {getStorageItem, setStorageItem, getUserIPLocation} from "@/utils";
-import {merge} from "ts-deepmerge";
+//import {merge} from "ts-deepmerge";
 
 
 

@@ -39,7 +39,7 @@ export type T_WeatherStore = {
   connectionAttempts: number
   error: string|null
   forecast: TWeatherData|null
-  isActive: (location:T_Location) => boolean
+  isActive: () => boolean
   updateWeatherForecast: (force?:boolean)=>Promise<void>
   getForecast: (location:T_Location)=>Promise<void>
 }

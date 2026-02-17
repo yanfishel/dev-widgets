@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 
 import {T_WidgetsSize} from "@/types/settings";
-import {useGlobalStore, useSettingsStore, useWeatherStore} from "@/store";
+import {useGlobalStore, useSettingsStore } from "@/store";
 import ThemeController from "@components/theme-controller";
 import Dragger from "@components/dragger";
 import AnalogClock from "@components/analog-clock";
@@ -25,11 +25,6 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(true)
 
   const appTimer = useGlobalStore(({appTimer}) => appTimer)
-  const updateWeatherForecast = useWeatherStore(({updateWeatherForecast}) => updateWeatherForecast)
-
-  const userLocation = useSettingsStore(({userLocation}) => userLocation)
-  const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
-  const weather = useSettingsStore(({weather}) => weather)
 
 
   const setWidgetSize = (size:T_WidgetsSize) => {
@@ -50,22 +45,11 @@ const App = () => {
     })
   }
 
-  const initApp = async () => {
+  useEffect(()=>{
+    console.log('Initializing App...')
     appTimer()
     electronEventsHandler()
-    await updateLocation()
-    await updateWeatherForecast()
-
     setLoading(false)
-  }
-
-
-  useEffect(() => {
-    updateWeatherForecast()
-  }, [userLocation, weather.active]);
-
-  useEffect(()=>{
-    initApp()
   }, [])
 
 

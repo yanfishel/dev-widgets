@@ -34,9 +34,16 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
     },
 
     updateWeatherForecast: async (force = false) => {
-      const { forecast, isActive, getForecast } = get()
+      const { forecast, isActive, getForecast, processing } = get()
+      if(processing){
+        return
+      }
       const location = useSettingsStore.getState().userLocation
-      if( !isActive(location) ) {
+
+      set({ error: null, processing: false })
+
+      if( !isActive() ) {
+        console.log('Weather Widget is not active')
         return
       }
 
@@ -46,6 +53,7 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
           && forecast.lon === location.lon )
       {
         set({ error: null })
+        console.log('Weather data is up to date')
         return
       }
 
@@ -53,25 +61,28 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
     },
 
     getForecast: async (location) => {
-      if(get().processing){
+      const { processing, connectionAttempts } = get()
+      if(processing){
         return
       }
       set({ error: null, processing: true })
       const controller = new AbortController()
       const timeout = setTimeout(() => controller.abort(), 10000)
-      console.log('Get Forecast'+new Date().toLocaleTimeString(), location.lat, location.lon)
+      console.log(`Get Forecast - ${new Date().toLocaleTimeString()}, ${location.lat}:${location.lon}. Connection Attempt: ${connectionAttempts}`)
       try {
         const forecast = await getWeatherData(location, controller.signal)
         if(forecast) {
-          set({ processing:false, connectionAttempts:0, forecast })
+          console.log('Weather data received!')
+          set({ connectionAttempts:0, forecast })
         }
       } catch (e) {
         const { connectionAttempts, getForecast } = get()
-        console.log('Error getting weather data. Connection Attempt:'+connectionAttempts, e)
+        console.log('Error getting weather data... Connection Attempt:'+connectionAttempts, e)
         if(connectionAttempts < 3) {
           set({ connectionAttempts: connectionAttempts + 1 })
           setTimeout( ()=>getForecast(location), 3_000 )
         } else {
+          console.log('Error getting weather data!')
           set({ connectionAttempts:0, error: 'Error getting weather data', forecast: null })
         }
       } finally {
@@ -82,6 +93,14 @@ export const useWeatherStore = createWithEqualityFn<T_WeatherStore>()(
 
   }),
   {
-    name: 'store-widgets-weather'
+    name: 'store-widgets-weather',
+    partialize: (state) => ({
+      ...state,
+      ...{
+        processing: false,
+        connectionAttempts: 0,
+        error: null
+      }
+    })
   })
 )

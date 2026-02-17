@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 
-import { useSettingsStore } from "@/store";
+import {useSettingsStore, useWeatherStore} from "@/store";
 import {T_Location} from "@/types/weather";
 
 
@@ -10,7 +10,6 @@ const Weather = () => {
   const weather = useSettingsStore(({weather}) => weather)
   const location = useSettingsStore(({location}) => location)
   const updateLocation = useSettingsStore(({updateLocation}) => updateLocation)
-
 
   const [manual, setManual] = useState<T_Location>(location)
 
@@ -78,6 +77,7 @@ const Weather = () => {
                  checked={ checked }
                  onChange={ e => {
                    useSettingsStore.setState(state => ({ weather: { ...state.weather, active: e.target.checked } }))
+                   useWeatherStore.getState().updateWeatherForecast(true)
                  }}
                  role="switch" />
         </div>
