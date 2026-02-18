@@ -9,6 +9,7 @@ import {DateTimeIcon, EncodeIcon, ColorIcon, DuckIcon} from "@/assets";
 import Encoding from "./encoding";
 import DateTime from "./date-time";
 import Color from "./color";
+import RubberDuck from "./rubber-duck";
 
 import './style.css'
 
@@ -39,7 +40,7 @@ const DevUtils = () => {
             <Tab><EncodeIcon /><span>Encode</span></Tab>
             <Tab><DateTimeIcon /><span>Time</span></Tab>
             <Tab><ColorIcon size={14} /><span>Color</span></Tab>
-            <Tab><DuckIcon /></Tab>
+            <Tab><DuckIcon size={14} /></Tab>
           </TabList>
 
           <TabPanel>
@@ -52,7 +53,7 @@ const DevUtils = () => {
             <Color />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <RubberDuck />
           </TabPanel>
 
         </Tabs>

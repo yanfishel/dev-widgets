@@ -16,8 +16,9 @@ export   const chartStyle = (percents:number[], maxValue?:number) => {
 
 export const diskInfoMap = (disk:S_FsSizeData):T_DiskInfo => {
   const { mount, use, size } = disk
-
-  const diskLetter = mount.split('/')[mount.split('/').length - 1] ?? '/'
+  const mounts = mount.split('/')
+  const letter = mounts[mounts.length - 1]
+  const diskLetter = letter ? letter : '/'
   const usedWidth = use > DISK_USE_THRESHOLD ?  DISK_USE_THRESHOLD  :  use
   const errorWidth = use > DISK_USE_THRESHOLD ?  use - DISK_USE_THRESHOLD  :  0
 

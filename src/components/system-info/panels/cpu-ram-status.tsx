@@ -24,9 +24,10 @@ const CpuRamStatus = () => {
       setCpuPercents(prev => prev.length > INFO_CHARS_STEPS ? [...prev.slice(1), cpuPercent] : [...prev, cpuPercent])
     }
     if(memory) {
-      const ramPercent = +(memory.used / memory.total * 100).toFixed(1)
+      const inUse = memory.total - memory.available // memory.used
+      const ramPercent = +(inUse / memory.total * 100).toFixed(1)
       setRamPercents(prev => prev.length > INFO_CHARS_STEPS ? [...prev.slice(1), ramPercent] : [...prev, ramPercent])
-      setRam({ total: formatBytesMetric(memory.total, 1), used: formatBytesMetric(memory.used) })
+      setRam({ total: formatBytesMetric(memory.total, 1), used: formatBytesMetric(inUse) })
     }
   }
 

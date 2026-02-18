@@ -1,0 +1,65 @@
+
+#widget-dev-utils {
+
+  /* -- RUBBER DUCK - */
+  .rubber-duck-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .rubber-duck-image {
+      width: 160px;
+      height: 160px;
+      background: url("/public/images/duck.png") no-repeat center center;
+      background-size: contain;
+      filter: grayscale(1);
+      opacity: 0.65;
+      margin-bottom: 5px;
+
+      &.image-on {
+        filter: none;
+        opacity: 1;
+      }
+    }
+
+    .rubber-duck-info-button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .rubber-duck-info {
+      padding: 10px 14px;
+      font-size: 0.725rem;
+      line-height: 1.25em;
+      text-align: left;
+      background: rgb( from var(--container-background) r g b / 0.95);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+      text-shadow: var(--text-shadow);
+      transition: all 0.2s ease-in-out;
+
+      p {
+        padding: 0;
+        margin: 0;
+
+        &.relevant-links {
+          text-align: right;
+          padding-top: 3px;
+          font-size: 95%;
+
+          span {
+             margin-inline: 5px;
+           }
+        }
+      }
+    }
+  }
+
+}

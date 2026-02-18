@@ -136,6 +136,21 @@ export const ButtonDownloadIcon = ({hover}:IButtonIcon) => hover ? (
   </svg>
 )
 
+export const ButtonHelpIcon = ({hover}:IButtonIcon) => hover ? (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14" className="icon-hover">
+    <path fill="currentColor" fillRule="evenodd"
+          d="M14 7A7 7 0 1 1 0 7a7 7 0 0 1 14 0M5.75 5.25A1.25 1.25 0 1 1 7 6.5a.75.75 0 0 0-.75.75v.646a.75.75 0 1 0 1.5 0a2.751 2.751 0 1 0-3.5-2.646a.75.75 0 0 0 1.5 0M8 10.5a1 1 0 1 1-2 0a1 1 0 0 1 2 0"
+          clipRule="evenodd"/>
+  </svg>
+) : (
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14" className="icon-regular">
+    <path fill="currentColor" fillRule="evenodd"
+          d="M7 0a7 7 0 1 0 0 14A7 7 0 0 0 7 0M1.25 7a5.75 5.75 0 1 1 11.5 0a5.75 5.75 0 0 1-11.5 0M7 4.125c-.621 0-1.125.504-1.125 1.125a.625.625 0 1 1-1.25 0a2.375 2.375 0 1 1 3 2.292V8a.625.625 0 1 1-1.25 0V7c0-.345.28-.625.625-.625a1.125 1.125 0 0 0 0-2.25m0 5a.875.875 0 1 1 0 1.75a.875.875 0 0 1 0-1.75"
+          clipRule="evenodd"/>
+  </svg>
+)
+
+
 export const DownloadIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32">
     <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 22V5M9 16l7 7l7-7M9 27h14"/>

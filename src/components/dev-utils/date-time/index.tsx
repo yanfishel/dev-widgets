@@ -1,17 +1,17 @@
 import React, {memo, useCallback, useEffect, useState} from 'react';
 import {TZDate} from "@date-fns/tz";
+import {toast} from "react-hot-toast";
 
 import {T_EncodingType} from "@/types/dev-utils";
 import {DATE_FORMAT_STANDARDS} from "@/constants";
 import {copyToClipboard, formatDateTimeISOString} from "@/utils";
 import {ButtonCopy, WidgetToaster} from "@components/ui";
-import DateTimeTable from "./date-time-table";
-import CurrentTimeTable from "./current-time-table";
-import TimeZoneTable from "./time-zone-table";
+import DateTimeTable from "./tables/date-time";
+import CurrentTimeTable from "./tables/current-time";
+import TimeZoneTable from "./tables/time-zone";
+import MillisecondsTable from "./tables/milliseconds";
 
 import './style.css'
-import {toast} from "react-hot-toast";
-import MillisecondsTable from "@components/dev-utils/date-time/milliseconds-table";
 
 
 const DateTime = () => {

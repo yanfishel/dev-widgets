@@ -53,6 +53,12 @@
         }
       }
 
+      &.current-time {
+        input {
+          max-width: 120px !important;
+        }
+      }
+
       &.convert-time,
       &.convert-date {
         width: 100%;

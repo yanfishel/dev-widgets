@@ -12,7 +12,7 @@ interface IDialogProps {
   openerClassName?: string
   children: React.ReactNode
 }
-export const Dialog = ({ id, position, fullWidth, open, modal, onClose, className, openerClassName, children }:IDialogProps) => {
+export const Dialog = ({ id, position='top', fullWidth, open, modal, onClose, className='', openerClassName, children }:IDialogProps) => {
 
   const dialogRef = useRef<HTMLDialogElement>(null)
 
