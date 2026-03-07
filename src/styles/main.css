@@ -1,89 +1,88 @@
 :root {
+  /* -- COLORS -- */
   --text-primary: #111827;
-  --text-muted: rgb( from var(--text-primary) r g b / 0.35);
+  --text-muted: rgb(from var(--text-primary) r g b / 0.35);
   --accent: #38bdf8;
   --accent-contrast: #fff;
 
+  --main-background: rgb(246, 248, 250);
   --main-color-invert: #f8fafc;
   --main-background-invert: rgb(32, 34, 43);
 
-  --button-opacity: 0.55;
-  --main-background: rgb(246, 248, 250);
   --container-background: rgb(246, 248, 250);
   --container-opacity: 0.98;
+  --input-background: rgba(0, 0, 0, 0.05);
+  --button-opacity: 0.55;
 
-  --text-shadow: 1px 1px 0 rgba(255,255,255,0.45);
+  --border: rgb(from var(--text-primary) r g b / 0.15);
+
+  /* -- SHADOWS -- */
+  --text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.45);
   --container-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.65) inset, 0 14px 30px -24px rgba(15, 23, 42, 0.9);
-  --input-background: rgba(0,0,0,0.05);
 
-  --border: rgb( from var(--text-primary) r g b / 0.15);
+  /* -- DIMENSIONS -- */
   --border-radius: 6px;
-  --scrollbar-background: #F7F7F9;
-  --scrollbar-thumb: rgba(0,0,0,0.25);
-
-  --weather-days-number: 7;
   --top-container-height: 125px;
   --weather-icon-size: 70px;
-  --widgets-distance: .85rem;
+  --widgets-distance: 0.85rem;
   --action-bar-padding: 30px;
 
+  /* -- SCROLLBAR -- */
+  --scrollbar-background: #F7F7F9;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.25);
+
+  /* -- MISC -- */
+  --weather-days-number: 7;
   --font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   -webkit-user-select: none;
   user-select: none;
 }
-.theme-dark {
-  --text-primary: #f8fafc;
 
+.theme-dark {
+  /* -- COLORS -- */
+  --text-primary: #f8fafc;
+  --main-background: rgb(32, 34, 43);
   --main-color-invert: #111827;
   --main-background-invert: rgb(246, 248, 250);
-
-  --button-opacity: 0.35;
-  --main-background: rgb(32, 34, 43);
   --container-background: rgb(32, 34, 43);
+  --input-background: rgba(255, 255, 255, 0.05);
+  --button-opacity: 0.35;
 
-  --text-shadow: 1px 1px 0 rgba(0,0,0,1);
+  /* -- SHADOWS -- */
+  --text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
   --container-box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.65) inset, 0 14px 30px -24px rgba(15, 23, 42, 0.9);
-  --input-background: rgba(255,255,255,0.05);
 
+  /* -- SCROLLBAR -- */
   --scrollbar-background: #102331;
-  --scrollbar-thumb: rgba(255,255,255,0.25);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.25);
 }
 
+/* -- SIZES -- */
 .widgets-size-medium {
   --weather-icon-size: 60px;
   --top-container-height: 106px;
-  --widgets-distance: .75rem;
+  --widgets-distance: 0.75rem;
 }
+
 .widgets-size-small {
   --weather-icon-size: 50px;
   --top-container-height: 90px;
-  --widgets-distance: .65rem;
+  --widgets-distance: 0.65rem;
   --weather-days-number: 6;
 }
 
-::-webkit-scrollbar-track, *::-webkit-scrollbar-track {
-  border-radius: 8px;
-  background-color: var(--scrollbar-background);
-}
-::-webkit-scrollbar, *::-webkit-scrollbar {
-  border-radius: 20px;
-  width: 4px;
-  height: 4px;
-  background-color: var(--scrollbar-background);
-}
-::-webkit-scrollbar-thumb, *::-webkit-scrollbar-thumb {
-  border-radius: 20px;
-  background-color: var(--scrollbar-thumb);
-}
-
+/* -- GLOBAL RESET -- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html { height: 100% }
+html {
+  height: 100%;
+}
+
 body {
   margin: 0;
   height: 100%;
@@ -108,6 +107,28 @@ pre {
   padding: 0;
 }
 
+/* -- SCROLLBAR -- */
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: var(--scrollbar-background);
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  border-radius: 20px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--scrollbar-background);
+}
+
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: var(--scrollbar-thumb);
+}
+
+/* -- LAYOUT -- */
 #root {
   width: 100%;
   height: 100%;
@@ -128,137 +149,129 @@ pre {
   justify-content: center;
   padding: 5px 2px 0;
   margin: 0;
+}
 
-  &:hover {
-    #settings-container {
-      .settings-menu-open {
-        opacity: var(--button-opacity);
-      }
-    }
-  }
+#top-container:hover #settings-container .settings-menu-open {
+  opacity: var(--button-opacity);
+}
 
-  #analog-clock,
-  #digital-clock { order:1; }
-  #weather-widget { order: 2; }
+#top-container #analog-clock,
+#top-container #digital-clock {
+  order: 1;
+}
+
+#top-container #weather-widget {
+  order: 2;
 }
 
 #main-container {
   width: 100%;
   flex: 1;
   overflow-y: auto;
-
-  .containers-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 2px;
-    gap: var(--widgets-distance);
-    transition: all 0.2s ease-in-out;
-
-    & > div, .widget-container {
-      width: 100%;
-      transition: all 0.2s ease-in-out;
-    }
-  }
 }
 
+#main-container .containers-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2px;
+  gap: var(--widgets-distance);
+  transition: all 0.2s ease-in-out;
+}
+
+#main-container .containers-wrapper > div,
+#main-container .containers-wrapper .widget-container {
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+/* -- COMPONENTS -- */
 .container {
   position: relative;
   width: 100%;
   padding: 8px 12px 15px;
   border-radius: var(--border-radius);
-  /*box-shadow: var( --container-box-shadow);*/
   background: rgba(from var(--container-background) r g b / var(--container-opacity));
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 10px;
   transition: all 0.2s ease-in-out;
-
-  * {
-    transition: all 0.2s ease-in-out;
-  }
-
-  &:has(.action-bar) {
-    padding-right: calc(var(--action-bar-padding) + 8px);
-  }
-
-  .alert-message {
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4px 12px;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    &.error {
-      background-color: #c00;
-      color: white;
-    }
-  }
-
-  /* -- ACTION BAR - */
-  .action-bar {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    opacity: 0.45;
-
-    .circle-button {
-      width: 24px;
-      height: 24px;
-
-      svg {
-        width: 0.9rem;
-        min-width: 0.9rem;
-      }
-    }
-  }
-  &:hover .action-bar,
-  &:focus-within .action-bar,
-  &:active .action-bar {
-    opacity: 1;
-  }
 }
 
-/* -- TOAST - */
+.container * {
+  transition: all 0.2s ease-in-out;
+}
+
+.container:has(.action-bar) {
+  padding-right: calc(var(--action-bar-padding) + 8px);
+}
+
+/* Alert Message */
+.container .alert-message {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.container .alert-message.error {
+  background-color: #c00;
+  color: white;
+}
+
+/* Action Bar */
+.container .action-bar {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.45;
+}
+
+.container .action-bar .circle-button {
+  width: 24px;
+  height: 24px;
+}
+
+.container .action-bar .circle-button svg {
+  width: 0.9rem;
+  min-width: 0.9rem;
+}
+
+.container:hover .action-bar,
+.container:focus-within .action-bar,
+.container:active .action-bar {
+  opacity: 1;
+}
+
+/* -- TOAST -- */
 .react-hot-toast {
   padding: 4px 12px;
   font-size: 0.8rem;
-
-  div[role='status'] {
-    margin: 1px 5px;
-  }
-  svg {
-    width: 0.9rem;
-    height: auto;
-  }
 }
 
-/* -- LINK - */
-.external-link {
-  color: var(--accent);
-  text-decoration: underline;
-  font-style: italic;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    opacity: 0.85;
-    text-decoration: none;
-  }
+.react-hot-toast div[role='status'] {
+  margin: 1px 5px;
 }
 
-/* -- LOADER - */
+.react-hot-toast svg {
+  width: 0.9rem;
+  height: auto;
+}
+
+/* -- LOADER -- */
 .container-loader {
   position: absolute;
   top: 0;
@@ -273,11 +286,30 @@ pre {
   color: var(--accent);
 }
 
+/* -- UTILITIES -- */
+.external-link {
+  color: var(--accent);
+  text-decoration: underline;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.external-link:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
 .rotate-icon {
   animation: rotate 1.5s linear infinite;
 }
 
 @keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }
